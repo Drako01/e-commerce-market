@@ -14,8 +14,8 @@ Este proyecto es un E-Commerce completo que consta de dos aplicaciones por separ
 
 ## Estructura del Proyecto
 
-- **frontend-user-app:** Carpeta que contiene el código fuente de la aplicación React para el Frontend del Usuario.
-- **backend:** Carpeta que contiene el código fuente del Backend construido con Node.js.
+- **app/app-ecommerce:** Carpeta que contiene el código fuente de la aplicación React para el Frontend del Usuario.
+- **app/backend:** Carpeta que contiene el código fuente del Backend construido con Node.js.
 - **server:** Carpeta que contiene el código del servidor que une las dos aplicaciones.
 
 ## Instalación
