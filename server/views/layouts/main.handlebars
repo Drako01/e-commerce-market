@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+
+<body>
+    {{{ body }}}
+
+    <div class="footer">
+        <footer class='bottom'>
+            <div class='legal'>
+                <p>
+                    &copy; Alejandro Di Stefano | Año
+                    <span id="anio"></span>
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const spanAnio = document.getElementById("anio");
+            const fechaActual = new Date();
+            const anioActual = fechaActual.getFullYear();
+            spanAnio.textContent = anioActual;
+        });
+    </script>
+</body>
+
+</html>
