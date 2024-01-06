@@ -21,7 +21,8 @@ import path from 'path';
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 // Configuracion del puerto
-const PORT = program.opts().mode === 'prod' ? config.ports.prodPort : config.ports.devPort;
+let dominio = program.opts().mode === 'local' ? config.urls.urlProd : config.urls.urlLocal;
+const PORT = program.opts().mode === 'dev' ? config.ports.prodPort : config.ports.devPort;
 
 // Ruta principal
 app.get('/', (req, res) => {
@@ -29,6 +30,10 @@ app.get('/', (req, res) => {
 });
 
 // Inicializar el servidor
-app.listen(PORT, () => {
-    loggers.info(`Servidor iniciado en http://localhost:${PORT}`);
-});
+function startServer() {
+    const httpServer = app.listen(PORT, () => {
+        loggers.http(`Server Up! => ${dominio}:${PORT}`);        
+    });    
+}
+
+startServer()

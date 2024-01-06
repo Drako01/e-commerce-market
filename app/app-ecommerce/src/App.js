@@ -1,17 +1,23 @@
-import logo from './logo.svg';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer'
+import Main from './components/Main/Main'
+import { BrowserRouter } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          App - E-Commerce
-        </p>
-      </header>
+    <div>
+      <AuthProvider>
+          <BrowserRouter>
+            <Header />
+            <Main />
+            <Footer />
+          </BrowserRouter>        
+      </AuthProvider>
     </div>
   );
 }
 
 export default App;
+

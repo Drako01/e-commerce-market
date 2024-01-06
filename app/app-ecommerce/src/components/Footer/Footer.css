@@ -1,0 +1,109 @@
+.Footer{
+    position: sticky;
+    margin-bottom: 0;
+}
+.Footer p{
+    color: var(--colour-second);
+    font-family:  var(--fontR);
+    font-size: 1.2rem;
+    text-align: center;
+}
+.Iconos-social{
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.Iconos-social> img{
+    width: 2.5rem;
+    margin: 0 1rem;
+    padding: .5rem;
+    transition: transform .2s ease-in-out; 
+}
+
+.Iconos-social> img:hover{
+    cursor: pointer;
+    transform: scale(1.3); 
+}
+
+footer{
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    margin: 0 4rem;
+}
+footer.Top{
+    border-bottom: 2px solid var(--colour-second);
+    padding: 2rem 0;
+}
+footer.Top a{
+    color: var(--colour-second);
+    text-decoration: none;
+    font-size: 1rem;
+}
+footer.Top img{
+    max-width: 4rem;
+}
+footer.Top .Links{
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.8rem;
+}
+footer.Bottom{
+    padding: 1rem 0;
+    justify-content: space-between;
+    align-items: center;
+}
+footer .Links > div {
+    display: grid;
+    gap: .5rem;
+    margin-bottom: 2rem;
+    padding: 0 3rem;
+}
+footer .Legal > a{
+    margin: 0 4px;
+}
+footer.Bottom .Links{
+    display: flex;
+    gap: 1rem;
+}
+.Gold span{
+    color: var(--colour-second);
+    font-weight: 600;
+}
+.LinkToArmoTuSitio{
+    color: var(--colour-second);
+    font-family: var(--fontR);
+    font-weight: 600;
+}
+@media (width <= 980px) {
+    .Footer p{
+        font-size: 1rem;
+    }
+}
+@media (width <= 740px) {
+    .Footer p{
+        padding: 0 1rem;
+        font-size: .9rem;
+    }
+    footer{
+        justify-content: center;
+        margin: 0 1rem;
+        align-items: center;
+    }
+    footer.Top .Links{
+        padding: 0;
+        gap: 0;
+        grid-template-columns: repeat(1, 1fr);
+    }
+    footer .Links > div {
+        margin-bottom: 0.5rem;
+    }
+    footer.Bottom{
+        gap: 1rem;
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+}

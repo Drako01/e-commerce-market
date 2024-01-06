@@ -1,0 +1,52 @@
+.App-header {
+    background-color: var(--colour-first);
+    min-height: 65vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: var(--colour-second);
+}
+
+.App-link {
+    color: var(--colour-second);
+}
+.DontView{
+    display: none;
+}
+
+li a.CartWidget{
+    margin: 1rem;
+}
+.CartWidget {
+    position: relative;
+    min-width:5rem;
+    max-width: 8rem;
+    padding: 1rem;
+    font-size: 1.2rem;
+    background: var(--colour-fourth);
+    border-radius: .5rem;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    border: none;
+    border-style: none;
+    cursor: pointer;
+    outline: inherit;
+}
+.CartWidget h4{
+    color: var(--colour-fourth);
+    margin-left: 1rem;
+    font-weight: lighter;
+}
+.CartWidget .Login{
+    margin-left: .5rem;
+}
+.None{
+    display: none !important;
+}
+.Signup{
+    font-size: 1rem;
+    text-align: right;
+}

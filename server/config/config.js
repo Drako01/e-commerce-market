@@ -13,5 +13,9 @@ export default {
     jwt: {
         privateKey: process.env.PRIVATE_KEY,
         cookieName: process.env.JWT_COOKIE_NAME
-    }
+    },
+    urls: {
+        urlLocal: process.env.URL_LOCAL,
+        urlProd: process.env.URL_PROD
+    },
 }
