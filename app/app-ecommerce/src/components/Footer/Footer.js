@@ -31,7 +31,7 @@ const Footer = () => {
                 <section className='Links'>
                     <div>
                         <NavLink to='/'><li>Inicio</li></NavLink>
-                        <NavLink to='/'><li>Listado de Productos</li></NavLink>
+                        <NavLink to='/'><li>Productos</li></NavLink>
                         <NavLink to='/'><li>Contactenos</li></NavLink>     
                     </div>
                     

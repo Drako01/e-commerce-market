@@ -7,7 +7,7 @@ import './App.css';
 
 function App() {
   return (
-    <div>
+    <>
       <AuthProvider>
           <BrowserRouter>
             <Header />
@@ -15,7 +15,7 @@ function App() {
             <Footer />
           </BrowserRouter>        
       </AuthProvider>
-    </div>
+    </>
   );
 }
 
