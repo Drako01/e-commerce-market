@@ -1,14 +1,16 @@
 import { BrowserRouter } from 'react-router-dom';
-import UserManage from './components/UserManage/UserManage';
 // import { AuthProvider } from './context/AuthContext.js';
+import Main from './components/Main/Main.js';
+import Header from './components/Header/Header.js'
 
 function App() {
   return (
     <>
       {/* <AuthProvider> */}
-        <BrowserRouter>
-          <UserManage />
-        </BrowserRouter>
+      <BrowserRouter>
+        <Header />
+        <Main />
+      </BrowserRouter>
       {/* </AuthProvider> */}
     </>
   );

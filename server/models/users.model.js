@@ -1,7 +1,6 @@
 import { getAuth, createUserWithEmailAndPassword, updateProfile, deleteUser as deleteUserAuth } from 'firebase/auth';
 import { firebaseApp } from '../controllers/firebase.controller.js';
-import { getFirestore, collection, doc, updateDoc, deleteDoc, getDoc } from 'firebase/firestore';
-
+import { getFirestore, collection } from 'firebase/firestore';
 
 class UserModel {
 
@@ -63,26 +62,14 @@ class UserModel {
     }
 
     async updateUser(uid, updatedUserData) {
-        const auth = getAuth(firebaseApp);
-    
         try {
-            // Validate that a valid UID is provided
-            if (!uid) {
-                throw new Error('UID del usuario es obligatorio.');
+            // Verifica que el UID y los datos actualizados se proporcionen
+            if (!uid || !updatedUserData) {
+                throw new Error('UID del usuario y datos actualizados son obligatorios.');
             }
     
-            // Obtén el usuario actual de manera síncrona
-            const currentUser = auth.currentUser;
-            
-            if (!currentUser) {
-                throw new Error('Usuario no autenticado.');
-            }
-    
-            // Actualiza el perfil del usuario (opcional)
-            await updateProfile(currentUser, {
-                displayName: updatedUserData.displayName,
-                // photoURL: updatedUserData.photoURL,
-            });
+            const userRef = firestore.collection('users').doc(uid);
+            await userRef.update(updatedUserData);
     
             return 'Usuario actualizado exitosamente';
         } catch (error) {

@@ -1,0 +1,51 @@
+.App-header {
+    background-color: var(--white);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:flex-end;
+    color: var(--light);
+}
+
+.App-header>h2,
+h3 {
+    font-family: var(--fontB);
+}
+.DontView{
+    display: none;
+}
+
+li a.CartWidget{
+    margin: 1rem;
+}
+.CartWidget {
+    position: relative;
+    min-width:5rem;
+    max-width: 8rem;
+    padding: 1rem;
+    font-size: 1.2rem;
+    background: var(--fourth);
+    border-radius: .5rem;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    border: none;
+    border-style: none;
+    cursor: pointer;
+    outline: inherit;
+}
+.CartWidget h4{
+    color: var(--light);
+    margin-left: 1rem;
+    font-weight: lighter;
+}
+.CartWidget .Login{
+    margin-left: .5rem;
+}
+.None{
+    display: none !important;
+}
+.Signup{
+    font-size: 1rem;
+    text-align: right;
+}

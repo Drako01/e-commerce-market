@@ -54,32 +54,33 @@ class UserController {
 
     async updateUser(req, res) {
         const uid = req.params.uid;
-        const updatedUserData = req.body;
+        const { email, displayName } = req.body;
 
         try {
-            await UserModel.updateUser(uid, updatedUserData);
-            res.status(200).json({ message: 'Usuario actualizado exitosamente' });
+            const result = await updateUser(uid, { email, displayName });
+            res.status(200).json({ message: result });
         } catch (error) {
-            loggers.error('Error al actualizar el usuario:', error);
-            res.status(error.status || 500).json({ error: 'Error interno del servidor' });
+            console.error('Error al actualizar el usuario:', error.message);
+            res.status(error.status || 500).json({ error: `Error interno del servidor: ${error.message}` });
         }
+
     }
 
     async deleteUser(req, res) {
         const uid = req.params.uid;
-    
+
         try {
             await admin.auth().deleteUser(uid);
             res.status(200).json({ message: 'Usuario eliminado exitosamente' });
         } catch (error) {
             console.error('Error al eliminar el usuario:', error);
-    
+
             // Devuelve un mensaje JSON con el error en caso de un error
             res.status(500).json({ error: 'Error al eliminar el usuario' });
         }
     }
-    
-    
+
+
 }
 
 export default new UserController();

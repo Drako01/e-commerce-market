@@ -4,8 +4,12 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import './UserManage.css';
+// import { useContext } from 'react';
+// import { AuthContext } from '../../context/AuthContext.js';
 
 const UserManage = () => {
+    // const { currentUser } = useContext(AuthContext);
+
     const urlServer = process.env.REACT_APP_URL_SERVER;
 
     const [users, setUsers] = useState([]);
@@ -25,7 +29,7 @@ const UserManage = () => {
 
     const fetchUsers = useCallback(async () => {
         try {
-            const response = await fetch(`${urlServer}/get-all-users`);
+            const response = await fetch(`${urlServer}/api/get-all-users`);
             const userList = await response.json();
             setUsers(userList);
         } catch (error) {
@@ -47,20 +51,20 @@ const UserManage = () => {
             });
             return;
         }
-    
+
         try {
-            const response = await fetch(`${urlServer}/create-user`, {
+            const response = await fetch(`${urlServer}/api/create-user`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(newUser),
             });
-    
+
             if (!response.ok) {
                 throw new Error(`Error en la solicitud: ${response.statusText}`);
             }
-    
+
             await response.text();
             fetchUsers();
             // Cerrar el modal después de agregar usuario
@@ -75,7 +79,7 @@ const UserManage = () => {
             });
         }
     };
-    
+
 
     const handleEditUser = (user) => {
         setEditingUser(user);
@@ -85,22 +89,22 @@ const UserManage = () => {
     const handleSaveChanges = async () => {
         try {
             const updatedUserData = {
+                email: editingUser.email,
                 displayName: editingUser.displayName,
-                // photoURL: 'https://avatars.githubusercontent.com/u/88512335?v=4', 
             };
-    
-            const response = await fetch(`${urlServer}/users/${editingUser.uid}`, {
+
+            const response = await fetch(`${urlServer}/api/users/${editingUser.uid}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(updatedUserData),
             });
-    
+
             if (!response.ok) {
                 throw new Error(`Error en la solicitud: ${response.statusText}`);
             }
-    
+
             setShowEditModal(false);
             fetchUsers();
         } catch (error) {
@@ -113,8 +117,8 @@ const UserManage = () => {
             });
         }
     };
-    
-    
+
+
 
     const handleDeleteUser = async (uid) => {
         try {
@@ -128,12 +132,12 @@ const UserManage = () => {
                 confirmButtonText: 'Sí, eliminarlo',
                 cancelButtonText: 'Cancelar',
             });
-    
+
             if (confirmDelete.isConfirmed) {
-                const response = await fetch(`${urlServer}/users/${uid}`, {
+                const response = await fetch(`${urlServer}/api/users/${uid}`, {
                     method: 'DELETE',
                 });
-    
+
                 if (response.ok) {
                     const responseData = await response.json();
                     // Mostrar SweetAlert de éxito
@@ -159,10 +163,12 @@ const UserManage = () => {
             fetchUsers();
         }
     };
-    
-    
-    
-    
+
+
+
+    // if (!currentUser) {
+    //     return <p>Inicia sesión para ver esta página</p>;
+    // }
 
     return (
         <>
@@ -269,10 +275,11 @@ const UserManage = () => {
                         <Form.Group className="mb-3" controlId="formEmailEdit">
                             <Form.Label>Email:</Form.Label>
                             <Form.Control
-                                type="text"
+                                type="email"
                                 placeholder="Ingrese el correo electrónico"
                                 value={editingUser.email}
-                                readOnly // Cambiado a readOnly en lugar de disabled
+                                // readOnly // Cambiado a readOnly en lugar de disabled
+                                onChange={(e) => setEditingUser({ ...editingUser, email: e.target.value })}
                             />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formDisplayNameEdit">
