@@ -1,16 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter } from 'react-router-dom';
+import UserManage from './components/UserManage/UserManage';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>
-          BackEnd
-        </h1>        
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <UserManage />
+      </BrowserRouter>
+    </>
   );
 }
 

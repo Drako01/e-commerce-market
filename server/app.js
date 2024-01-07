@@ -2,7 +2,11 @@ import express from 'express';
 import compression from 'compression';
 import config from './config/config.js';
 import loggers from './config/logger.js'
+import 'core-js';
+import cors from 'cors';
 const app = express();
+app.use(cors());
+let httpServer;
 
 // Configuracion de Compresion de Archivos Estaticos con Brotli
 app.use(compression({
@@ -13,8 +17,9 @@ app.use(compression({
 import { Command } from 'commander';
 const program = new Command();
 program
-    .option('--mode <mode>', 'Puerto', 'prod')    
+    .option('--mode <mode>', 'Puerto', 'prod')
 program.parse();
+
 
 
 // Configuracion de Path
@@ -39,6 +44,14 @@ function setupRoutes(app, routes) {
 }
 setupRoutes(app, views);
 
+// Middleware de manejo de errores
+app.use((err, req, res, next) => {
+    loggers.error(err.stack);
+    res.status(500).send('Something went wrong!');
+});
+
+
+
 // Configuracion del puerto
 let dominio = program.opts().mode === 'local' ? config.urls.urlProd : config.urls.urlLocal;
 const PORT = program.opts().mode === 'dev' ? config.ports.prodPort : config.ports.devPort;
@@ -47,9 +60,20 @@ const upServer = `Server Up! => ${dominio}:${PORT}`;
 
 // Inicializar el servidor
 function startServer() {
-    const httpServer = app.listen(PORT, () => {
-        loggers.http(upServer);        
-    });    
+    httpServer = app.listen(PORT, () => {
+        loggers.http(upServer);
+    });
 }
 
-startServer()
+startServer();
+
+// Cerrar conexiones de Firebase u otras tareas de limpieza antes de apagar el servidor
+process.on('SIGTERM', () => {    
+    if (httpServer) {
+        httpServer.close(() => {
+            loggers.info('Servidor cerrado.');
+        });
+    }
+});
+
+/////////////////////////////// PRUEBAS //////////////////////////////
