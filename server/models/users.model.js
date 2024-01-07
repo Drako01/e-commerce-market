@@ -1,6 +1,6 @@
 import { getAuth, createUserWithEmailAndPassword, updateProfile, deleteUser as deleteUserAuth } from 'firebase/auth';
 import { firebaseApp } from '../controllers/firebase.controller.js';
-import { getFirestore, collection } from 'firebase/firestore';
+import { getFirestore, collection, doc, updateDoc, deleteDoc, getDoc } from 'firebase/firestore';
 
 
 class UserModel {
@@ -28,13 +28,13 @@ class UserModel {
 
     async getUser(uid) {
         const auth = getAuth(firebaseApp);
-    
+
         try {
             // Validate that a valid UID is provided
             if (!uid) {
                 throw new Error('UID del usuario es obligatorio.');
             }
-    
+
             const userRecord = await getUser(auth, uid);
             return {
                 uid: userRecord.uid,
@@ -45,56 +45,11 @@ class UserModel {
             throw new Error(`Error al obtener el usuario: ${error.message}`);
         }
     }
-    
-
-    async updateUser(uid, updatedUserData) {
-        const auth = getAuth(firebaseApp);
-    
-        try {
-            // Validate that a valid UID is provided
-            if (!uid) {
-                throw new Error('UID del usuario es obligatorio.');
-            }
-    
-            // Fetch the user details using the Admin SDK
-            const userRecord = await getUser(auth, uid);
-    
-            // Update user profile (optional)
-            if (updatedUserData.displayName) {
-                await updateProfile(userRecord, { displayName: updatedUserData.displayName });
-            }
-    
-            // You can add logic to update other user properties if necessary
-            // ...
-    
-            return 'Usuario actualizado exitosamente';
-        } catch (error) {
-            throw new Error(`Error al actualizar el usuario: ${error.message}`);
-        }
-    }
-    
-
-    async deleteUser(uid) {
-        const adminAuth = getAdminAuth();
-
-        try {
-            if (!uid) {
-                throw new Error('UID del usuario es obligatorio.');
-            }
-
-            // Eliminar el usuario de la autenticación
-            await deleteAdminUser(adminAuth, uid);
-
-            return `Usuario ${uid} eliminado exitosamente`;
-        } catch (error) {
-            throw new Error(`Error al eliminar el usuario: ${error.message}`);
-        }
-    } 
 
     async getAllUsers() {
         const db = getFirestore(firebaseApp);
         const usersCollection = collection(db, 'users');
-    
+
         try {
             const querySnapshot = await getDocs(usersCollection);
             const users = [];
@@ -106,7 +61,54 @@ class UserModel {
             throw error;
         }
     }
+
+    async updateUser(uid, updatedUserData) {
+        const auth = getAuth(firebaseApp);
     
+        try {
+            // Validate that a valid UID is provided
+            if (!uid) {
+                throw new Error('UID del usuario es obligatorio.');
+            }
+    
+            // Obtén el usuario actual de manera síncrona
+            const currentUser = auth.currentUser;
+            
+            if (!currentUser) {
+                throw new Error('Usuario no autenticado.');
+            }
+    
+            // Actualiza el perfil del usuario (opcional)
+            await updateProfile(currentUser, {
+                displayName: updatedUserData.displayName,
+                // photoURL: updatedUserData.photoURL,
+            });
+    
+            return 'Usuario actualizado exitosamente';
+        } catch (error) {
+            throw new Error(`Error al actualizar el usuario: ${error.message}`);
+        }
+    }
+    
+
+    async deleteUser(uid) {
+        const auth = getAuth(firebaseApp);
+
+        try {
+            // Eliminar el usuario de la autenticación usando getAuth().deleteUser
+            await deleteUser(auth, uid);
+
+            return `Usuario ${uid} eliminado exitosamente`;
+        } catch (error) {
+            if (error.code === 'auth/user-not-found') {
+                // El usuario no existe
+                return `Usuario con UID ${uid} no encontrado`;
+            } else {
+                throw new Error(`Error al eliminar el usuario: ${error.message}`);
+            }
+        }
+    }
+
 }
 
 export default new UserModel();

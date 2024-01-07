@@ -20,7 +20,6 @@ class UserController {
         }
     }
 
-
     async getUser(req, res) {
         try {
             const uid = req.params.uid;
@@ -31,34 +30,6 @@ class UserController {
             res.status(error.status || 500).json({ error: 'Error interno del servidor' });
         }
     }
-
-    async updateUser(req, res) {
-        const uid = req.params.uid;
-        const updatedUserData = req.body;
-
-        try {
-            await UserModel.updateUser(uid, updatedUserData);
-            res.status(200).json({ message: 'Usuario actualizado exitosamente' });
-        } catch (error) {
-            loggers.error('Error al actualizar el usuario:', error.message);
-            res.status(error.status || 500).json({ error: 'Error interno del servidor' });
-        }
-    }
-
-
-    async deleteUser(req, res) {
-        const uid = req.params.uid;
-
-        try {
-            await admin.auth().deleteUser(uid);
-            res.status(200).send('Usuario eliminado exitosamente');
-        } catch (error) {
-            console.error('Error al eliminar el usuario:', error);
-            res.status(500).send('Error al eliminar el usuario');
-        }
-    }
-
-
 
     async getAllUsers(req, res) {
         try {
@@ -80,6 +51,35 @@ class UserController {
             res.status(500).json({ error: 'Error fetching users' });
         }
     }
+
+    async updateUser(req, res) {
+        const uid = req.params.uid;
+        const updatedUserData = req.body;
+
+        try {
+            await UserModel.updateUser(uid, updatedUserData);
+            res.status(200).json({ message: 'Usuario actualizado exitosamente' });
+        } catch (error) {
+            loggers.error('Error al actualizar el usuario:', error);
+            res.status(error.status || 500).json({ error: 'Error interno del servidor' });
+        }
+    }
+
+    async deleteUser(req, res) {
+        const uid = req.params.uid;
+    
+        try {
+            await admin.auth().deleteUser(uid);
+            res.status(200).json({ message: 'Usuario eliminado exitosamente' });
+        } catch (error) {
+            console.error('Error al eliminar el usuario:', error);
+    
+            // Devuelve un mensaje JSON con el error en caso de un error
+            res.status(500).json({ error: 'Error al eliminar el usuario' });
+        }
+    }
+    
+    
 }
 
 export default new UserController();

@@ -86,8 +86,9 @@ const UserManage = () => {
         try {
             const updatedUserData = {
                 displayName: editingUser.displayName,
+                // photoURL: 'https://avatars.githubusercontent.com/u/88512335?v=4', 
             };
-
+    
             const response = await fetch(`${urlServer}/users/${editingUser.uid}`, {
                 method: 'PUT',
                 headers: {
@@ -95,34 +96,73 @@ const UserManage = () => {
                 },
                 body: JSON.stringify(updatedUserData),
             });
-
+    
             if (!response.ok) {
                 throw new Error(`Error en la solicitud: ${response.statusText}`);
             }
-
+    
             setShowEditModal(false);
             fetchUsers();
         } catch (error) {
             console.error('Error al guardar cambios:', error.message);
+            // Puedes manejar otros errores aquí si es necesario
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Error al guardar los cambios del usuario',
+            });
         }
     };
+    
+    
 
     const handleDeleteUser = async (uid) => {
         try {
-            const response = await fetch(`${urlServer}/users/${uid}`, {
-                method: 'DELETE',
+            const confirmDelete = await Swal.fire({
+                title: '¿Estás seguro?',
+                text: '¡No podrás revertir esto!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, eliminarlo',
+                cancelButtonText: 'Cancelar',
             });
-
-            if (!response.ok) {
-                throw new Error(`Error en la solicitud: ${response.statusText}`);
+    
+            if (confirmDelete.isConfirmed) {
+                const response = await fetch(`${urlServer}/users/${uid}`, {
+                    method: 'DELETE',
+                });
+    
+                if (response.ok) {
+                    const responseData = await response.json();
+                    // Mostrar SweetAlert de éxito
+                    Swal.fire({
+                        icon: 'success',
+                        title: responseData.message || 'Usuario eliminado correctamente',
+                    });
+                } else {
+                    const errorData = await response.json();
+                    throw new Error(`Error en la solicitud: ${errorData.error}`);
+                }
             }
-
-            await response.json();
-            fetchUsers();
         } catch (error) {
             console.error('Error al eliminar usuario:', error.message);
+            // Puedes manejar otros errores aquí si es necesario
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Error al eliminar el usuario',
+            });
+        } finally {
+            // Asegurarse de que fetchUsers se ejecute después de eliminar, tanto si hay éxito como si hay un error
+            fetchUsers();
         }
     };
+    
+    
+    
+    
 
     return (
         <>
@@ -241,7 +281,7 @@ const UserManage = () => {
                                 type="text"
                                 placeholder="Ingrese el nombre"
                                 value={editingUser.displayName}
-                                onChange={(e) => setNewUser({ ...editingUser, displayName: e.target.value })}
+                                onChange={(e) => setEditingUser({ ...editingUser, displayName: e.target.value })}
                             />
                         </Form.Group>
                     </Form>
