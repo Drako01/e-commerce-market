@@ -1,8 +1,10 @@
-import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, updateProfile, deleteUser as deleteUserAuth } from 'firebase/auth';
 import { firebaseApp } from '../controllers/firebase.controller.js';
 import { getFirestore, collection } from 'firebase/firestore';
 
+
 class UserModel {
+
     async createUser(userData) {
         const auth = getAuth(firebaseApp);
 
@@ -26,58 +28,68 @@ class UserModel {
 
     async getUser(uid) {
         const auth = getAuth(firebaseApp);
-
+    
         try {
-            // Validar que se proporcione un UID válido
+            // Validate that a valid UID is provided
             if (!uid) {
                 throw new Error('UID del usuario es obligatorio.');
             }
-
-            const user = await getUser(auth, uid);
-            return user;
+    
+            const userRecord = await getUser(auth, uid);
+            return {
+                uid: userRecord.uid,
+                email: userRecord.email,
+                displayName: userRecord.displayName,
+            };
         } catch (error) {
             throw new Error(`Error al obtener el usuario: ${error.message}`);
         }
     }
+    
 
     async updateUser(uid, updatedUserData) {
         const auth = getAuth(firebaseApp);
-
+    
         try {
-            // Validar que se proporcione un UID válido
+            // Validate that a valid UID is provided
             if (!uid) {
                 throw new Error('UID del usuario es obligatorio.');
             }
-
-            // Actualizar perfil del usuario (opcional)
+    
+            // Fetch the user details using the Admin SDK
+            const userRecord = await getUser(auth, uid);
+    
+            // Update user profile (optional)
             if (updatedUserData.displayName) {
-                await updateProfile(auth.currentUser, { displayName: updatedUserData.displayName });
+                await updateProfile(userRecord, { displayName: updatedUserData.displayName });
             }
-
-            // Puedes agregar lógica para actualizar otras propiedades del usuario si es necesario
+    
+            // You can add logic to update other user properties if necessary
             // ...
-
+    
             return 'Usuario actualizado exitosamente';
         } catch (error) {
             throw new Error(`Error al actualizar el usuario: ${error.message}`);
         }
     }
+    
 
     async deleteUser(uid) {
-        const auth = getAuth(firebaseApp);
+        const adminAuth = getAdminAuth();
 
         try {
-            // Validar que se proporcione un UID válido
             if (!uid) {
                 throw new Error('UID del usuario es obligatorio.');
             }
 
-            await deleteUser(auth.currentUser);
-            return 'Usuario eliminado exitosamente';
+            // Eliminar el usuario de la autenticación
+            await deleteAdminUser(adminAuth, uid);
+
+            return `Usuario ${uid} eliminado exitosamente`;
         } catch (error) {
             throw new Error(`Error al eliminar el usuario: ${error.message}`);
         }
-    }
+    } 
 
     async getAllUsers() {
         const db = getFirestore(firebaseApp);

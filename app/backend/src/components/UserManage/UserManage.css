@@ -1,3 +1,6 @@
-*{
+body{
     background-color: var(--second);
+}
+.container{
+    padding: 2rem;
 }

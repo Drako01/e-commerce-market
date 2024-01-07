@@ -11,48 +11,55 @@ class UserController {
                 throw { status: 400, message: 'Email y contraseña son campos obligatorios.' };
             }
 
-            const uid = await UserModel.createUser({ email, password, displayName }); 
+            const uid = await UserModel.createUser({ email, password, displayName });
             res.status(201).json({ uid });
         } catch (error) {
             loggers.error('Error al crear el usuario:', error.message);
-            
+
             res.status(error.status || 500).json({ error: 'Error interno del servidor' });
         }
     }
-    
 
-    async getUser(uid) {
+
+    async getUser(req, res) {
         try {
+            const uid = req.params.uid;
             const user = await UserModel.getUser(uid);
-            loggers.info('Usuario obtenido exitosamente:', user);
-            return user;
+            res.json(user);
         } catch (error) {
             loggers.error('Error al obtener el usuario:', error.message);
-            throw error;
+            res.status(error.status || 500).json({ error: 'Error interno del servidor' });
         }
     }
 
-    async updateUser(uid, updatedUserData) {
+    async updateUser(req, res) {
+        const uid = req.params.uid;
+        const updatedUserData = req.body;
+
         try {
             await UserModel.updateUser(uid, updatedUserData);
-            loggers.info('Usuario actualizado exitosamente');
+            res.status(200).json({ message: 'Usuario actualizado exitosamente' });
         } catch (error) {
             loggers.error('Error al actualizar el usuario:', error.message);
-            throw error;
+            res.status(error.status || 500).json({ error: 'Error interno del servidor' });
         }
     }
 
-    async deleteUser(uid) {
+
+    async deleteUser(req, res) {
+        const uid = req.params.uid;
+
         try {
-            await UserModel.deleteUser(uid);
-            loggers.info('Usuario eliminado exitosamente');
+            await admin.auth().deleteUser(uid);
+            res.status(200).send('Usuario eliminado exitosamente');
         } catch (error) {
-            loggers.error('Error al eliminar el usuario:', error.message);
-            throw error;
+            console.error('Error al eliminar el usuario:', error);
+            res.status(500).send('Error al eliminar el usuario');
         }
     }
 
-    
+
+
     async getAllUsers(req, res) {
         try {
             const userRecords = await admin.auth().listUsers();
@@ -64,11 +71,11 @@ class UserController {
                 lastSignInTime: user.metadata.lastSignInTime,
                 photoURL: user.photoURL,
             }));
-    
+
             res.json(userList);
         } catch (error) {
             loggers.error('Error fetching users:', error);
-    
+
             // Devuelve una respuesta JSON con el error en caso de un error
             res.status(500).json({ error: 'Error fetching users' });
         }

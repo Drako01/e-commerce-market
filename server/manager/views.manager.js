@@ -7,6 +7,7 @@ const views = [
     { path: '/', router: indexRouter },
     { path: '/get-all-users', router: userRouter},
     { path: '/create-user', router: userRouter},
+    { path: '/users', router: userRouter},
 ];
 
 export default views;

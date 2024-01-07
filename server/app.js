@@ -6,7 +6,9 @@ import 'core-js';
 import cors from 'cors';
 import admin from 'firebase-admin';
 import bodyParser from 'body-parser';
+
 const app = express();
+
 const corsOptions = {
     origin: '*',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
@@ -15,6 +17,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
+
 let httpServer;
 
 // Configuracion de Compresion de Archivos Estaticos con Brotli
@@ -28,7 +31,6 @@ const program = new Command();
 program
     .option('--mode <mode>', 'Puerto', 'prod')
 program.parse();
-
 
 
 // Configuracion de Path
@@ -64,7 +66,7 @@ app.use((err, req, res, next) => {
 });
 
 // Utiliza el import para cargar el archivo JSON
-const serviceAccountPath = path.join('./serviceAccountKey.json');
+const serviceAccountPath = path.join('serviceAccountKey.json');
 
 // Lee el contenido del archivo JSON utilizando readFileSync
 const serviceAccount = JSON.parse(readFileSync(serviceAccountPath, 'utf-8'));
@@ -98,6 +100,5 @@ process.on('SIGTERM', () => {
 });
 
 process.on('unhandledRejection', (reason, promise) => {
-    console.error('Unhandled Rejection at:', promise, 'reason:', reason);
-    // Aquí puedes agregar lógica adicional, como enviar alertas, registrar errores, etc.
+    loggers.error('Unhandled Rejection at:', promise, 'reason:', reason);
 });
