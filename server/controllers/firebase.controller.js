@@ -26,6 +26,7 @@ try {
 }
 
 const firebaseApp = initializeApp(firebaseConfig);
-
+const auth = getAuth(firebaseConexion); 
+const db = getFirestore(firebaseConexion); 
 // Exportar la conexión de Firebase
-export { firebaseConexion, firebaseApp };
+export { firebaseConexion, firebaseApp, auth, db};

@@ -5,7 +5,8 @@ import userRouter from '../routers/users.router.js';
 // Vistas
 const views = [
     { path: '/', router: indexRouter },
-    { path: '/api/get-all-users', router: userRouter},
+    { path: '/get-all-users', router: userRouter},
+    { path: '/create-user', router: userRouter},
 ];
 
 export default views;

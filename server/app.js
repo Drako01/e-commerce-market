@@ -4,8 +4,17 @@ import config from './config/config.js';
 import loggers from './config/logger.js'
 import 'core-js';
 import cors from 'cors';
+import admin from 'firebase-admin';
+import bodyParser from 'body-parser';
 const app = express();
-app.use(cors());
+const corsOptions = {
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
+app.use(bodyParser.json());
 let httpServer;
 
 // Configuracion de Compresion de Archivos Estaticos con Brotli
@@ -24,6 +33,9 @@ program.parse();
 
 // Configuracion de Path
 import path from 'path';
+import { fileURLToPath } from 'url';
+import { readFileSync } from 'fs';
+const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 //  Configuracion de Handlebars
@@ -36,6 +48,7 @@ configureHandlebars(app);
 import views from './manager/views.manager.js';
 app.use(express.static(path.resolve('..', 'public')));
 app.set('views', './views/');
+// Configura las rutas
 function setupRoutes(app, routes) {
     routes.forEach((route) => {
         const { path, router } = route;
@@ -50,7 +63,15 @@ app.use((err, req, res, next) => {
     res.status(500).send('Something went wrong!');
 });
 
+// Utiliza el import para cargar el archivo JSON
+const serviceAccountPath = path.join('./serviceAccountKey.json');
 
+// Lee el contenido del archivo JSON utilizando readFileSync
+const serviceAccount = JSON.parse(readFileSync(serviceAccountPath, 'utf-8'));
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+});
 
 // Configuracion del puerto
 let dominio = program.opts().mode === 'local' ? config.urls.urlProd : config.urls.urlLocal;
@@ -76,4 +97,7 @@ process.on('SIGTERM', () => {
     }
 });
 
-/////////////////////////////// PRUEBAS //////////////////////////////
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+    // Aquí puedes agregar lógica adicional, como enviar alertas, registrar errores, etc.
+});

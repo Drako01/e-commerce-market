@@ -1,13 +1,12 @@
-import { getAuth, createUserWithEmailAndPassword, deleteUser, updateProfile } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { firebaseApp } from '../controllers/firebase.controller.js';
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import { getFirestore, collection } from 'firebase/firestore';
 
 class UserModel {
     async createUser(userData) {
         const auth = getAuth(firebaseApp);
 
         try {
-            // Validar que se proporcionen los datos necesarios
             if (!userData.email || !userData.password) {
                 throw new Error('Email y contraseña son campos obligatorios.');
             }
@@ -15,7 +14,6 @@ class UserModel {
             const userCredential = await createUserWithEmailAndPassword(auth, userData.email, userData.password);
             const user = userCredential.user;
 
-            // Actualizar perfil del usuario (opcional)
             if (userData.displayName) {
                 await updateProfile(user, { displayName: userData.displayName });
             }
@@ -84,8 +82,7 @@ class UserModel {
     async getAllUsers() {
         const db = getFirestore(firebaseApp);
         const usersCollection = collection(db, 'users');
-        const auth = getAuth(firebaseApp);
-
+    
         try {
             const querySnapshot = await getDocs(usersCollection);
             const users = [];
@@ -97,6 +94,7 @@ class UserModel {
             throw error;
         }
     }
+    
 }
 
 export default new UserModel();

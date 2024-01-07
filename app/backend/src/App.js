@@ -1,12 +1,15 @@
 import { BrowserRouter } from 'react-router-dom';
 import UserManage from './components/UserManage/UserManage';
+// import { AuthProvider } from './context/AuthContext.js';
 
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <UserManage />
-      </BrowserRouter>
+      {/* <AuthProvider> */}
+        <BrowserRouter>
+          <UserManage />
+        </BrowserRouter>
+      {/* </AuthProvider> */}
     </>
   );
 }

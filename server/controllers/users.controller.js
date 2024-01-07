@@ -1,17 +1,25 @@
 import UserModel from '../models/users.model.js';
 import loggers from '../config/logger.js';
+import admin from 'firebase-admin';
 
 class UserController {
-    async createUser(userData) {
+    async createUser(req, res) {
         try {
-            const uid = await UserModel.createUser(userData);
-            loggers.info(`Usuario creado exitosamente con UID: ${uid}`);
-            return uid;
+            const { email, password, displayName } = req.body;
+
+            if (!email || !password) {
+                throw { status: 400, message: 'Email y contraseña son campos obligatorios.' };
+            }
+
+            const uid = await UserModel.createUser({ email, password, displayName }); 
+            res.status(201).json({ uid });
         } catch (error) {
             loggers.error('Error al crear el usuario:', error.message);
-            throw error;
+            
+            res.status(error.status || 500).json({ error: 'Error interno del servidor' });
         }
     }
+    
 
     async getUser(uid) {
         try {
@@ -44,13 +52,25 @@ class UserController {
         }
     }
 
+    
     async getAllUsers(req, res) {
         try {
-            const users = await UserModel.getAllUsers();
-            res.json(users);
+            const userRecords = await admin.auth().listUsers();
+            const userList = userRecords.users.map((user) => ({
+                uid: user.uid,
+                email: user.email,
+                displayName: user.displayName,
+                creationTime: user.metadata.creationTime,
+                lastSignInTime: user.metadata.lastSignInTime,
+                photoURL: user.photoURL,
+            }));
+    
+            res.json(userList);
         } catch (error) {
-            loggers.error('Error al obtener todos los usuarios:', error);
-            res.status(500).json({ error: 'Error al obtener usuarios' });
+            loggers.error('Error fetching users:', error);
+    
+            // Devuelve una respuesta JSON con el error en caso de un error
+            res.status(500).json({ error: 'Error fetching users' });
         }
     }
 }
