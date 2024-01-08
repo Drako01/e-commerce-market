@@ -4,8 +4,6 @@ import Swal from 'sweetalert2';
 import { Link, useNavigate } from 'react-router-dom';
 import { makeStyles, Typography, Button, TextField } from '@material-ui/core';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
-// import { useContext } from 'react';
-// import { AuthContext } from '../../context/AuthContext.js';
 
 
 const theme = createTheme({
@@ -45,23 +43,24 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Login = () => {
-    // const { currentUser } = useContext(AuthContext);
-    const classes = useStyles();
     const auth = getAuth();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
-
+    const classes = useStyles(); 
+    
     const handleEmailChange = (event) => setEmail(event.target.value);
     const handlePasswordChange = (event) => setPassword(event.target.value);
 
     const handleLogin = (event) => {
         event.preventDefault();
+
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
                 localStorage.setItem("user", JSON.stringify(user));
+                setError(""); // Limpiar el estado de error en caso de éxito
                 Swal.fire({
                     title: `Bienvenido ${user.email}`,
                     html: `Gracias por entrar a nuestro Pro-Shop`,
@@ -71,8 +70,8 @@ const Login = () => {
                     }
                 });
             })
-            .catch(() => {
-                setError()
+            .catch((error) => {
+                setError(error.message); // Actualizar el estado de error con el mensaje real
                 Swal.fire('Error', 'Usuario o Contraseña Incorrectos', 'error');
             });
     };
@@ -82,6 +81,7 @@ const Login = () => {
             .then((result) => {
                 const user = result.user;
                 localStorage.setItem("user", JSON.stringify(user));
+                setError(""); // Limpiar el estado de error en caso de éxito
                 Swal.fire({
                     title: `Bienvenido ${user.displayName}`,
                     html: `Gracias por entrar a nuestro Pro-Shop`,
@@ -91,13 +91,12 @@ const Login = () => {
                     }
                 });
             })
-            .catch(() => {
+            .catch((error) => {
+                setError(error.message); // Actualizar el estado de error con el mensaje real
                 Swal.fire('Error', 'Error al iniciar sesión con Google', 'error');
             });
     };
-    // if (!currentUser) {
-    //     return <p>Inicia sesión para ver esta página</p>;
-    //   }
+
     return (
         <ThemeProvider theme={theme}>
             <div>
