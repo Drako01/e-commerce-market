@@ -14,9 +14,11 @@ const UserManage = () => {
         password: '',
         displayName: '',
     });
-
+    const [selectedUserDetails, setSelectedUserDetails] = useState(null);
     const [showAddModal, setShowAddModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
+    const [showDetailsModal, setShowDetailsModal] = useState(false);
+
     const [editingUser, setEditingUser] = useState({
         uid: '',
         email: '',
@@ -47,7 +49,7 @@ const UserManage = () => {
             });
             return;
         }
-    
+
         try {
             const response = await fetch(`${urlServer}/create-user`, {
                 method: 'POST',
@@ -56,11 +58,11 @@ const UserManage = () => {
                 },
                 body: JSON.stringify(newUser),
             });
-    
+
             if (!response.ok) {
                 throw new Error(`Error en la solicitud: ${response.statusText}`);
             }
-    
+
             await response.text();
             fetchUsers();
             // Cerrar el modal después de agregar usuario
@@ -75,12 +77,18 @@ const UserManage = () => {
             });
         }
     };
-    
+
 
     const handleEditUser = (user) => {
         setEditingUser(user);
         setShowEditModal(true);
     };
+
+    const handleViewDetails = (user) => {
+        setSelectedUserDetails(user);
+        setShowDetailsModal(true);
+    };
+
 
     const handleSaveChanges = async () => {
         try {
@@ -88,7 +96,7 @@ const UserManage = () => {
                 displayName: editingUser.displayName,
                 // photoURL: 'https://avatars.githubusercontent.com/u/88512335?v=4', 
             };
-    
+
             const response = await fetch(`${urlServer}/users/${editingUser.uid}`, {
                 method: 'PUT',
                 headers: {
@@ -96,11 +104,11 @@ const UserManage = () => {
                 },
                 body: JSON.stringify(updatedUserData),
             });
-    
+
             if (!response.ok) {
                 throw new Error(`Error en la solicitud: ${response.statusText}`);
             }
-    
+
             setShowEditModal(false);
             fetchUsers();
         } catch (error) {
@@ -113,8 +121,8 @@ const UserManage = () => {
             });
         }
     };
-    
-    
+
+
 
     const handleDeleteUser = async (uid) => {
         try {
@@ -128,12 +136,12 @@ const UserManage = () => {
                 confirmButtonText: 'Sí, eliminarlo',
                 cancelButtonText: 'Cancelar',
             });
-    
+
             if (confirmDelete.isConfirmed) {
                 const response = await fetch(`${urlServer}/users/${uid}`, {
                     method: 'DELETE',
                 });
-    
+
                 if (response.ok) {
                     const responseData = await response.json();
                     // Mostrar SweetAlert de éxito
@@ -159,10 +167,10 @@ const UserManage = () => {
             fetchUsers();
         }
     };
-    
-    
-    
-    
+
+
+
+
 
     return (
         <>
@@ -177,6 +185,7 @@ const UserManage = () => {
                                 <th>ID</th>
                                 <th>Editar</th>
                                 <th>Eliminar</th>
+                                <th>Detalles</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -199,6 +208,14 @@ const UserManage = () => {
                                             onClick={() => handleDeleteUser(user.uid)}
                                         >
                                             Eliminar
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button
+                                            className="btn btn-info"
+                                            onClick={() => handleViewDetails(user)}
+                                        >
+                                            Detalles
                                         </button>
                                     </td>
                                 </tr>
@@ -292,6 +309,27 @@ const UserManage = () => {
                     </Button>
                     <Button variant="primary" onClick={handleSaveChanges}>
                         Guardar Cambios
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+            <Modal show={showDetailsModal} onHide={() => setShowDetailsModal(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Detalles del Usuario</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {selectedUserDetails && (
+                        <>
+                            <img src={selectedUserDetails.photoURL} alt={selectedUserDetails.displayName} />
+                            <p><strong>Email:</strong> {selectedUserDetails.email}</p>
+                            <p><strong>Nombre:</strong> {selectedUserDetails.displayName}</p>
+                            <p><strong>ID:</strong> {selectedUserDetails.uid}</p>
+                            {/* Agrega más detalles según sea necesario */}
+                        </>
+                    )}
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowDetailsModal(false)}>
+                        Cerrar
                     </Button>
                 </Modal.Footer>
             </Modal>
