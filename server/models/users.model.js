@@ -1,6 +1,7 @@
 import { getAuth, createUserWithEmailAndPassword, updateProfile, deleteUser as deleteUserAuth } from 'firebase/auth';
 import { firebaseApp } from '../controllers/firebase.controller.js';
-import { getFirestore, collection } from 'firebase/firestore';
+import { getFirestore, collection, doc, updateDoc, deleteDoc, getDoc, getDocs } from 'firebase/firestore';
+
 
 class UserModel {
 
@@ -15,8 +16,8 @@ class UserModel {
             const userCredential = await createUserWithEmailAndPassword(auth, userData.email, userData.password);
             const user = userCredential.user;
 
-            if (userData.displayName) {
-                await updateProfile(user, { displayName: userData.displayName });
+            if (userData.displayName || userData.photoURL) {
+                await updateProfile(user, { displayName: userData.displayName, photoURL: userData.photoURL });
             }
 
             return user.uid;
@@ -38,7 +39,9 @@ class UserModel {
             return {
                 uid: userRecord.uid,
                 email: userRecord.email,
-                displayName: userRecord.displayName,
+                displayName: userRecord.displayName,   
+                providerData: userRecord.providerData, 
+                photoURL: userRecord.photoURL,   
             };
         } catch (error) {
             throw new Error(`Error al obtener el usuario: ${error.message}`);
@@ -62,14 +65,26 @@ class UserModel {
     }
 
     async updateUser(uid, updatedUserData) {
+        const auth = getAuth(firebaseApp);
+    
         try {
-            // Verifica que el UID y los datos actualizados se proporcionen
-            if (!uid || !updatedUserData) {
-                throw new Error('UID del usuario y datos actualizados son obligatorios.');
+            // Validate that a valid UID is provided
+            if (!uid) {
+                throw new Error('UID del usuario es obligatorio.');
             }
     
-            const userRef = firestore.collection('users').doc(uid);
-            await userRef.update(updatedUserData);
+            // Obtén el usuario actual de manera síncrona
+            const currentUser = auth.currentUser;
+            
+            if (!currentUser) {
+                throw new Error('Usuario no autenticado.');
+            }
+    
+            // Actualiza el perfil del usuario (opcional)
+            await updateProfile(currentUser, {                
+                displayName: updatedUserData.displayName,
+                photoURL: updatedUserData.photoURL,
+            });
     
             return 'Usuario actualizado exitosamente';
         } catch (error) {

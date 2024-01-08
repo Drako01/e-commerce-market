@@ -14,7 +14,7 @@ const Main = () => {
         <main className="App-main">
             <Routes>
                 <Route path="/" exact component={Login} />
-                <Route path="/user" component={UserManage} />
+                <Route path="/api" exact component={UserManage} />
             </Routes>
         </main>
     )

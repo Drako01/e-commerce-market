@@ -5,13 +5,13 @@ import admin from 'firebase-admin';
 class UserController {
     async createUser(req, res) {
         try {
-            const { email, password, displayName } = req.body;
+            const { email, password, displayName, photoURL } = req.body;
 
             if (!email || !password) {
                 throw { status: 400, message: 'Email y contraseña son campos obligatorios.' };
             }
 
-            const uid = await UserModel.createUser({ email, password, displayName });
+            const uid = await UserModel.createUser({ email, password, displayName, photoURL });
             res.status(201).json({ uid });
         } catch (error) {
             loggers.error('Error al crear el usuario:', error.message);
@@ -54,33 +54,32 @@ class UserController {
 
     async updateUser(req, res) {
         const uid = req.params.uid;
-        const { email, displayName } = req.body;
+        const updatedUserData = req.body;
 
         try {
-            const result = await updateUser(uid, { email, displayName });
-            res.status(200).json({ message: result });
+            await UserModel.updateUser(uid, updatedUserData);
+            res.status(200).json({ message: 'Usuario actualizado exitosamente' });
         } catch (error) {
-            console.error('Error al actualizar el usuario:', error.message);
-            res.status(error.status || 500).json({ error: `Error interno del servidor: ${error.message}` });
+            loggers.error('Error al actualizar el usuario:', error);
+            res.status(error.status || 500).json({ error: 'Error interno del servidor' });
         }
-
     }
 
     async deleteUser(req, res) {
         const uid = req.params.uid;
-
+    
         try {
             await admin.auth().deleteUser(uid);
             res.status(200).json({ message: 'Usuario eliminado exitosamente' });
         } catch (error) {
             console.error('Error al eliminar el usuario:', error);
-
+    
             // Devuelve un mensaje JSON con el error en caso de un error
             res.status(500).json({ error: 'Error al eliminar el usuario' });
         }
     }
-
-
+    
+    
 }
 
 export default new UserController();

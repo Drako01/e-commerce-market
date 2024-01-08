@@ -1,12 +1,7 @@
-.App-header {
-    background-color: var(--white);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content:flex-end;
-    color: var(--light);
+.App-header img{
+    width: 60px;
+    padding-right: 1rem;
 }
-
 .App-header>h2,
 h3 {
     font-family: var(--fontB);

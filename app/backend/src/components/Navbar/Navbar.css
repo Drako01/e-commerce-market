@@ -1,0 +1,7 @@
+.menu .navbar {
+    background: var(--colour-second) !important;      
+}
+
+.menu .navbar a{
+    color: var(--colour-first) !important;  
+}
