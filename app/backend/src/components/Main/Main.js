@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import UserManage from '../UserManage/UserManage';
 import Login from '../Login/Login.js';
 // import { useContext } from 'react';
@@ -13,8 +13,8 @@ const Main = () => {
     return (
         <main className="App-main">
             <Routes>
-                <Route path="/" exact component={Login} />
-                <Route path="/api" exact component={UserManage} />
+                <Route path="/" exact component={<Login/>} />
+                <Route path="/api" element={<UserManage />} />
             </Routes>
         </main>
     )

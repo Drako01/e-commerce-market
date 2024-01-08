@@ -77,8 +77,7 @@ class UserController {
             // Devuelve un mensaje JSON con el error en caso de un error
             res.status(500).json({ error: 'Error al eliminar el usuario' });
         }
-    }
-    
+    }   
     
 }
 
