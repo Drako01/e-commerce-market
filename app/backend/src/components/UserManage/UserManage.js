@@ -3,6 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, Button, Form } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faTrash, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons';
 import './UserManage.css';
 
 const UserManage = () => {
@@ -10,19 +12,20 @@ const UserManage = () => {
 
     const [users, setUsers] = useState([]);
     const [newUser, setNewUser] = useState({
-        email: '',
-        password: '',
-        displayName: '',
+        email: null,
+        password: null,
+        displayName: null,
+        photoURL: null,
     });
     const [selectedUserDetails, setSelectedUserDetails] = useState(null);
     const [showAddModal, setShowAddModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
     const [showDetailsModal, setShowDetailsModal] = useState(false);
-
     const [editingUser, setEditingUser] = useState({
-        uid: '',
-        email: '',
-        displayName: '',
+        uid: null,
+        email: null,
+        displayName: null,
+        photoURL: null,
     });
 
     const fetchUsers = useCallback(async () => {
@@ -168,10 +171,7 @@ const UserManage = () => {
         }
     };
 
-
-
-
-
+    
     return (
         <>
             <section className="container mt-5">
@@ -199,7 +199,7 @@ const UserManage = () => {
                                             className="btn btn-warning"
                                             onClick={() => handleEditUser(user)}
                                         >
-                                            Editar
+                                            <FontAwesomeIcon icon={faEdit} />
                                         </button>
                                     </td>
                                     <td>
@@ -207,7 +207,7 @@ const UserManage = () => {
                                             className="btn btn-danger"
                                             onClick={() => handleDeleteUser(user.uid)}
                                         >
-                                            Eliminar
+                                            <FontAwesomeIcon icon={faTrash} />
                                         </button>
                                     </td>
                                     <td>
@@ -215,7 +215,7 @@ const UserManage = () => {
                                             className="btn btn-info"
                                             onClick={() => handleViewDetails(user)}
                                         >
-                                            Detalles
+                                            <FontAwesomeIcon icon={faEye} />
                                         </button>
                                     </td>
                                 </tr>
@@ -226,7 +226,7 @@ const UserManage = () => {
 
                 {/* Botón para abrir el modal de agregar usuario */}
                 <Button variant="primary" onClick={() => setShowAddModal(true)}>
-                    Agregar Usuario
+                    <FontAwesomeIcon icon={faPlus} /> Agregar Usuario
                 </Button>
             </section>
 
@@ -262,6 +262,16 @@ const UserManage = () => {
                                 placeholder="Ingrese el nombre"
                                 value={newUser.displayName}
                                 onChange={(e) => setNewUser({ ...newUser, displayName: e.target.value })}
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formProfileImageAdd">
+                            <Form.Label>Imagen de Perfil:</Form.Label>
+                            <Form.Control
+                                id="custom-file"
+                                type="text"
+                                label="Selecciona una imagen"  
+                                value={newUser.photoURL}                              
+                                onChange={(e) => setNewUser({ ...newUser, photoURL: e.target.value })}                               
                             />
                         </Form.Group>
                     </Form>
@@ -301,6 +311,16 @@ const UserManage = () => {
                                 onChange={(e) => setEditingUser({ ...editingUser, displayName: e.target.value })}
                             />
                         </Form.Group>
+                        <Form.Group className="mb-3" controlId="formProfileImageAdd">
+                            <Form.Label>Imagen de Perfil:</Form.Label>
+                            <Form.Control
+                                id="custom-file"
+                                type="text"
+                                label="Selecciona una imagen"  
+                                value={newUser.photoURL}                              
+                                onChange={(e) => setEditingUser({ ...editingUser, photoURL: e.target.value })}          
+                            />
+                        </Form.Group>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
@@ -319,11 +339,11 @@ const UserManage = () => {
                 <Modal.Body>
                     {selectedUserDetails && (
                         <>
-                            <img src={selectedUserDetails.photoURL} alt={selectedUserDetails.displayName} />
+                            <img src={selectedUserDetails.photoURL} alt={selectedUserDetails.displayName} width={180}/>
                             <p><strong>Email:</strong> {selectedUserDetails.email}</p>
                             <p><strong>Nombre:</strong> {selectedUserDetails.displayName}</p>
-                            <p><strong>ID:</strong> {selectedUserDetails.uid}</p>
-                            {/* Agrega más detalles según sea necesario */}
+                            <p><strong>Proveedor:</strong> {selectedUserDetails.providerData}</p>
+                            <p><strong>ID:</strong> {selectedUserDetails.uid}</p>                            
                         </>
                     )}
                 </Modal.Body>

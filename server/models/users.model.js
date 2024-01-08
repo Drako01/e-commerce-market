@@ -1,6 +1,6 @@
 import { getAuth, createUserWithEmailAndPassword, updateProfile, deleteUser as deleteUserAuth } from 'firebase/auth';
 import { firebaseApp } from '../controllers/firebase.controller.js';
-import { getFirestore, collection, doc, updateDoc, deleteDoc, getDoc } from 'firebase/firestore';
+import { getFirestore, collection, doc, updateDoc, deleteDoc, getDoc, getDocs } from 'firebase/firestore';
 
 
 class UserModel {
@@ -16,8 +16,8 @@ class UserModel {
             const userCredential = await createUserWithEmailAndPassword(auth, userData.email, userData.password);
             const user = userCredential.user;
 
-            if (userData.displayName) {
-                await updateProfile(user, { displayName: userData.displayName });
+            if (userData.displayName || userData.photoURL) {
+                await updateProfile(user, { displayName: userData.displayName, photoURL: userData.photoURL });
             }
 
             return user.uid;
@@ -39,7 +39,9 @@ class UserModel {
             return {
                 uid: userRecord.uid,
                 email: userRecord.email,
-                displayName: userRecord.displayName,
+                displayName: userRecord.displayName,   
+                providerData: userRecord.providerData, 
+                photoURL: userRecord.photoURL,   
             };
         } catch (error) {
             throw new Error(`Error al obtener el usuario: ${error.message}`);
@@ -79,9 +81,9 @@ class UserModel {
             }
     
             // Actualiza el perfil del usuario (opcional)
-            await updateProfile(currentUser, {
+            await updateProfile(currentUser, {                
                 displayName: updatedUserData.displayName,
-                // photoURL: updatedUserData.photoURL,
+                photoURL: updatedUserData.photoURL,
             });
     
             return 'Usuario actualizado exitosamente';

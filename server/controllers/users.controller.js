@@ -5,13 +5,13 @@ import admin from 'firebase-admin';
 class UserController {
     async createUser(req, res) {
         try {
-            const { email, password, displayName } = req.body;
+            const { email, password, displayName, photoURL } = req.body;
 
             if (!email || !password) {
                 throw { status: 400, message: 'Email y contraseña son campos obligatorios.' };
             }
 
-            const uid = await UserModel.createUser({ email, password, displayName });
+            const uid = await UserModel.createUser({ email, password, displayName, photoURL });
             res.status(201).json({ uid });
         } catch (error) {
             loggers.error('Error al crear el usuario:', error.message);
