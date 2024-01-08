@@ -97,7 +97,7 @@ const UserManage = () => {
         try {
             const updatedUserData = {
                 displayName: editingUser.displayName,
-                // photoURL: 'https://avatars.githubusercontent.com/u/88512335?v=4', 
+                photoURL: editingUser.photoURL, 
             };
 
             const response = await fetch(`${urlServer}/users/${editingUser.uid}`, {
