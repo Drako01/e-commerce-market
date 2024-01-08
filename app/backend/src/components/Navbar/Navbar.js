@@ -28,11 +28,11 @@ const Navbar = () => {
                 setAuthenticated(false);
             }
         });
-    
+
         // Asegúrate de desuscribirte cuando el componente se desmonte
         return () => unsubscribe();
     }, [auth]);
-    
+
 
     const handleLogout = () => {
         const auth = getAuth();
@@ -50,7 +50,7 @@ const Navbar = () => {
                 if (result.isConfirmed) {
                     auth.signOut();
                     localStorage.removeItem('user');
-                    
+
                     setCurrentUser(null);
                 }
             });
@@ -59,13 +59,18 @@ const Navbar = () => {
             Swal.fire('Error', error.message, 'error');
         });
     };
-    
+
     return (
         <section>
             <div className='menu'>
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
                     <div className="container">
-                        <img src={logo} alt=' ' />
+                        {authenticated ? (
+                            <img src={currentUser.photoURL} alt={currentUser.displayName} />
+                        ) : (
+                            <img src={logo} alt=' ' />
+                        )}
+
                         <NavLink className="navbar-brand" to='/'>Inicio</NavLink>
                         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
@@ -75,20 +80,18 @@ const Navbar = () => {
                                 <li className="nav-item">
                                     <NavLink className="nav-link" to='/api'>Usuarios</NavLink>
                                 </li>
-
+                                {authenticated && (
+                                    <li className="nav-item">
+                                        <NavLink className="nav-link">Bienvenido, {currentUser.displayName}!</NavLink>
+                                    </li>
+                                )}
                                 {currentUser ? (
                                     <li className="nav-item">
-                                        <NavLink  className="nav-link" onClick={handleLogout}>Logout</NavLink>
+                                        <NavLink className="nav-link" onClick={handleLogout}>Logout</NavLink>
                                     </li>
                                 ) : (
                                     <li className="nav-item">
                                         <NavLink className="nav-link" to='/login'>Login</NavLink>
-                                    </li>
-                                )}
-
-                                {authenticated && (
-                                    <li className="nav-item">
-                                        <NavLink className="nav-link">Bienvenido, {currentUser.displayName}!</NavLink>
                                     </li>
                                 )}
                             </ul>
