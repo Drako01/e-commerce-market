@@ -47,7 +47,6 @@ class ProductsController {
         }
     }
 
-
     // Actualizar un producto por ID
     async updateProduct(req, res) {
         try {
@@ -81,8 +80,6 @@ class ProductsController {
             return res.status(500).json({ error: 'Error interno del servidor' });
         }
     }
-
-
 
     // Obtener productos por categoría
     async getProductsByCategory(req, res) {

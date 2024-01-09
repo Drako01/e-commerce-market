@@ -21,6 +21,8 @@ const ProductsManage = () => {
     const [showAddModal, setShowAddModal] = useState(false);
     const [showProgressModal, setShowProgressModal] = useState(false);
     const [uploadProgress, setUploadProgress] = useState(0);
+    const [showDetailsModal, setShowDetailsModal] = useState(false);
+    const [productDetailsModal, setProductDetailsModal] = useState(null);
 
     const [newProduct, setNewProduct] = useState({
         marca: null,
@@ -56,7 +58,7 @@ const ProductsManage = () => {
     }, [urlServer]);
 
 
-    const handleDeleteProduct = async (uid) => {       
+    const handleDeleteProduct = async (uid) => {
         try {
             const confirmDelete = await Swal.fire({
                 title: '¿Estás seguro?',
@@ -102,17 +104,21 @@ const ProductsManage = () => {
 
     const handleViewDetails = async (productId) => {
         try {
-            // Lógica para obtener detalles de un producto utilizando el controlador
-            const response = await axios.get(`http://localhost:8080/api/products/getById/${productId}`);
+            const response = await axios.get(`${urlServer}/api/products/getById/${productId}`);
 
+            // Mostrar los detalles en un modal
             const productDetails = response.data;
-            console.log('Detalles del producto:', productDetails);
-            // Puedes mostrar los detalles en un modal o de la manera que desees
+            // Puedes personalizar el contenido del modal según los detalles del producto
+            // Por ejemplo, puedes usar el estado local para almacenar los detalles y mostrarlos en el modal.
+            setProductDetailsModal(productDetails);
+            setShowDetailsModal(true);
         } catch (error) {
             console.error('Error al obtener detalles del producto:', error);
+        } finally {
+            // Asegurarse de que fetchUsers se ejecute después de obtener detalles, tanto si hay éxito como si hay un error
+            fetchData();
         }
     };
-
 
     const handleAddProduct = async () => {
         try {
@@ -163,7 +169,6 @@ const ProductsManage = () => {
         }));
     };
 
-
     // eslint-disable-next-line
     const handleShowProgressModal = () => {
         setShowProgressModal(true);
@@ -172,9 +177,6 @@ const ProductsManage = () => {
     const handleCloseProgressModal = () => {
         setShowProgressModal(false);
     };
-
-
-
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -262,7 +264,7 @@ const ProductsManage = () => {
 
                                         </td>
                                     ))}
-                                    
+
                                     <td>
                                         <Button variant="outline-danger" onClick={() => handleDeleteProduct(product.id)}>
                                             <FontAwesomeIcon icon={faTrash} />
@@ -273,7 +275,7 @@ const ProductsManage = () => {
                                         <Button variant="outline-info" onClick={() => handleViewDetails(product.id)}>
                                             <FontAwesomeIcon icon={faEye} />
                                         </Button>
-                                    </td>                                    
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
@@ -374,6 +376,32 @@ const ProductsManage = () => {
                         </Modal.Body>
                     </Modal>
 
+                    <Modal show={showDetailsModal} onHide={() => setShowDetailsModal(false)}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Detalles del Producto</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            {/* Mostrar los detalles del producto aquí */}
+                            {productDetailsModal && (
+                                <>
+                                    <p className='Detalles-Productos'><span>Marca:</span> {productDetailsModal.marca}</p>
+                                    <p className='Detalles-Productos'><span>Subcategoría:</span> {productDetailsModal.subcategoria}</p>
+                                    <p className='Detalles-Productos'><span>Categoría:</span> {productDetailsModal.categoria}</p>
+                                    <p className='Detalles-Productos'><span>Descripción:</span> {productDetailsModal.descripcion}</p>
+                                    <p className='Detalles-Productos'><span>Precio: $</span> {productDetailsModal.precio} .-</p>
+                                    <div className='userPhotoDiv'>
+                                        <img src={productDetailsModal.foto} alt={productDetailsModal.marca} className='Foto-Product' />
+                                        <div className='line'></div>
+                                    </div>
+                                </>
+                            )}
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={() => setShowDetailsModal(false)}>
+                                Cerrar
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
 
                 </div>
             ) : (
