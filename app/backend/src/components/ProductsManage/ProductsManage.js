@@ -263,12 +263,12 @@ const ProductsManage = () => {
                                         </td>
                                     ))}
                                     <td>
-                                        <Button variant="danger" onClick={() => handleDeleteProduct(product.uid)}>
+                                        <Button variant="outline-danger" onClick={() => handleDeleteProduct(product.uid)}>
                                             <FontAwesomeIcon icon={faTrash} />
                                         </Button>
                                     </td>
                                     <td>
-                                        <Button variant="info" onClick={() => handleViewDetails(product.uid)}>
+                                        <Button variant="outline-info" onClick={() => handleViewDetails(product.uid)}>
                                             <FontAwesomeIcon icon={faEye} />
                                         </Button>
                                     </td>
