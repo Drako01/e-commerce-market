@@ -3,10 +3,13 @@ import loggers from '../config/logger.js';
 
 class ProductsController {
     // Agregar un nuevo producto
+
+
     async addProduct(req, res) {
         try {
-            const productData = req.body; 
-            const productId = await ProductModel.addProduct(productData);
+            const productData = req.body;
+            const productId = await ProductModel.addProduct(productData, res); // Pasar res como parámetro
+            const imageUrl = generateImageUrl(productData);
             res.status(201).json({ message: 'Producto agregado con éxito', productId });
         } catch (error) {
             res.status(500).json({ error: 'Error al agregar el producto' });
@@ -26,7 +29,7 @@ class ProductsController {
     // Obtener un producto por ID
     async getProductById(req, res) {
         try {
-            const productId = req.params.id; 
+            const productId = req.params.id;
             const product = await ProductModel.getProductById(productId);
 
             if (product) {
@@ -65,7 +68,7 @@ class ProductsController {
     // Obtener productos por categoría
     async getProductsByCategory(req, res) {
         try {
-            const category = req.params.category; 
+            const category = req.params.category;
             const products = await ProductModel.getProductsByCategory(category);
             res.status(200).json(products);
         } catch (error) {
@@ -75,3 +78,13 @@ class ProductsController {
 }
 
 export default new ProductsController();
+
+export function generateImageUrl(productData) {
+    const imageUrl = `Products/${productData.categoria}/${productData.subcategoria}/${productData.marca}/${productData.foto.name}`;
+    return imageUrl;
+}
+
+
+
+
+

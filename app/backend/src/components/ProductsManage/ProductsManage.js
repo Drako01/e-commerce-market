@@ -7,8 +7,10 @@ import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Modal, Form } from 'react-bootstrap';
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 
 const ProductsManage = () => {
+    const storage = getStorage();
     const urlServer = process.env.REACT_APP_URL_SERVER;
     const [products, setProducts] = useState([]);
     const auth = getAuth();
@@ -17,12 +19,12 @@ const ProductsManage = () => {
     const [loading, setLoading] = useState(true);
     const [showAddModal, setShowAddModal] = useState(false);
     const [newProduct, setNewProduct] = useState({
-        marca: '',
-        subcategoria: '',
-        categoria: '',
+        marca: null,
+        subcategoria: null,
+        categoria: null,
         precio: 0,
-        descripcion: '',
-        foto: '',
+        descripcion: null,
+        foto: null,
     });
 
     const items = ['categoria', 'subcategoria', 'marca', 'descripcion', 'foto', 'precio'];
@@ -107,18 +109,55 @@ const ProductsManage = () => {
         }
     };
 
+
     const handleAddProduct = async () => {
         try {
-            // Lógica para agregar un nuevo producto utilizando el controlador
-            const response = await axios.post('http://localhost:8080/api/products/add', newProduct);
-            console.log('Producto agregado con éxito. ID:', response.data.productId);
-
-            fetchData(); // <-- Use fetchData here to refresh the product list after addition
-            handleCloseAddModal(); // Cerrar el modal después de agregar
+            // Subir la imagen al almacenamiento de Firebase
+            const imageRef = ref(
+                storage,
+                `Products/${newProduct.categoria}/${newProduct.subcategoria}/${newProduct.marca}/${newProduct.foto.name}`
+            );
+            const uploadTask = uploadBytesResumable(imageRef, newProduct.foto); // Change here
+    
+            uploadTask.on(
+                'state_changed',
+                (snapshot) => {
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log(`Progreso de carga: ${progress}%`);
+                },
+                (error) => {
+                    console.error('Error al cargar la imagen:', error);
+                },
+                async () => {
+                    try {
+                        const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+                        const updatedProduct = {
+                            ...newProduct,
+                            foto: downloadURL,
+                        };
+    
+                        await axios.post(`${urlServer}/api/products/add`, updatedProduct);
+                        fetchData();
+                        handleCloseAddModal();
+                    } catch (error) {
+                        console.error('Error al agregar el producto:', error);
+                    }
+                }
+            );
         } catch (error) {
             console.error('Error al agregar el producto:', error);
         }
     };
+    
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        setNewProduct((prevProduct) => ({
+            ...prevProduct,
+            foto: file,
+        }));
+    };
+    
+    
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -191,12 +230,19 @@ const ProductsManage = () => {
                                 <tr key={index}>
                                     {/* Filtrar las columnas basadas en el array 'items' */}
                                     {items.map((key, columnIndex) => (
-                                        <td key={columnIndex}>
+                                        <td key={columnIndex}>                                            
                                             {key.toLowerCase() === 'foto' ? (
-                                                <img src={product[key.toLowerCase()]} alt={product[key.toLowerCase()]} style={{ maxWidth: '32px', maxHeight: '32px' }} />
+                                                <div> 
+                                                    <img
+                                                        src={product[key.toLowerCase()]}
+                                                        alt={product[key.toLowerCase()]}
+                                                        style={{ maxWidth: '32px', maxHeight: '32px' }}
+                                                    />
+                                                </div>
                                             ) : (
                                                 product[key.toLowerCase()]
                                             )}
+
                                         </td>
                                     ))}
                                     <td>
@@ -276,14 +322,16 @@ const ProductsManage = () => {
                                     />
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formImage">
-                                    <Form.Label>URL de la Imagen:</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Ingrese la URL de la imagen"
-                                        name="foto"
-                                        value={newProduct.foto}
-                                        onChange={handleChange}
-                                    />
+                                    <Form.Group className="mb-3" controlId="formImage">
+                                        <Form.Label>Imagen:</Form.Label>
+                                        <Form.Control
+                                            type="file"
+                                            accept="image/*"
+                                            name='foto'
+                                            onChange={handleImageChange}
+                                        />
+
+                                    </Form.Group>
                                 </Form.Group>
                             </Form>
                         </Modal.Body>

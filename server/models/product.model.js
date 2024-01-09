@@ -1,6 +1,7 @@
 import loggers from '../config/logger.js'
 import { getFirestore, collection, addDoc, getDocs, query, where } from '@firebase/firestore';
 import { firebaseConexion } from '../controllers/firebase.controller.js';
+import { generateImageUrl } from '../controllers/products.controler.js';
 
 const db = getFirestore(firebaseConexion);
 const productCollection = collection(db, 'productos');
@@ -9,7 +10,10 @@ class ProductModel {
     // Método para agregar un nuevo producto
     async addProduct(productData) {
         try {
-            const docRef = await addDoc(productCollection, productData);            
+            const docRef = await addDoc(productCollection, {
+                ...productData,
+                imageUrl: generateImageUrl(productData),
+            });
             return docRef.id;
         } catch (error) {
             loggers.error('Error al agregar el producto:', error);
