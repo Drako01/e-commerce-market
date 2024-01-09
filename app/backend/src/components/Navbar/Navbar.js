@@ -86,7 +86,10 @@ const Navbar = () => {
                                 {authenticated && (
                                     <>
                                         <li className="nav-item">
-                                            <NavLink className="nav-link" to='/api'>Usuarios</NavLink>
+                                            <NavLink className="nav-link" to='/api/usuarios'>Usuarios</NavLink>
+                                        </li>
+                                        <li className="nav-item">
+                                            <NavLink className="nav-link" to='/api/products'>Productos</NavLink>
                                         </li>
 
                                     </>
