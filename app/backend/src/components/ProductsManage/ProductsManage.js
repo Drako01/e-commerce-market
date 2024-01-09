@@ -37,9 +37,10 @@ const ProductsManage = () => {
         precio: 0,
         descripcion: null,
         foto: null,
+        stock: null,
     });
 
-    const items = ['categoria', 'subcategoria', 'marca', 'descripcion', 'foto', 'precio'];
+    const items = ['categoria', 'subcategoria', 'marca', 'descripcion', 'foto', 'precio', 'stock'];
 
 
     // Función para abrir el modal de agregar producto
@@ -298,11 +299,6 @@ const ProductsManage = () => {
     }, [fetchData, fetchAllCategories]);
     
 
-    
-    
-
-    
-
     if (loading) {
         return (
             <div className="loader-container">
@@ -430,6 +426,16 @@ const ProductsManage = () => {
                                         onChange={handleChange}
                                     />
                                 </Form.Group>
+                                <Form.Group className="mb-3" controlId="formPrice">
+                                    <Form.Label>Precio:</Form.Label>
+                                    <Form.Control
+                                        type="number"
+                                        placeholder="Ingrese el stock"
+                                        name="stock"
+                                        value={newProduct.stock}
+                                        onChange={handleChange}
+                                    />
+                                </Form.Group>
                                 <Form.Group className="mb-3" controlId="formDescription">
                                     <Form.Label>Descripción:</Form.Label>
                                     <Form.Control
@@ -492,6 +498,7 @@ const ProductsManage = () => {
                                         <img src={productDetailsModal.foto} alt={productDetailsModal.marca} className='Foto-Product' />
                                         <div className='line'></div>
                                     </div>
+                                    <p className='Detalles-Productos'><span>Stock:</span> {productDetailsModal.stock}</p>
                                 </>
                             )}
                         </Modal.Body>
@@ -530,6 +537,16 @@ const ProductsManage = () => {
                                         placeholder="Ingrese el precio"
                                         name="precio"
                                         value={currentProduct.precio}
+                                        onChange={handleEditChange}
+                                    />
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formPrice">
+                                    <Form.Label>Precio:</Form.Label>
+                                    <Form.Control
+                                        type="number"
+                                        placeholder="Ingrese el stock"
+                                        name="stock"
+                                        value={currentProduct.stock}
                                         onChange={handleEditChange}
                                     />
                                 </Form.Group>
