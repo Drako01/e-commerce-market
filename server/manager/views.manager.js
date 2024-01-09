@@ -4,7 +4,7 @@ import userRouter from '../routers/users.router.js';
 
 // Vistas
 const views = [
-    { path: '/api', router: indexRouter },
+    { path: '/', router: indexRouter },
     { path: '/api/get-all-users', router: userRouter},
     { path: '/api/create-user', router: userRouter},
     { path: '/api/users', router: userRouter},
