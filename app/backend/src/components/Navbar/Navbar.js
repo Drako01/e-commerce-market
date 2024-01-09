@@ -40,7 +40,7 @@ const Navbar = () => {
             text: "¿Deseas cerrar sesión?",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "var(--first)",
+            confirmButtonColor: "var(--colour-second)",
             cancelButtonColor: "var(--brick)",
             confirmButtonText: "Sí, cerrar sesión",
             cancelButtonText: "Cancelar",
