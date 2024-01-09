@@ -1,7 +1,7 @@
 import React from 'react';
-import { NavLink, redirect } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import logo from '../../logo.svg'
+import logo from '../../logo.svg';
 import Swal from 'sweetalert2';
 import './Navbar.css';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
@@ -10,6 +10,7 @@ const Navbar = () => {
     const auth = getAuth();
     const [authenticated, setAuthenticated] = useState(false);
     const [currentUser, setCurrentUser] = useState(null);
+    const navigate = useNavigate();
 
     // Escucha los cambios en la autenticación y actualiza el estado del usuario
     useEffect(() => {
@@ -33,31 +34,35 @@ const Navbar = () => {
         return () => unsubscribe();
     }, [auth]);
 
-
     const handleLogout = () => {
-        const auth = getAuth();
-        signOut(auth).then(() => {
-            Swal.fire({
-                title: "¿Estás seguro?",
-                text: "¿Deseas cerrar sesión?",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "var(--first)",
-                cancelButtonColor: "var(--brick)",
-                confirmButtonText: "Sí, cerrar sesión",
-                cancelButtonText: "Cancelar",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    auth.signOut();
-                    localStorage.removeItem('user');
+        Swal.fire({
+            title: "¿Estás seguro?",
+            text: "¿Deseas cerrar sesión?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "var(--first)",
+            cancelButtonColor: "var(--brick)",
+            confirmButtonText: "Sí, cerrar sesión",
+            cancelButtonText: "Cancelar",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                signOut(auth)
+                    .then(() => {
+                        Swal.fire({
+                            title: "Cerrando sesión...",
+                            icon: "info",
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
 
-                    setCurrentUser(null);
-                    redirect('/');
-                }
-            });
-
-        }).catch(error => {
-            Swal.fire('Error', error.message, 'error');
+                        localStorage.removeItem('user');
+                        setCurrentUser(null);
+                        navigate('/');
+                    })
+                    .catch((error) => {
+                        Swal.fire('Error', error.message, 'error');
+                    });
+            }
         });
     };
 
@@ -69,7 +74,7 @@ const Navbar = () => {
                         {authenticated ? (
                             <img src={currentUser.photoURL} alt={currentUser.displayName} />
                         ) : (
-                            <img src={logo} alt=' ' />
+                            <img src={logo} alt='Logo' />
                         )}
 
                         <NavLink className="navbar-brand" to='/'>Inicio</NavLink>
