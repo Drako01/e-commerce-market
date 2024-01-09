@@ -13,7 +13,7 @@ router.get('/getById/:id', ProductsController.getProductById);
 router.post('/add', ProductsController.addProduct);
 
 // Ruta para actualizar un producto por ID
-router.put('/update/:id', ProductsController.updateProduct);
+router.put('/update/:id', ProductsController.updateProductById);
 
 // Ruta para eliminar un producto por ID
 router.delete('/delete/:id', ProductsController.deleteProduct);

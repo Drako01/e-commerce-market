@@ -1,5 +1,5 @@
 import loggers from '../config/logger.js'
-import { getFirestore, collection, addDoc, getDocs, getDoc, query, where, doc, updateDoc, deleteDoc } from '@firebase/firestore';
+import { getFirestore, collection, addDoc, getDocs, query, where, doc, updateDoc, deleteDoc } from '@firebase/firestore';
 import { firebaseConexion } from '../controllers/firebase.controller.js';
 import { generateImageUrl } from '../controllers/products.controler.js';
 
@@ -54,7 +54,7 @@ class ProductModel {
     }
 
     // Método para actualizar un producto por ID
-    async updateProduct(productId, updatedProductData) {
+    async updateProductById(productId, updatedProductData) {
         try {
             const productDoc = doc(productCollection, productId);
             await updateDoc(productDoc, updatedProductData);
@@ -64,6 +64,8 @@ class ProductModel {
             throw error;
         }
     }
+    
+
 
     // Método para eliminar un producto por ID
     async deleteProduct(productId) {

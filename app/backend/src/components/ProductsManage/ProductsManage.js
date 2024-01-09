@@ -23,6 +23,9 @@ const ProductsManage = () => {
     const [uploadProgress, setUploadProgress] = useState(0);
     const [showDetailsModal, setShowDetailsModal] = useState(false);
     const [productDetailsModal, setProductDetailsModal] = useState(null);
+    const [editProductModal, setEditProductModal] = useState(false);
+    const [currentProduct, setCurrentProduct] = useState({});
+
 
     const [newProduct, setNewProduct] = useState({
         marca: null,
@@ -104,18 +107,14 @@ const ProductsManage = () => {
 
     const handleViewDetails = async (productId) => {
         try {
-            const response = await axios.get(`${urlServer}/api/products/getById/${productId}`);
-
-            // Mostrar los detalles en un modal
+            const response = await axios.get(`${urlServer}/api/products/getById/${productId}`);            
             const productDetails = response.data;
-            // Puedes personalizar el contenido del modal según los detalles del producto
-            // Por ejemplo, puedes usar el estado local para almacenar los detalles y mostrarlos en el modal.
             setProductDetailsModal(productDetails);
+            setCurrentProduct(productDetails);
             setShowDetailsModal(true);
         } catch (error) {
             console.error('Error al obtener detalles del producto:', error);
         } finally {
-            // Asegurarse de que fetchUsers se ejecute después de obtener detalles, tanto si hay éxito como si hay un error
             fetchData();
         }
     };
@@ -186,6 +185,51 @@ const ProductsManage = () => {
         }));
     };
 
+    const handleEditProduct = (product) => {
+        setCurrentProduct(product);
+        setEditProductModal(true);
+        setShowDetailsModal(false);
+    };
+
+    const handleSaveEdit = async () => {
+        try {
+            const response = await axios.put(`${urlServer}/api/products/update/${currentProduct.id}`, currentProduct);
+    
+            if (response.status === 200) {
+                // Success: close the modal, show success message, etc.
+                setEditProductModal(false);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Producto editado correctamente',
+                });
+            } else {
+                // Failure: show error message
+                throw new Error(`Error en la solicitud: ${response.statusText}`);
+            }
+        } catch (error) {
+            console.error('Error al editar el producto:', error.message);
+            // Show an error message using Swal or other means
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Error al editar el Producto',
+            });
+        } finally {
+            // Additional logic if needed
+            fetchData();
+        }
+    };
+    
+    
+    const handleEditChange = (e) => {
+        const { name, value } = e.target;
+        setCurrentProduct((prevProduct) => ({
+            ...prevProduct,
+            [name]: value,
+        }));
+    };
+    
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -203,7 +247,6 @@ const ProductsManage = () => {
     useEffect(() => {
         fetchData();
     }, [fetchData]);
-
 
 
     if (loading) {
@@ -376,7 +419,7 @@ const ProductsManage = () => {
                         </Modal.Body>
                     </Modal>
 
-                    <Modal show={showDetailsModal} onHide={() => setShowDetailsModal(false)}>
+                    <Modal show={showDetailsModal && !editProductModal} onHide={() => setShowDetailsModal(false)}>
                         <Modal.Header closeButton>
                             <Modal.Title>Detalles del Producto</Modal.Title>
                         </Modal.Header>
@@ -384,9 +427,9 @@ const ProductsManage = () => {
                             {/* Mostrar los detalles del producto aquí */}
                             {productDetailsModal && (
                                 <>
-                                    <p className='Detalles-Productos'><span>Marca:</span> {productDetailsModal.marca}</p>
-                                    <p className='Detalles-Productos'><span>Subcategoría:</span> {productDetailsModal.subcategoria}</p>
                                     <p className='Detalles-Productos'><span>Categoría:</span> {productDetailsModal.categoria}</p>
+                                    <p className='Detalles-Productos'><span>Subcategoría:</span> {productDetailsModal.subcategoria}</p>
+                                    <p className='Detalles-Productos'><span>Marca:</span> {productDetailsModal.marca}</p>
                                     <p className='Detalles-Productos'><span>Descripción:</span> {productDetailsModal.descripcion}</p>
                                     <p className='Detalles-Productos'><span>Precio: $</span> {productDetailsModal.precio} .-</p>
                                     <div className='userPhotoDiv'>
@@ -400,8 +443,53 @@ const ProductsManage = () => {
                             <Button variant="secondary" onClick={() => setShowDetailsModal(false)}>
                                 Cerrar
                             </Button>
+                            <Button variant="primary" onClick={() => handleEditProduct(currentProduct)} className='LinkProfile'>
+                                Editar
+                            </Button>
                         </Modal.Footer>
                     </Modal>
+
+                    <Modal show={editProductModal} onHide={() => setEditProductModal(false)}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Editar Producto</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            {/* Formulario para editar producto */}
+                            <Form>
+                                <Form.Group className="mb-3" controlId="formDescription">
+                                    <Form.Label>Descripción:</Form.Label>
+                                    <Form.Control
+                                        as="textarea"
+                                        rows={3}
+                                        placeholder="Ingrese la descripción"
+                                        name="descripcion"
+                                        value={currentProduct.descripcion}
+                                        onChange={handleEditChange}
+                                    />
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formPrice">
+                                    <Form.Label>Precio:</Form.Label>
+                                    <Form.Control
+                                        type="number"
+                                        placeholder="Ingrese el precio"
+                                        name="precio"
+                                        value={currentProduct.precio}
+                                        onChange={handleEditChange}
+                                    />
+                                </Form.Group>
+                            </Form>
+
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={() => setEditProductModal(false)}>
+                                Cerrar
+                            </Button>
+                            <Button variant="primary" onClick={handleSaveEdit} className='LinkProfile'>
+                                Guardar Cambios
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+
 
                 </div>
             ) : (

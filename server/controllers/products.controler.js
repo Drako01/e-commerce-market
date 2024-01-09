@@ -48,17 +48,17 @@ class ProductsController {
     }
 
     // Actualizar un producto por ID
-    async updateProduct(req, res) {
+    async updateProductById(req, res) {
         try {
-            const productId = req.params.uid;
-
-            const updatedProductData = req.body;
-            await ProductModel.updateProduct(productId, updatedProductData);
+            const productId = req.params.id;
+            const updatedProductData = req.body;            
+            await ProductModel.updateProductById(productId, updatedProductData);
             res.status(200).json({ message: 'Producto actualizado con éxito' });
         } catch (error) {
             res.status(500).json({ error: 'Error al actualizar el producto' });
         }
     }
+    
 
     // Método para eliminar un producto por ID
     async deleteProduct(req, res) {
@@ -104,7 +104,7 @@ export function generateImageUrl(productData) {
         const imageUrl = `${photoName}`;
         return imageUrl;
     } else {
-        console.log('Error: productData o productData.foto no están definidos');
+        loggers.error('Error: productData o productData.foto no están definidos');
         return 'URL_por_defecto_o_manejo_de_error';
     }
 }
