@@ -1,7 +1,7 @@
 import { getAuth, createUserWithEmailAndPassword, updateProfile, deleteUser, onAuthStateChanged } from 'firebase/auth';
 import { firebaseApp } from '../controllers/firebase.controller.js';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
-import config from '../config/config.js';
+
 
 class UserModel {
 
@@ -136,10 +136,8 @@ class UserModel {
             console.error('Error al actualizar el usuario:', error.message);
             throw new Error(`Error al actualizar el usuario: ${error.message}`);
         }
-    }
+    }  
     
-    
-
     async deleteUser(uid) {
         const auth = getAuth(firebaseApp);
 

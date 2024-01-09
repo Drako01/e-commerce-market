@@ -4,3 +4,35 @@ body{
 .container{
     padding: 2rem;
 }
+
+.modal-body{
+    padding: 1rem;
+}
+
+.userPhotoDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem;
+}
+
+.modal-body p {
+    text-align: left;
+    font-size: 1.2rem;
+    padding-left: 1rem;
+}
+
+.line{
+    margin-top: 2rem;
+    width: calc(100% - 2rem);
+    height: 3px;
+    background-color: var(--colour-second);
+    border-radius: 50%;
+    box-shadow: 3px 5px 20px var(--colour-second);
+}
+
+.Prohibido{
+    width: 400px;
+    margin-top: 3rem;
+}

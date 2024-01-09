@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import React, { useState, useEffect } from "react";
+import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
 import Swal from 'sweetalert2';
 import { Link, useNavigate } from 'react-router-dom';
 import { makeStyles, Typography, Button, TextField } from '@material-ui/core';
@@ -49,7 +49,30 @@ const Login = () => {
     const [error, setError] = useState("");
     const navigate = useNavigate();
     const classes = useStyles(); 
+    const [currentUser, setCurrentUser] = useState(null);
+
+    // Escucha los cambios en la autenticación y actualiza el estado del usuario
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // El usuario está autenticado
+                setCurrentUser(user);                
+            } else {
+                // El usuario no está autenticado
+                setCurrentUser(null);
+            }
+        });
+
+        // Asegúrate de desuscribirte cuando el componente se desmonte
+        return () => unsubscribe();
+    }, [auth]);
     
+    useEffect(() => {
+        if (currentUser ) {
+            navigate('/');
+        }
+    }, [currentUser, navigate]);
+
     const handleEmailChange = (event) => setEmail(event.target.value);
     const handlePasswordChange = (event) => setPassword(event.target.value);
 
@@ -97,9 +120,10 @@ const Login = () => {
             });
     };
 
+    
     return (
         <ThemeProvider theme={theme}>
-            <div>
+            <div className='LoginAndSignup'>
                 <Typography variant="h1" className="Mini">Login</Typography>
                 {error &&
                     <Typography variant="body1">{error}</Typography>

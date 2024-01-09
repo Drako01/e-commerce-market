@@ -4,7 +4,7 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faTrash, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
 import './UserManage.css';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
@@ -23,16 +23,9 @@ const UserManage = () => {
     });
     const [selectedUserDetails, setSelectedUserDetails] = useState(null);
     const [showAddModal, setShowAddModal] = useState(false);
-    const [showEditModal, setShowEditModal] = useState(false);
-    const [showDetailsModal, setShowDetailsModal] = useState(false);
-    const [editingUser, setEditingUser] = useState({
-        uid: null,
-        email: null,
-        displayName: null,
-        photoURL: null,
-    });
+    const [showDetailsModal, setShowDetailsModal] = useState(false);    
 
-    
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -62,7 +55,7 @@ const UserManage = () => {
             setUsers(userList);
         } catch (error) {
             console.error('Error al obtener datos:', error);
-        }finally {
+        } finally {
             setLoading(false);
         }
     }, [urlServer]);
@@ -120,49 +113,10 @@ const UserManage = () => {
     };
 
 
-    const handleEditUser = (user) => {
-        setEditingUser(user);
-        setShowEditModal(true);
-    };
-
     const handleViewDetails = (user) => {
         setSelectedUserDetails(user);
         setShowDetailsModal(true);
     };
-
-
-    const handleSaveChanges = async () => {
-        try {
-            const updatedUserData = {
-                displayName: editingUser.displayName,
-                photoURL: editingUser.photoURL,
-            };
-
-            const response = await fetch(`${urlServer}/api/users/${editingUser.uid}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(updatedUserData),
-            });
-
-            if (!response.ok) {
-                throw new Error(`Error en la solicitud: ${response.statusText}`);
-            }
-
-            setShowEditModal(false);
-            fetchUsers();
-        } catch (error) {
-            console.error('Error al guardar cambios:', error.message);
-            // Puedes manejar otros errores aquí si es necesario
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Error al guardar los cambios del usuario',
-            });
-        }
-    };
-
 
 
     const handleDeleteUser = async (uid) => {
@@ -223,7 +177,6 @@ const UserManage = () => {
                                         <th>Email</th>
                                         <th>Nombre</th>
                                         <th>ID</th>
-                                        <th>Editar</th>
                                         <th>Eliminar</th>
                                         <th>Detalles</th>
                                     </tr>
@@ -234,14 +187,6 @@ const UserManage = () => {
                                             <td>{user.email}</td>
                                             <td>{user.displayName}</td>
                                             <td>{user.uid}</td>
-                                            <td>
-                                                <button
-                                                    className="btn btn-warning"
-                                                    onClick={() => handleEditUser(user)}
-                                                >
-                                                    <FontAwesomeIcon icon={faEdit} />
-                                                </button>
-                                            </td>
                                             <td>
                                                 <button
                                                     className="btn btn-danger"
@@ -326,52 +271,7 @@ const UserManage = () => {
                         </Modal.Footer>
                     </Modal>
 
-                    {/* Modal para editar usuarios */}
-                    <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
-                        <Modal.Header closeButton>
-                            <Modal.Title>Editar Usuario</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <Form>
-                                <Form.Group className="mb-3" controlId="formEmailEdit">
-                                    <Form.Label>Email:</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Ingrese el correo electrónico"
-                                        value={editingUser.email}
-                                        readOnly // Cambiado a readOnly en lugar de disabled
-                                    />
-                                </Form.Group>
-                                <Form.Group className="mb-3" controlId="formDisplayNameEdit">
-                                    <Form.Label>Nombre:</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Ingrese el nombre"
-                                        value={editingUser.displayName}
-                                        onChange={(e) => setEditingUser({ ...editingUser, displayName: e.target.value })}
-                                    />
-                                </Form.Group>
-                                <Form.Group className="mb-3" controlId="formProfileImageAdd">
-                                    <Form.Label>Imagen de Perfil:</Form.Label>
-                                    <Form.Control
-                                        id="custom-file"
-                                        type="text"
-                                        label="Selecciona una imagen"
-                                        value={newUser.photoURL}
-                                        onChange={(e) => setEditingUser({ ...editingUser, photoURL: e.target.value })}
-                                    />
-                                </Form.Group>
-                            </Form>
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button variant="secondary" onClick={() => setShowEditModal(false)}>
-                                Cerrar
-                            </Button>
-                            <Button variant="primary" onClick={handleSaveChanges}>
-                                Guardar Cambios
-                            </Button>
-                        </Modal.Footer>
-                    </Modal>
+                    {/* Modal para ver detalles del usuario */}
                     <Modal show={showDetailsModal} onHide={() => setShowDetailsModal(false)}>
                         <Modal.Header closeButton>
                             <Modal.Title>Detalles del Usuario</Modal.Title>
@@ -379,7 +279,10 @@ const UserManage = () => {
                         <Modal.Body>
                             {selectedUserDetails && (
                                 <>
-                                    <img src={selectedUserDetails.photoURL} alt={selectedUserDetails.displayName} className='userPhoto' />
+                                    <div className='userPhotoDiv'>
+                                        <img src={selectedUserDetails.photoURL} alt={selectedUserDetails.displayName} className='userPhoto' />
+                                        <div className='line'></div>
+                                    </div>
                                     <p><strong>Email:</strong> {selectedUserDetails.email}</p>
                                     <p><strong>Nombre:</strong> {selectedUserDetails.displayName}</p>
                                     <p><strong>Proveedor:</strong> {selectedUserDetails.providerData}</p>
@@ -393,9 +296,13 @@ const UserManage = () => {
                             </Button>
                         </Modal.Footer>
                     </Modal>
+
                 </>
             ) : (
-                <h1>No esta autorizado a ver esta Página.!!</h1>
+                <div className='container inicio '>
+                    <h1>No esta autorizado a ver esta Página.!!</h1>
+                    <img src='https://static.vecteezy.com/system/resources/previews/009/381/293/non_2x/prohibition-sign-clipart-design-illustration-free-png.png' alt='Prohibido' className='Prohibido'/>
+                </div>
             )}
 
 

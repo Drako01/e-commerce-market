@@ -3,10 +3,14 @@ import Main from './components/Main/Main.js';
 import Header from './components/Header/Header.js';
 import Footer from './components/Footer/Footer.js';
 import { db, auth, storage } from './Firebase/firebaseConfig.js'; 
-// import { AuthProvider } from './context/AuthContext.js';
 
 function App() {
-  console.log(db, auth, storage);
+  // eslint-disable-next-line no-unused-vars
+  const unusedDbVariable = db;
+  // eslint-disable-next-line no-unused-vars
+  const unusedAuthVariable = auth;
+  // eslint-disable-next-line no-unused-vars
+  const unusedStorageVariable = storage;
   return (
     <>
       <BrowserRouter>
