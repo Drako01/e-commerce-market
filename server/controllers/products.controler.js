@@ -1,4 +1,5 @@
 import ProductModel from '../models/product.model.js';
+import loggers from '../config/logger.js';
 
 class ProductsController {
     // Agregar un nuevo producto
@@ -52,9 +53,9 @@ class ProductsController {
 
     // Eliminar un producto por ID
     async deleteProduct(req, res) {
+        const uid = req.params.uid;
         try {
-            const productId = req.params.id;
-            await ProductModel.deleteProduct(productId);
+            await ProductModel.deleteProduct(uid);
             res.status(200).json({ message: 'Producto eliminado con éxito' });
         } catch (error) {
             res.status(500).json({ error: 'Error al eliminar el producto' });

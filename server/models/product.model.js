@@ -9,8 +9,7 @@ class ProductModel {
     // Método para agregar un nuevo producto
     async addProduct(productData) {
         try {
-            const docRef = await addDoc(productCollection, productData);
-            loggers.info('Producto agregado con ID:', docRef.id);
+            const docRef = await addDoc(productCollection, productData);            
             return docRef.id;
         } catch (error) {
             loggers.error('Error al agregar el producto:', error);
