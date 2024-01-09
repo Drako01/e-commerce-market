@@ -23,7 +23,7 @@ const UserManage = () => {
     });
     const [selectedUserDetails, setSelectedUserDetails] = useState(null);
     const [showAddModal, setShowAddModal] = useState(false);
-    const [showDetailsModal, setShowDetailsModal] = useState(false);    
+    const [showDetailsModal, setShowDetailsModal] = useState(false);
 
 
     useEffect(() => {
@@ -74,6 +74,12 @@ const UserManage = () => {
     }
 
     const handleAddUser = async () => {
+        const formData = new FormData();
+        formData.append("email", newUser.email);
+        formData.append("password", newUser.password);
+        formData.append("displayName", newUser.displayName);
+        formData.append("profileImage", newUser.photoURL, newUser.photoURL.name);
+    
         // Verificar si la contraseña tiene al menos 6 caracteres
         if (newUser.password.length < 6) {
             Swal.fire({
@@ -83,20 +89,17 @@ const UserManage = () => {
             });
             return;
         }
-
+    
         try {
             const response = await fetch(`${urlServer}/api/create-user`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(newUser),
+                body: formData,
             });
-
+    
             if (!response.ok) {
                 throw new Error(`Error en la solicitud: ${response.statusText}`);
             }
-
+    
             await response.text();
             fetchUsers();
             // Cerrar el modal después de agregar usuario
@@ -111,7 +114,15 @@ const UserManage = () => {
             });
         }
     };
+    
 
+    const handleProfileImageChange = (event) => {
+        const file = event.target.files[0];
+        setNewUser((prevUser) => ({
+            ...prevUser,
+            photoURL: file,
+        }));
+    };
 
     const handleViewDetails = (user) => {
         setSelectedUserDetails(user);
@@ -252,13 +263,16 @@ const UserManage = () => {
                                 <Form.Group className="mb-3" controlId="formProfileImageAdd">
                                     <Form.Label>Imagen de Perfil:</Form.Label>
                                     <Form.Control
-                                        id="custom-file"
-                                        type="text"
+                                        type="file"
                                         label="Selecciona una imagen"
-                                        value={newUser.photoURL}
-                                        onChange={(e) => setNewUser({ ...newUser, photoURL: e.target.value })}
+                                        name="profileImage"
+                                        onChange={handleProfileImageChange}
+                                        accept="image/*" 
                                     />
                                 </Form.Group>
+
+
+
                             </Form>
                         </Modal.Body>
                         <Modal.Footer>
@@ -285,7 +299,6 @@ const UserManage = () => {
                                     </div>
                                     <p><strong>Email:</strong> {selectedUserDetails.email}</p>
                                     <p><strong>Nombre:</strong> {selectedUserDetails.displayName}</p>
-                                    <p><strong>Proveedor:</strong> {selectedUserDetails.providerData}</p>
                                     <p><strong>ID:</strong> {selectedUserDetails.uid}</p>
                                 </>
                             )}
@@ -301,7 +314,7 @@ const UserManage = () => {
             ) : (
                 <div className='container inicio '>
                     <h1>No esta autorizado a ver esta Página.!!</h1>
-                    <img src='https://static.vecteezy.com/system/resources/previews/009/381/293/non_2x/prohibition-sign-clipart-design-illustration-free-png.png' alt='Prohibido' className='Prohibido'/>
+                    <img src='https://static.vecteezy.com/system/resources/previews/009/381/293/non_2x/prohibition-sign-clipart-design-illustration-free-png.png' alt='Prohibido' className='Prohibido' />
                 </div>
             )}
 
