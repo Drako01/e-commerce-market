@@ -11,3 +11,9 @@
     border-radius: 2rem;
     object-fit: cover;
 }
+.AdminPhoto{
+    border-radius: .5rem;
+    width: 44px !important;
+    margin-right: 1.5rem;
+    padding-right: 0 !important;
+}

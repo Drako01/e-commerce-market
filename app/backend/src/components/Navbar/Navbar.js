@@ -72,7 +72,7 @@ const Navbar = () => {
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
                     <div className="container">
                         {authenticated ? (
-                            <img src={currentUser.photoURL} alt={currentUser.displayName} />
+                            <img src={currentUser.photoURL} alt={currentUser.displayName} className='AdminPhoto'/>
                         ) : (
                             <img src={logo} alt='Logo' />
                         )}

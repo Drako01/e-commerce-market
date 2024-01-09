@@ -86,7 +86,7 @@ const Login = () => {
                 setError(""); // Limpiar el estado de error en caso de éxito
                 Swal.fire({
                     title: `Bienvenido ${user.email}`,
-                    html: `Gracias por entrar a nuestro Pro-Shop`,
+                    html: `Gracias por entrar a nuestro BackEnd`,
                     icon: 'success',
                     didClose: () => {
                         navigate('/');
@@ -107,7 +107,7 @@ const Login = () => {
                 setError(""); // Limpiar el estado de error en caso de éxito
                 Swal.fire({
                     title: `Bienvenido ${user.displayName}`,
-                    html: `Gracias por entrar a nuestro Pro-Shop`,
+                    html: `Gracias por entrar a nuestro BackEnd`,
                     icon: 'success',
                     didClose: () => {
                         navigate('/');
