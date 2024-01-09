@@ -15,14 +15,23 @@ class UserController {
             }
 
             let photoURL;
-
+            function convertToSlug(text) {
+                return text
+                    .toLowerCase() 
+                    .replace(/[\s_]+/g, '_') 
+                    .replace(/[^\w-]+/g, ''); 
+            }
+            
+            const slug = convertToSlug(displayName);
+            
+            
             // Verifica si hay un archivo en la carga
             if (req.file) {
                 const profileImage = req.file;
 
                 // Guarda la imagen en Firebase Storage y obtén la URL de descarga
                 const storage = getStorage();
-                const storageRef = ref(storage, `profileImages/${profileImage.originalname}`);                
+                const storageRef = ref(storage, `profileImages/${slug}/${profileImage.originalname}`);                
                 await uploadBytes(storageRef, profileImage.buffer);
 
 

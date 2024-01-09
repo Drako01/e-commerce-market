@@ -90,7 +90,15 @@ const Signup = () => {
                 const user = userCredential.user;
 
                 if (profileImage) {
-                    const storageRef = ref(storage, `profileImages/${user.uid}`);
+                    function convertToSlug(text) {
+                        return text
+                            .toLowerCase() 
+                            .replace(/[\s_]+/g, '_') 
+                            .replace(/[^\w-]+/g, ''); 
+                    }
+                    
+                    const slug = convertToSlug(user.displayName);
+                    const storageRef = ref(storage, `profileImages/${slug}/${user.uid}`);
                     uploadBytes(storageRef, profileImage)
                         .then((snapshot) => {
                             getDownloadURL(storageRef)

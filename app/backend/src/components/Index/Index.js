@@ -41,39 +41,42 @@ const Index = () => {
             {currentUser ? (
                 <>
                     <h1>Bienvenido {currentUser.displayName}</h1>
-                    <img src={currentUser.photoURL || currentUser.metadata.photoURL} alt={currentUser.displayName} className='avatar'/>
+                    <img src={currentUser.photoURL || currentUser.metadata.photoURL} alt={currentUser.displayName} className='avatar' />
                     <NavLink onClick={() => handleViewDetails(currentUser)} className='LinkProfile'>Ver Perfil</NavLink>
                 </>
             ) : (
                 <>
                     <h1>Inicie sesión para ver contenido!</h1>
-                    <img src={logo} alt='Armotusitio.com' className='logotipo'/>
+                    <img src={logo} alt='Armotusitio.com' className='logotipo' />
                 </>
             )}
             {/* Modal para ver detalles del usuario */}
             <Modal show={showDetailsModal} onHide={() => setShowDetailsModal(false)}>
-                        <Modal.Header closeButton>
-                            <Modal.Title>Detalles del Usuario</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            {selectedUserDetails && (
-                                <>
-                                    <div className='userPhotoDiv'>
-                                        <img src={selectedUserDetails.photoURL} alt={selectedUserDetails.displayName} className='userPhoto' />
-                                        <div className='line'></div>
-                                    </div>
-                                    <p><strong>Email:</strong> {selectedUserDetails.email}</p>
-                                    <p><strong>Nombre:</strong> {selectedUserDetails.displayName}</p>
-                                    <p><strong>ID:</strong> {selectedUserDetails.uid}</p>
-                                </>
-                            )}
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button variant="secondary" onClick={() => setShowDetailsModal(false)}>
-                                Cerrar
-                            </Button>
-                        </Modal.Footer>
-                    </Modal>
+                <Modal.Header closeButton>
+                    <Modal.Title>Detalles del Usuario</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {selectedUserDetails && (
+                        <>
+                            <div className='userPhotoDiv'>
+                                <img src={selectedUserDetails.photoURL} alt={selectedUserDetails.displayName} className='userPhoto' />
+                                <div className='line'></div>
+                            </div>
+                            <p><strong>Email:</strong> {selectedUserDetails.email}</p>
+                            <p><strong>Nombre:</strong> {selectedUserDetails.displayName}</p>
+                            <p><strong>ID:</strong> {selectedUserDetails.uid}</p>
+                        </>
+                    )}
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowDetailsModal(false)}>
+                        Cerrar
+                    </Button>
+                    <Button variant="primary" onClick={() => setShowDetailsModal(false)}>
+                        Editar
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 };

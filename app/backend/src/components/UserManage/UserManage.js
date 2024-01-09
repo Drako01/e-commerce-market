@@ -46,7 +46,6 @@ const UserManage = () => {
         return () => unsubscribe();
     }, [auth]);
 
-
     const fetchUsers = useCallback(async () => {
         setLoading(true);
         try {
@@ -115,7 +114,6 @@ const UserManage = () => {
         }
     };
     
-
     const handleProfileImageChange = (event) => {
         const file = event.target.files[0];
         setNewUser((prevUser) => ({
@@ -128,7 +126,6 @@ const UserManage = () => {
         setSelectedUserDetails(user);
         setShowDetailsModal(true);
     };
-
 
     const handleDeleteUser = async (uid) => {
         try {
