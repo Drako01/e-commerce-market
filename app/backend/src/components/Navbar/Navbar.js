@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, redirect } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import logo from '../../logo.svg'
 import Swal from 'sweetalert2';
@@ -52,6 +52,7 @@ const Navbar = () => {
                     localStorage.removeItem('user');
 
                     setCurrentUser(null);
+                    redirect('/');
                 }
             });
 
@@ -77,13 +78,16 @@ const Navbar = () => {
                         </button>
                         <div className="collapse navbar-collapse" id="navbarNav">
                             <ul className="navbar-nav">
-                                <li className="nav-item">
-                                    <NavLink className="nav-link" to='/api'>Usuarios</NavLink>
-                                </li>
                                 {authenticated && (
-                                    <li className="nav-item">
-                                        <NavLink className="nav-link">Bienvenido, {currentUser.displayName}!</NavLink>
-                                    </li>
+                                    <>
+                                        <li className="nav-item">
+                                            <NavLink className="nav-link" to='/api'>Usuarios</NavLink>
+                                        </li>
+
+                                        <li className="nav-item">
+                                            <NavLink className="nav-link">Bienvenido, {currentUser.displayName}!</NavLink>
+                                        </li>
+                                    </>
                                 )}
                                 {currentUser ? (
                                     <li className="nav-item">

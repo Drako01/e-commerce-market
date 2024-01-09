@@ -5,3 +5,9 @@
 .menu .navbar a{
     color: var(--colour-first) !important;  
 }
+
+.userPhoto{
+    width: 120px;
+    border-radius: 2rem;
+    object-fit: cover;
+}

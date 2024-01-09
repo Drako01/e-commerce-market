@@ -2,14 +2,15 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import UserManage from '../UserManage/UserManage';
 import Login from '../Login/Login.js';
+import Index from '../Index/Index.js';
+import './Main.css'
 
-
-const Main = () => {   
+const Main = () => {
 
     return (
-        <main className="App-main">       
+        <main className="App-main">
             <Routes>
-                <Route path="/" />
+                <Route path="/" element={<Index />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/api" element={<UserManage />} />
             </Routes>

@@ -1,0 +1,19 @@
+.App-footer{
+    position: sticky;
+    bottom: 0;
+    background-color: var(--colour-second);
+    color: var(--colour-first);
+    height: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.App-footer a {
+    color: var(--colour-first);
+    text-decoration: none;
+}
+
+.App-footer p {
+    margin: 0;
+}

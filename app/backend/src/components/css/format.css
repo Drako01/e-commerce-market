@@ -1,4 +1,4 @@
-:root{
+:root {
     /* Colores */
     --colour-first: #ffffff;
     --colour-second: #04395E;
@@ -42,10 +42,17 @@ code {
         monospace;
 }
 
-a{
+a {
     text-decoration: none;
 }
 
 .hidden {
     display: none;
+}
+
+.inicio {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

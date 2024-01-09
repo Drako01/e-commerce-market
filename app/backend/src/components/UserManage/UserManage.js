@@ -6,10 +6,14 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faTrash, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons';
 import './UserManage.css';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 const UserManage = () => {
     const urlServer = process.env.REACT_APP_URL_SERVER;
-
+    const auth = getAuth();
+    const [authenticated, setAuthenticated] = useState(false);
+    const [currentUser, setCurrentUser] = useState(null);
+    const [loading, setLoading] = useState(true);
     const [users, setUsers] = useState([]);
     const [newUser, setNewUser] = useState({
         email: null,
@@ -28,19 +32,53 @@ const UserManage = () => {
         photoURL: null,
     });
 
+    
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // El usuario está autenticado
+                setCurrentUser(user);
+                if (user.email === process.env.REACT_APP_MAIL_Admin) {
+                    setAuthenticated(true);
+                } else {
+                    setAuthenticated(false);
+                }
+            } else {
+                // El usuario no está autenticado
+                setCurrentUser(null);
+                setAuthenticated(false);
+            }
+        });
+
+        return () => unsubscribe();
+    }, [auth]);
+
+
     const fetchUsers = useCallback(async () => {
+        setLoading(true);
         try {
             const response = await fetch(`${urlServer}/api/get-all-users`);
             const userList = await response.json();
             setUsers(userList);
         } catch (error) {
             console.error('Error al obtener datos:', error);
+        }finally {
+            setLoading(false);
         }
     }, [urlServer]);
 
     useEffect(() => {
         fetchUsers();
     }, [fetchUsers, urlServer]);
+
+    if (loading) {
+        return (
+            <div className="loader-container">
+                <div className="loader"></div>
+                <div className="loader2"></div>
+            </div>
+        );
+    }
 
     const handleAddUser = async () => {
         // Verificar si la contraseña tiene al menos 6 caracteres
@@ -97,7 +135,7 @@ const UserManage = () => {
         try {
             const updatedUserData = {
                 displayName: editingUser.displayName,
-                photoURL: editingUser.photoURL, 
+                photoURL: editingUser.photoURL,
             };
 
             const response = await fetch(`${urlServer}/api/users/${editingUser.uid}`, {
@@ -171,188 +209,195 @@ const UserManage = () => {
         }
     };
 
-    
+
     return (
         <>
-            <section className="container mt-5">
-                <h1>Listado de Usuarios</h1>
-                {users && (
-                    <table className="table">
-                        <thead>
-                            <tr>
-                                <th>Email</th>
-                                <th>Nombre</th>
-                                <th>ID</th>
-                                <th>Editar</th>
-                                <th>Eliminar</th>
-                                <th>Detalles</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {users.map((user) => (
-                                <tr key={user.uid}>
-                                    <td>{user.email}</td>
-                                    <td>{user.displayName}</td>
-                                    <td>{user.uid}</td>
-                                    <td>
-                                        <button
-                                            className="btn btn-warning"
-                                            onClick={() => handleEditUser(user)}
-                                        >
-                                            <FontAwesomeIcon icon={faEdit} />
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <button
-                                            className="btn btn-danger"
-                                            onClick={() => handleDeleteUser(user.uid)}
-                                        >
-                                            <FontAwesomeIcon icon={faTrash} />
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <button
-                                            className="btn btn-info"
-                                            onClick={() => handleViewDetails(user)}
-                                        >
-                                            <FontAwesomeIcon icon={faEye} />
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                )}
+            {currentUser && authenticated ? (
+                <>
+                    <section className="container mt-5">
+                        <h1>Listado de Usuarios</h1>
+                        {users && (
+                            <table className="table">
+                                <thead>
+                                    <tr>
+                                        <th>Email</th>
+                                        <th>Nombre</th>
+                                        <th>ID</th>
+                                        <th>Editar</th>
+                                        <th>Eliminar</th>
+                                        <th>Detalles</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {users.map((user) => (
+                                        <tr key={user.uid}>
+                                            <td>{user.email}</td>
+                                            <td>{user.displayName}</td>
+                                            <td>{user.uid}</td>
+                                            <td>
+                                                <button
+                                                    className="btn btn-warning"
+                                                    onClick={() => handleEditUser(user)}
+                                                >
+                                                    <FontAwesomeIcon icon={faEdit} />
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button
+                                                    className="btn btn-danger"
+                                                    onClick={() => handleDeleteUser(user.uid)}
+                                                >
+                                                    <FontAwesomeIcon icon={faTrash} />
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button
+                                                    className="btn btn-info"
+                                                    onClick={() => handleViewDetails(user)}
+                                                >
+                                                    <FontAwesomeIcon icon={faEye} />
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        )}
 
-                {/* Botón para abrir el modal de agregar usuario */}
-                <Button variant="primary" onClick={() => setShowAddModal(true)}>
-                    <FontAwesomeIcon icon={faPlus} /> Agregar Usuario
-                </Button>
-            </section>
+                        {/* Botón para abrir el modal de agregar usuario */}
+                        <Button variant="primary" onClick={() => setShowAddModal(true)}>
+                            <FontAwesomeIcon icon={faPlus} /> Agregar Usuario
+                        </Button>
+                    </section>
 
-            {/* Modal para agregar usuarios */}
-            <Modal show={showAddModal} onHide={() => setShowAddModal(false)}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Agregar Usuario</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Form>
-                        <Form.Group className="mb-3" controlId="formEmailAdd">
-                            <Form.Label>Email:</Form.Label>
-                            <Form.Control
-                                type="email"
-                                placeholder="Ingrese el correo electrónico"
-                                value={newUser.email}
-                                onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formPasswordAdd">
-                            <Form.Label>Password:</Form.Label>
-                            <Form.Control
-                                type="password"
-                                placeholder="Ingrese la contraseña"
-                                value={newUser.password}
-                                onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formDisplayNameAdd">
-                            <Form.Label>Nombre:</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Ingrese el nombre"
-                                value={newUser.displayName}
-                                onChange={(e) => setNewUser({ ...newUser, displayName: e.target.value })}
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formProfileImageAdd">
-                            <Form.Label>Imagen de Perfil:</Form.Label>
-                            <Form.Control
-                                id="custom-file"
-                                type="text"
-                                label="Selecciona una imagen"  
-                                value={newUser.photoURL}                              
-                                onChange={(e) => setNewUser({ ...newUser, photoURL: e.target.value })}                               
-                            />
-                        </Form.Group>
-                    </Form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setShowAddModal(false)}>
-                        Cerrar
-                    </Button>
-                    <Button variant="primary" onClick={handleAddUser}>
-                        Agregar Usuario
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+                    {/* Modal para agregar usuarios */}
+                    <Modal show={showAddModal} onHide={() => setShowAddModal(false)}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Agregar Usuario</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <Form>
+                                <Form.Group className="mb-3" controlId="formEmailAdd">
+                                    <Form.Label>Email:</Form.Label>
+                                    <Form.Control
+                                        type="email"
+                                        placeholder="Ingrese el correo electrónico"
+                                        value={newUser.email}
+                                        onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+                                    />
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formPasswordAdd">
+                                    <Form.Label>Password:</Form.Label>
+                                    <Form.Control
+                                        type="password"
+                                        placeholder="Ingrese la contraseña"
+                                        value={newUser.password}
+                                        onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
+                                    />
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formDisplayNameAdd">
+                                    <Form.Label>Nombre:</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Ingrese el nombre"
+                                        value={newUser.displayName}
+                                        onChange={(e) => setNewUser({ ...newUser, displayName: e.target.value })}
+                                    />
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formProfileImageAdd">
+                                    <Form.Label>Imagen de Perfil:</Form.Label>
+                                    <Form.Control
+                                        id="custom-file"
+                                        type="text"
+                                        label="Selecciona una imagen"
+                                        value={newUser.photoURL}
+                                        onChange={(e) => setNewUser({ ...newUser, photoURL: e.target.value })}
+                                    />
+                                </Form.Group>
+                            </Form>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={() => setShowAddModal(false)}>
+                                Cerrar
+                            </Button>
+                            <Button variant="primary" onClick={handleAddUser}>
+                                Agregar Usuario
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
 
-            {/* Modal para editar usuarios */}
-            <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Editar Usuario</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Form>
-                        <Form.Group className="mb-3" controlId="formEmailEdit">
-                            <Form.Label>Email:</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Ingrese el correo electrónico"
-                                value={editingUser.email}
-                                readOnly // Cambiado a readOnly en lugar de disabled
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formDisplayNameEdit">
-                            <Form.Label>Nombre:</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Ingrese el nombre"
-                                value={editingUser.displayName}
-                                onChange={(e) => setEditingUser({ ...editingUser, displayName: e.target.value })}
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formProfileImageAdd">
-                            <Form.Label>Imagen de Perfil:</Form.Label>
-                            <Form.Control
-                                id="custom-file"
-                                type="text"
-                                label="Selecciona una imagen"  
-                                value={newUser.photoURL}                              
-                                onChange={(e) => setEditingUser({ ...editingUser, photoURL: e.target.value })}          
-                            />
-                        </Form.Group>
-                    </Form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setShowEditModal(false)}>
-                        Cerrar
-                    </Button>
-                    <Button variant="primary" onClick={handleSaveChanges}>
-                        Guardar Cambios
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-            <Modal show={showDetailsModal} onHide={() => setShowDetailsModal(false)}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Detalles del Usuario</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    {selectedUserDetails && (
-                        <>
-                            <img src={selectedUserDetails.photoURL} alt={selectedUserDetails.displayName} width={180}/>
-                            <p><strong>Email:</strong> {selectedUserDetails.email}</p>
-                            <p><strong>Nombre:</strong> {selectedUserDetails.displayName}</p>
-                            <p><strong>Proveedor:</strong> {selectedUserDetails.providerData}</p>
-                            <p><strong>ID:</strong> {selectedUserDetails.uid}</p>                            
-                        </>
-                    )}
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setShowDetailsModal(false)}>
-                        Cerrar
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+                    {/* Modal para editar usuarios */}
+                    <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Editar Usuario</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <Form>
+                                <Form.Group className="mb-3" controlId="formEmailEdit">
+                                    <Form.Label>Email:</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Ingrese el correo electrónico"
+                                        value={editingUser.email}
+                                        readOnly // Cambiado a readOnly en lugar de disabled
+                                    />
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formDisplayNameEdit">
+                                    <Form.Label>Nombre:</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Ingrese el nombre"
+                                        value={editingUser.displayName}
+                                        onChange={(e) => setEditingUser({ ...editingUser, displayName: e.target.value })}
+                                    />
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formProfileImageAdd">
+                                    <Form.Label>Imagen de Perfil:</Form.Label>
+                                    <Form.Control
+                                        id="custom-file"
+                                        type="text"
+                                        label="Selecciona una imagen"
+                                        value={newUser.photoURL}
+                                        onChange={(e) => setEditingUser({ ...editingUser, photoURL: e.target.value })}
+                                    />
+                                </Form.Group>
+                            </Form>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={() => setShowEditModal(false)}>
+                                Cerrar
+                            </Button>
+                            <Button variant="primary" onClick={handleSaveChanges}>
+                                Guardar Cambios
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+                    <Modal show={showDetailsModal} onHide={() => setShowDetailsModal(false)}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Detalles del Usuario</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            {selectedUserDetails && (
+                                <>
+                                    <img src={selectedUserDetails.photoURL} alt={selectedUserDetails.displayName} className='userPhoto' />
+                                    <p><strong>Email:</strong> {selectedUserDetails.email}</p>
+                                    <p><strong>Nombre:</strong> {selectedUserDetails.displayName}</p>
+                                    <p><strong>Proveedor:</strong> {selectedUserDetails.providerData}</p>
+                                    <p><strong>ID:</strong> {selectedUserDetails.uid}</p>
+                                </>
+                            )}
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={() => setShowDetailsModal(false)}>
+                                Cerrar
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+                </>
+            ) : (
+                <h1>No esta autorizado a ver esta Página.!!</h1>
+            )}
+
 
         </>
     );
