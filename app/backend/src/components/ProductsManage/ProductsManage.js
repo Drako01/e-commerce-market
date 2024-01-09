@@ -19,6 +19,9 @@ const ProductsManage = () => {
     const [currentUser, setCurrentUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [showAddModal, setShowAddModal] = useState(false);
+    const [showProgressModal, setShowProgressModal] = useState(false);
+    const [uploadProgress, setUploadProgress] = useState(0);
+
     const [newProduct, setNewProduct] = useState({
         marca: null,
         subcategoria: null,
@@ -113,18 +116,20 @@ const ProductsManage = () => {
 
     const handleAddProduct = async () => {
         try {
+            setShowProgressModal(true); // Mostrar modal de progreso
+            handleCloseAddModal(false);
             // Subir la imagen al almacenamiento de Firebase
             const imageRef = ref(
                 storage,
-                `Products/${newProduct.marca}/${newProduct.categoria}/${newProduct.subcategoria}/${newProduct.foto.name}`                
+                `Products/${newProduct.marca}/${newProduct.categoria}/${newProduct.subcategoria}/${newProduct.foto.name}`
             );
             const uploadTask = uploadBytesResumable(imageRef, newProduct.foto); // Change here
-    
+
             uploadTask.on(
                 'state_changed',
                 (snapshot) => {
                     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    console.log(`Progreso de carga: ${progress}%`);
+                    setUploadProgress(progress);
                 },
                 (error) => {
                     console.error('Error al cargar la imagen:', error);
@@ -136,10 +141,10 @@ const ProductsManage = () => {
                             ...newProduct,
                             foto: downloadURL,
                         };
-    
+
                         await axios.post(`${urlServer}/api/products/add`, updatedProduct);
                         fetchData();
-                        handleCloseAddModal();
+                        handleCloseProgressModal();
                     } catch (error) {
                         console.error('Error al agregar el producto:', error);
                     }
@@ -149,7 +154,7 @@ const ProductsManage = () => {
             console.error('Error al agregar el producto:', error);
         }
     };
-    
+
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         setNewProduct((prevProduct) => ({
@@ -157,8 +162,19 @@ const ProductsManage = () => {
             foto: file,
         }));
     };
-    
-    
+
+
+    // eslint-disable-next-line
+    const handleShowProgressModal = () => {
+        setShowProgressModal(true);
+    };
+
+    const handleCloseProgressModal = () => {
+        setShowProgressModal(false);
+    };
+
+
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -231,9 +247,9 @@ const ProductsManage = () => {
                                 <tr key={index}>
                                     {/* Filtrar las columnas basadas en el array 'items' */}
                                     {items.map((key, columnIndex) => (
-                                        <td key={columnIndex}>                                            
+                                        <td key={columnIndex}>
                                             {key.toLowerCase() === 'foto' ? (
-                                                <div> 
+                                                <div>
                                                     <img
                                                         src={product[key.toLowerCase()]}
                                                         alt={product[key.toLowerCase()]}
@@ -340,11 +356,23 @@ const ProductsManage = () => {
                             <Button variant="secondary" onClick={handleCloseAddModal}>
                                 Cerrar
                             </Button>
-                            <Button variant="primary" onClick={handleAddProduct}>
+                            <Button variant="primary" onClick={handleAddProduct} className='LinkProfile'>
                                 Guardar Producto
                             </Button>
                         </Modal.Footer>
                     </Modal>
+
+
+                    <Modal show={showProgressModal} onHide={handleCloseProgressModal}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Progreso de carga</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <p>{`Progreso de carga: ${uploadProgress}%`}</p>
+                        </Modal.Body>
+                    </Modal>
+
+
                 </div>
             ) : (
                 <div className="container inicio ">
