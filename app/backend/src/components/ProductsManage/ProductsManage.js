@@ -25,7 +25,10 @@ const ProductsManage = () => {
     const [productDetailsModal, setProductDetailsModal] = useState(null);
     const [editProductModal, setEditProductModal] = useState(false);
     const [currentProduct, setCurrentProduct] = useState({});
-
+    const [showPricesModal, setShowPricesModal] = useState(false);
+    const [selectedCategory, setSelectedCategory] = useState([]);
+    const [priceIncrement, setPriceIncrement] = useState(0);
+    const [allCategories, setAllCategories] = useState([]);
 
     const [newProduct, setNewProduct] = useState({
         marca: null,
@@ -107,7 +110,7 @@ const ProductsManage = () => {
 
     const handleViewDetails = async (productId) => {
         try {
-            const response = await axios.get(`${urlServer}/api/products/getById/${productId}`);            
+            const response = await axios.get(`${urlServer}/api/products/getById/${productId}`);
             const productDetails = response.data;
             setProductDetailsModal(productDetails);
             setCurrentProduct(productDetails);
@@ -194,7 +197,7 @@ const ProductsManage = () => {
     const handleSaveEdit = async () => {
         try {
             const response = await axios.put(`${urlServer}/api/products/update/${currentProduct.id}`, currentProduct);
-    
+
             if (response.status === 200) {
                 // Success: close the modal, show success message, etc.
                 setEditProductModal(false);
@@ -219,8 +222,7 @@ const ProductsManage = () => {
             fetchData();
         }
     };
-    
-    
+
     const handleEditChange = (e) => {
         const { name, value } = e.target;
         setCurrentProduct((prevProduct) => ({
@@ -228,7 +230,53 @@ const ProductsManage = () => {
             [name]: value,
         }));
     };
-    
+
+    const handleShowPricesModal = () => {
+        setShowPricesModal(true);
+    };
+
+    const handleClosePricesModal = () => {
+        setShowPricesModal(false);
+    };
+
+    const handleApplyPriceIncrement = async () => {
+        try {
+            // Obtén la lista de productos de la categoría seleccionada
+            const response = await axios.get(`${urlServer}/api/products/getByCategory/${selectedCategory}`);
+            const productsInCategory = response.data;
+
+            // Aplica el incremento de precio a cada producto
+            const updatedProducts = productsInCategory.map((product) => {
+                const updatedPrice = parseFloat(product.precio) * (1 + parseFloat(priceIncrement) / 100);
+                return {
+                    ...product,
+                    precio: updatedPrice.toFixed(2), // Redondea a 2 decimales
+                };
+            });
+
+            // Actualiza los productos en el servidor
+            await Promise.all(updatedProducts.map(async (updatedProduct) => {
+                await axios.put(`${urlServer}/api/products/update/${updatedProduct.id}`, updatedProduct);
+            }));
+
+            // Cierra el modal y vuelve a cargar los productos
+            handleClosePricesModal();
+            fetchData();
+        } catch (error) {
+            console.error('Error al aplicar el incremento de precios:', error.message);
+            // Puedes manejar el error según tus necesidades
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Error al aplicar el incremento de precios',
+            });
+        }
+    };
+
+    const fetchAllCategories = useCallback(() => {
+        const uniqueCategories = [...new Set(products.map(product => product.categoria))];
+        setAllCategories(uniqueCategories);
+    }, [products]);
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -246,8 +294,14 @@ const ProductsManage = () => {
 
     useEffect(() => {
         fetchData();
-    }, [fetchData]);
+        fetchAllCategories();
+    }, [fetchData, fetchAllCategories]);
+    
 
+    
+    
+
+    
 
     if (loading) {
         return (
@@ -264,10 +318,12 @@ const ProductsManage = () => {
             {currentUser && authenticated ? (
                 <div className="container mt-5">
                     <h2>Lista de Productos</h2>
-                    <Button variant="primary" onClick={handleShowAddModal} className='LinkProfile Agregarproducto'>
+                    <Button onClick={handleShowAddModal} className='LinkProfile Agregarproducto'>
                         <FontAwesomeIcon icon={faPlus} /> Agregar Producto
                     </Button>
-
+                    <Button onClick={handleShowPricesModal} className='LinkProfile Agregarproducto'>
+                        Precios
+                    </Button>
                     {/* Tabla de productos */}
                     <table className="table table-bordered">
                         <thead>
@@ -486,6 +542,48 @@ const ProductsManage = () => {
                             </Button>
                             <Button variant="primary" onClick={handleSaveEdit} className='LinkProfile'>
                                 Guardar Cambios
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+
+                    <Modal show={showPricesModal} onHide={handleClosePricesModal}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Manejo de Precios</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <Form>
+                                <Form.Group className="mb-3" controlId="formCategory">
+                                    <Form.Label>Seleccione la Categoría:</Form.Label>
+                                    <Form.Control
+                                        as="select"
+                                        name="categoria"
+                                        value={selectedCategory}
+                                        onChange={(e) => setSelectedCategory(e.target.value)}
+                                    >
+                                        {allCategories.map((category, index) => (
+                                            <option key={index} value={category}>
+                                                {category}
+                                            </option>
+                                        ))}
+                                    </Form.Control>
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formPriceIncrement">
+                                    <Form.Label>Incremento de Precio (%):</Form.Label>
+                                    <Form.Control
+                                        type="number"
+                                        placeholder="Ingrese el incremento de precio"
+                                        value={priceIncrement}
+                                        onChange={(e) => setPriceIncrement(e.target.value)}
+                                    />
+                                </Form.Group>
+                            </Form>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={handleClosePricesModal}>
+                                Cerrar
+                            </Button>
+                            <Button variant="primary" onClick={handleApplyPriceIncrement} className='LinkProfile'>
+                                Aplicar Incremento
                             </Button>
                         </Modal.Footer>
                     </Modal>

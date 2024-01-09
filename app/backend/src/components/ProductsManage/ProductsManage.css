@@ -1,5 +1,7 @@
 .Agregarproducto{
-    margin: 2rem 0;
+    margin: 2rem 2rem 2rem 0;
+    min-width: 180px;
+    border: 1px solid var(--colour-second);
 }
 
 .Detalles-Productos{
