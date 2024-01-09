@@ -116,7 +116,7 @@ const ProductsManage = () => {
             // Subir la imagen al almacenamiento de Firebase
             const imageRef = ref(
                 storage,
-                `Products/${newProduct.marca}/${newProduct.categoria}/${newProduct.subcategoria}/${newProduct.foto.name}`
+                `Products/${newProduct.marca}/${newProduct.categoria}/${newProduct.subcategoria}/${newProduct.foto.name}`                
             );
             const uploadTask = uploadBytesResumable(imageRef, newProduct.foto); // Change here
     

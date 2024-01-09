@@ -80,8 +80,17 @@ class ProductsController {
 export default new ProductsController();
 
 export function generateImageUrl(productData) {
-    const imageUrl = `Products/${productData.marca}/${productData.categoria}/${productData.subcategoria}/${productData.foto.name}`;
-    return imageUrl;
+    if (productData && productData.foto) {
+        // Extraer el nombre de la foto de la URL
+        const photoUrlParts = productData.foto.split('/');
+        const photoName = photoUrlParts[photoUrlParts.length - 1];
+
+        const imageUrl = `${photoName}`;
+        return imageUrl;
+    } else {
+        console.log('Error: productData o productData.foto no están definidos');
+        return 'URL_por_defecto_o_manejo_de_error';
+    }
 }
 
 
