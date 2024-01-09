@@ -1,6 +1,5 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, Button, Form } from 'react-bootstrap';
 import Swal from 'sweetalert2';
@@ -88,7 +87,7 @@ const Index = () => {
                 <>
                     <h1>Bienvenido {currentUser.displayName}</h1>
                     <img src={currentUser.photoURL || currentUser.metadata.photoURL} alt={currentUser.displayName} className='avatar' />
-                    <NavLink onClick={() => handleViewDetails(currentUser)} className='LinkProfile'>Ver Perfil</NavLink>
+                    <Button variant="primary" onClick={() => handleViewDetails(currentUser)} className='LinkProfile'>Ver Perfil</Button>
                 </>
             ) : (
                 <>
@@ -118,7 +117,7 @@ const Index = () => {
                     <Button variant="secondary" onClick={() => setShowDetailsModal(false)}>
                         Cerrar
                     </Button>
-                    <Button variant="primary" onClick={() => handleEditUser(currentUser)}>
+                    <Button variant="primary" onClick={() => handleEditUser(currentUser)} className='LinkProfile'>
                         Editar
                     </Button>
                 </Modal.Footer>
@@ -156,7 +155,7 @@ const Index = () => {
                     <Button variant="secondary" onClick={() => setShowEditModal(false)}>
                         Cerrar
                     </Button>
-                    <Button variant="primary" onClick={handleSaveChanges}>
+                    <Button variant="primary" onClick={handleSaveChanges} className='LinkProfile'>
                         Guardar Cambios
                     </Button>
                 </Modal.Footer>

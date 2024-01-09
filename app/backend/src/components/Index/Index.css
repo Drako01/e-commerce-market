@@ -7,8 +7,14 @@
     border-radius: 2rem;
     margin-top: 2rem;
     cursor: pointer;
+    margin-bottom: 2rem;
 }
-.LinkProfile{
-    margin-top: 2rem;
+
+button.LinkProfile{
+    background-color: var(--colour-second);
+}
+button.LinkProfile:hover{
+    background-color: transparent;
     color: var(--colour-second);
+    border: 1px solid var(--colour-second);
 }
