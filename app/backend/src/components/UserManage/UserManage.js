@@ -78,7 +78,7 @@ const UserManage = () => {
         formData.append("password", newUser.password);
         formData.append("displayName", newUser.displayName);
         formData.append("profileImage", newUser.photoURL, newUser.photoURL.name);
-    
+
         // Verificar si la contraseña tiene al menos 6 caracteres
         if (newUser.password.length < 6) {
             Swal.fire({
@@ -88,17 +88,17 @@ const UserManage = () => {
             });
             return;
         }
-    
+
         try {
             const response = await fetch(`${urlServer}/api/create-user`, {
                 method: 'POST',
                 body: formData,
             });
-    
+
             if (!response.ok) {
                 throw new Error(`Error en la solicitud: ${response.statusText}`);
             }
-    
+
             await response.text();
             fetchUsers();
             // Cerrar el modal después de agregar usuario
@@ -113,7 +113,7 @@ const UserManage = () => {
             });
         }
     };
-    
+
     const handleProfileImageChange = (event) => {
         const file = event.target.files[0];
         setNewUser((prevUser) => ({
@@ -179,48 +179,51 @@ const UserManage = () => {
                     <section className="container mt-5">
                         <h1>Listado de Usuarios</h1>
                         {users && (
-                            <table className="table">
-                                <thead>
-                                    <tr>
-                                        <th>Email</th>
-                                        <th>Nombre</th>
-                                        <th>ID</th>
-                                        <th>Eliminar</th>
-                                        <th>Detalles</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {users.map((user) => (
-                                        <tr key={user.uid}>
-                                            <td>{user.email}</td>
-                                            <td>{user.displayName}</td>
-                                            <td>{user.uid}</td>
-                                            <td>
-                                                <button
-                                                    className="btn btn-danger"
-                                                    onClick={() => handleDeleteUser(user.uid)}
-                                                >
-                                                    <FontAwesomeIcon icon={faTrash} />
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <button
-                                                    className="btn btn-info"
-                                                    onClick={() => handleViewDetails(user)}
-                                                >
-                                                    <FontAwesomeIcon icon={faEye} />
-                                                </button>
-                                            </td>
+                            <>
+                                {/* Botón para abrir el modal de agregar usuario */}
+                                <Button variant="primary" onClick={() => setShowAddModal(true)} className='LinkProfile Agregarproducto'>
+                                    <FontAwesomeIcon icon={faPlus} /> Agregar Usuario
+                                </Button>
+                                <table className="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Email</th>
+                                            <th>Nombre</th>
+                                            <th>ID</th>
+                                            <th>Eliminar</th>
+                                            <th>Detalles</th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        {users.map((user) => (
+                                            <tr key={user.uid}>
+                                                <td>{user.email}</td>
+                                                <td>{user.displayName}</td>
+                                                <td>{user.uid}</td>
+                                                <td>
+                                                    <button
+                                                        className="btn btn-danger"
+                                                        onClick={() => handleDeleteUser(user.uid)}
+                                                    >
+                                                        <FontAwesomeIcon icon={faTrash} />
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button
+                                                        className="btn btn-info"
+                                                        onClick={() => handleViewDetails(user)}
+                                                    >
+                                                        <FontAwesomeIcon icon={faEye} />
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </>
                         )}
 
-                        {/* Botón para abrir el modal de agregar usuario */}
-                        <Button variant="primary" onClick={() => setShowAddModal(true)}>
-                            <FontAwesomeIcon icon={faPlus} /> Agregar Usuario
-                        </Button>
+
                     </section>
 
                     {/* Modal para agregar usuarios */}
@@ -264,7 +267,7 @@ const UserManage = () => {
                                         label="Selecciona una imagen"
                                         name="profileImage"
                                         onChange={handleProfileImageChange}
-                                        accept="image/*" 
+                                        accept="image/*"
                                     />
                                 </Form.Group>
 

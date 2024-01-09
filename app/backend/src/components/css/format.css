@@ -70,3 +70,12 @@ a {
     font-size: 3rem;
     margin-top: 2rem;
 }
+
+button.LinkProfile{
+    background-color: var(--colour-second);
+}
+button.LinkProfile:hover{
+    background-color: transparent;
+    color: var(--colour-second);
+    border: 1px solid var(--colour-second);
+}

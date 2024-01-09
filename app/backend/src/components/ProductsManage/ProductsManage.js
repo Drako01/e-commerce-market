@@ -8,6 +8,7 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Modal, Form } from 'react-bootstrap';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import './ProductsManage.css'
 
 const ProductsManage = () => {
     const storage = getStorage();
@@ -115,7 +116,7 @@ const ProductsManage = () => {
             // Subir la imagen al almacenamiento de Firebase
             const imageRef = ref(
                 storage,
-                `Products/${newProduct.categoria}/${newProduct.subcategoria}/${newProduct.marca}/${newProduct.foto.name}`
+                `Products/${newProduct.marca}/${newProduct.categoria}/${newProduct.subcategoria}/${newProduct.foto.name}`
             );
             const uploadTask = uploadBytesResumable(imageRef, newProduct.foto); // Change here
     
@@ -202,7 +203,7 @@ const ProductsManage = () => {
             {currentUser && authenticated ? (
                 <div className="container mt-5">
                     <h2>Lista de Productos</h2>
-                    <Button variant="primary" onClick={handleShowAddModal}>
+                    <Button variant="primary" onClick={handleShowAddModal} className='LinkProfile Agregarproducto'>
                         <FontAwesomeIcon icon={faPlus} /> Agregar Producto
                     </Button>
 

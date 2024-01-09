@@ -80,7 +80,7 @@ class ProductsController {
 export default new ProductsController();
 
 export function generateImageUrl(productData) {
-    const imageUrl = `Products/${productData.categoria}/${productData.subcategoria}/${productData.marca}/${productData.foto.name}`;
+    const imageUrl = `Products/${productData.marca}/${productData.categoria}/${productData.subcategoria}/${productData.foto.name}`;
     return imageUrl;
 }
 
