@@ -71,7 +71,7 @@ const Navbar = () => {
             <div className='menu'>
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
                     <div className="container">
-                        {authenticated ? (
+                        {currentUser ? (
                             <img src={currentUser.photoURL} alt={currentUser.displayName} className='AdminPhoto'/>
                         ) : (
                             <img src={logo} alt='Logo' />
@@ -89,9 +89,6 @@ const Navbar = () => {
                                             <NavLink className="nav-link" to='/api'>Usuarios</NavLink>
                                         </li>
 
-                                        <li className="nav-item">
-                                            <NavLink className="nav-link">Bienvenido, {currentUser.displayName}!</NavLink>
-                                        </li>
                                     </>
                                 )}
                                 {currentUser ? (

@@ -6,4 +6,9 @@
     width: 200px;
     border-radius: 2rem;
     margin-top: 2rem;
+    cursor: pointer;
+}
+.LinkProfile{
+    margin-top: 2rem;
+    color: var(--colour-second);
 }

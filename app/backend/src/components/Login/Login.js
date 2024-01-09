@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import Swal from 'sweetalert2';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { makeStyles, Typography, Button, TextField } from '@material-ui/core';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 
@@ -99,28 +99,7 @@ const Login = () => {
             });
     };
 
-    const handleGoogleLogin = () => {
-        signInWithPopup(auth, new GoogleAuthProvider())
-            .then((result) => {
-                const user = result.user;
-                localStorage.setItem("user", JSON.stringify(user));
-                setError(""); // Limpiar el estado de error en caso de éxito
-                Swal.fire({
-                    title: `Bienvenido ${user.displayName}`,
-                    html: `Gracias por entrar a nuestro BackEnd`,
-                    icon: 'success',
-                    didClose: () => {
-                        navigate('/');
-                    }
-                });
-            })
-            .catch((error) => {
-                setError(error.message); // Actualizar el estado de error con el mensaje real
-                Swal.fire('Error', 'Error al iniciar sesión con Google', 'error');
-            });
-    };
-
-    
+        
     return (
         <ThemeProvider theme={theme}>
             <div className='LoginAndSignup'>
@@ -154,14 +133,7 @@ const Login = () => {
                     <Button type="submit" variant="contained" color="primary" className={classes.button}>
                         Iniciar sesión
                     </Button>
-
-                    <Button onClick={handleGoogleLogin} variant="contained" color="secondary" className={classes.button}>
-                        Iniciar sesión con Google
-                    </Button>
-
-                    <Typography variant="body1">
-                        ¿No tienes cuenta? <Link to="/signup">Crea una.</Link>
-                    </Typography>
+                    
                 </form>
             </div>
         </ThemeProvider>
