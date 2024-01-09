@@ -1,5 +1,5 @@
 import express from 'express';
-import { multerUpload } from '../config/multerConfig.js';
+import { multerUpload } from '../middlewares/multer.middleware.js';
 import UserController from '../controllers/users.controller.js';
 
 const router = express.Router();
