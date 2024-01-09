@@ -57,8 +57,7 @@ class ProductsController {
         } catch (error) {
             res.status(500).json({ error: 'Error al actualizar el producto' });
         }
-    }
-    
+    }    
 
     // Método para eliminar un producto por ID
     async deleteProduct(req, res) {

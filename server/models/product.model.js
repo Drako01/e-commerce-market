@@ -57,16 +57,13 @@ class ProductModel {
     async updateProductById(productId, updatedProductData) {
         try {
             const productDoc = doc(productCollection, productId);
-            await updateDoc(productDoc, updatedProductData);
-            loggers.info('Producto actualizado con éxito');
+            await updateDoc(productDoc, updatedProductData);            
         } catch (error) {
             loggers.error('Error al actualizar el producto:', error);
             throw error;
         }
     }
     
-
-
     // Método para eliminar un producto por ID
     async deleteProduct(productId) {
         try {
