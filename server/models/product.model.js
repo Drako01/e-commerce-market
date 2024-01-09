@@ -1,5 +1,5 @@
 import loggers from '../config/logger.js'
-import { getFirestore, collection, addDoc, getDocs, query, where } from '@firebase/firestore';
+import { getFirestore, collection, addDoc, getDocs, getDoc, query, where, doc, updateDoc, deleteDoc } from '@firebase/firestore';
 import { firebaseConexion } from '../controllers/firebase.controller.js';
 import { generateImageUrl } from '../controllers/products.controler.js';
 
@@ -72,7 +72,7 @@ class ProductModel {
             await deleteDoc(productDoc);
             loggers.info('Producto eliminado con éxito');
         } catch (error) {
-            loggers.error('Error al eliminar el producto:', error);
+            loggers.error('Error al eliminar el producto desde Model:', error);
             throw error;
         }
     }

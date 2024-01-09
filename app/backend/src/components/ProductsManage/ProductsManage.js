@@ -56,7 +56,7 @@ const ProductsManage = () => {
     }, [urlServer]);
 
 
-    const handleDeleteProduct = async (uid) => {
+    const handleDeleteProduct = async (uid) => {       
         try {
             const confirmDelete = await Swal.fire({
                 title: '¿Estás seguro?',
@@ -262,16 +262,18 @@ const ProductsManage = () => {
 
                                         </td>
                                     ))}
+                                    
                                     <td>
-                                        <Button variant="outline-danger" onClick={() => handleDeleteProduct(product.uid)}>
+                                        <Button variant="outline-danger" onClick={() => handleDeleteProduct(product.id)}>
                                             <FontAwesomeIcon icon={faTrash} />
                                         </Button>
+
                                     </td>
                                     <td>
-                                        <Button variant="outline-info" onClick={() => handleViewDetails(product.uid)}>
+                                        <Button variant="outline-info" onClick={() => handleViewDetails(product.id)}>
                                             <FontAwesomeIcon icon={faEye} />
                                         </Button>
-                                    </td>
+                                    </td>                                    
                                 </tr>
                             ))}
                         </tbody>

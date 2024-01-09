@@ -1,9 +1,12 @@
 import ProductModel from '../models/product.model.js';
 import loggers from '../config/logger.js';
+import { doc, collection, getDoc, updateDoc, deleteDoc } from '@firebase/firestore';
+
+
+import { db } from '../controllers/firebase.controller.js';
+const productCollection = collection(db, 'productos');
 
 class ProductsController {
-    // Agregar un nuevo producto
-
 
     async addProduct(req, res) {
         try {
@@ -30,9 +33,11 @@ class ProductsController {
     async getProductById(req, res) {
         try {
             const productId = req.params.id;
-            const product = await ProductModel.getProductById(productId);
+            const productDoc = doc(productCollection, productId);
+            const productSnapshot = await getDoc(productDoc);
 
-            if (product) {
+            if (productSnapshot.exists()) {
+                const product = { id: productSnapshot.id, ...productSnapshot.data() };
                 res.status(200).json(product);
             } else {
                 res.status(404).json({ message: 'Producto no encontrado' });
@@ -42,10 +47,12 @@ class ProductsController {
         }
     }
 
+
     // Actualizar un producto por ID
     async updateProduct(req, res) {
         try {
-            const productId = req.params.id;
+            const productId = req.params.uid;
+
             const updatedProductData = req.body;
             await ProductModel.updateProduct(productId, updatedProductData);
             res.status(200).json({ message: 'Producto actualizado con éxito' });
@@ -54,16 +61,28 @@ class ProductsController {
         }
     }
 
-    // Eliminar un producto por ID
+    // Método para eliminar un producto por ID
     async deleteProduct(req, res) {
-        const uid = req.params.uid;
+        const { id } = req.params;
+
         try {
-            await ProductModel.deleteProduct(uid);
-            res.status(200).json({ message: 'Producto eliminado con éxito' });
+            const productRef = doc(productCollection, id);  // Use doc function with the productCollection
+            const deletedProduct = await getDoc(productRef);
+
+            if (!deletedProduct.exists()) {
+                return res.status(404).json({ error: 'Producto no encontrado' });
+            }
+
+            await deleteDoc(productRef);
+
+            return res.json({ message: 'Producto eliminado correctamente' });
         } catch (error) {
-            res.status(500).json({ error: 'Error al eliminar el producto' });
+            console.error('Error al eliminar producto desde el controlador:', error.message);
+            return res.status(500).json({ error: 'Error interno del servidor' });
         }
     }
+
+
 
     // Obtener productos por categoría
     async getProductsByCategory(req, res) {
