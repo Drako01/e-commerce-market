@@ -3,6 +3,7 @@ import { multerUpload } from '../middlewares/multer.middleware.js';
 import UserController from '../controllers/users.controller.js';
 import verifyTokenMiddleware from '../middlewares/token.middleware.js';
 
+
 const router = express.Router();
 
 // Ruta para obtener todos los usuarios

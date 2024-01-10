@@ -8,7 +8,7 @@ class UserController {
 
     async createUser(req, res) {
         try {
-            const { email, password, displayName } = req.body;
+            const { email, password, displayName, phoneNumber } = req.body;
 
             if (!email || !password) {
                 throw { status: 400, message: 'Email y contraseña son campos obligatorios.' };
@@ -47,6 +47,7 @@ class UserController {
             await updateProfile(user, {
                 displayName: displayName,
                 photoURL: photoURL,
+                phoneNumber: phoneNumber,
             });
 
             const uid = user.uid;
@@ -85,6 +86,7 @@ class UserController {
                 creationTime: user.metadata.creationTime,
                 lastSignInTime: user.metadata.lastSignInTime,
                 photoURL: user.photoURL,
+                phoneNumber: user.phoneNumber,
             }));
 
             res.json(userList);
@@ -112,9 +114,7 @@ class UserController {
             console.error('Error al actualizar el usuario desde controller:', error);
             res.status(error.status || 500).json({ error: 'Error interno del servidor' });
         }
-    }
-    
-    
+    } 
 
     async deleteUser(req, res) {
         const uid = req.params.uid;

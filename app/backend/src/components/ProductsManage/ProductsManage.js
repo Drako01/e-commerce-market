@@ -26,10 +26,17 @@ const ProductsManage = () => {
     const [editProductModal, setEditProductModal] = useState(false);
     const [currentProduct, setCurrentProduct] = useState({});
     const [showPricesModal, setShowPricesModal] = useState(false);
+    // eslint-disable-next-line no-unused-vars
     const [selectedCategory, setSelectedCategory] = useState([]);
+    // eslint-disable-next-line no-unused-vars
     const [priceIncrement, setPriceIncrement] = useState(0);
+    // eslint-disable-next-line no-unused-vars
     const [allCategories, setAllCategories] = useState([]);
 
+    const [selectedSubcategory, setSelectedSubcategory] = useState([]);
+    const [selectedBrand, setSelectedBrand] = useState([]);
+    const [subcategories, setSubcategories] = useState([]); // Add this line
+    const [brands, setBrands] = useState([]);
     const [newProduct, setNewProduct] = useState({
         marca: null,
         subcategoria: null,
@@ -275,9 +282,20 @@ const ProductsManage = () => {
     };
 
     const fetchAllCategories = useCallback(() => {
+        // Obtén categorías únicas
         const uniqueCategories = [...new Set(products.map(product => product.categoria))];
         setAllCategories(uniqueCategories);
-    }, [products]);
+
+        // Obtén subcategorías únicas basadas en la categoría seleccionada
+        const selectedCategoryProducts = products.filter(product => product.categoria === selectedCategory);
+        const uniqueSubcategories = [...new Set(selectedCategoryProducts.map(product => product.subcategoria))];
+        setSubcategories(uniqueSubcategories);
+
+        // Obtén marcas únicas basadas en la categoría y subcategoría seleccionadas
+        const selectedSubcategoryProducts = selectedCategoryProducts.filter(product => product.subcategoria === selectedSubcategory);
+        const uniqueBrands = [...new Set(selectedSubcategoryProducts.map(product => product.marca))];
+        setBrands(uniqueBrands);
+    }, [products, selectedCategory, selectedSubcategory]);
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -297,7 +315,7 @@ const ProductsManage = () => {
         fetchData();
         fetchAllCategories();
     }, [fetchData, fetchAllCategories]);
-    
+
 
     if (loading) {
         return (
@@ -568,32 +586,40 @@ const ProductsManage = () => {
                             <Modal.Title>Manejo de Precios</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            <Form>
-                                <Form.Group className="mb-3" controlId="formCategory">
-                                    <Form.Label>Seleccione la Categoría:</Form.Label>
-                                    <Form.Control
-                                        as="select"
-                                        name="categoria"
-                                        value={selectedCategory}
-                                        onChange={(e) => setSelectedCategory(e.target.value)}
-                                    >
-                                        {allCategories.map((category, index) => (
-                                            <option key={index} value={category}>
-                                                {category}
-                                            </option>
-                                        ))}
-                                    </Form.Control>
-                                </Form.Group>
-                                <Form.Group className="mb-3" controlId="formPriceIncrement">
-                                    <Form.Label>Incremento de Precio (%):</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Ingrese el incremento de precio"
-                                        value={priceIncrement}
-                                        onChange={(e) => setPriceIncrement(e.target.value)}
-                                    />
-                                </Form.Group>
-                            </Form>
+                            <Form.Group className="mb-3" controlId="formSubcategory">
+                                <Form.Label>Seleccione la Subcategoría:</Form.Label>
+                                <Form.Control
+                                    as="select"
+                                    name="subcategoria"
+                                    value={selectedSubcategory}
+                                    onChange={(e) => setSelectedSubcategory(e.target.value)}
+                                >
+                                    {/* Opciones de subcategoría basadas en la categoría seleccionada */}
+                                    {subcategories.map((subcategory, index) => (
+                                        <option key={index} value={subcategory}>
+                                            {subcategory}
+                                        </option>
+                                    ))}
+                                </Form.Control>
+                            </Form.Group>
+
+                            <Form.Group className="mb-3" controlId="formBrand">
+                                <Form.Label>Seleccione la Marca:</Form.Label>
+                                <Form.Control
+                                    as="select"
+                                    name="marca"
+                                    value={selectedBrand}
+                                    onChange={(e) => setSelectedBrand(e.target.value)}
+                                >
+                                    {/* Opciones de marca basadas en la categoría y subcategoría seleccionadas */}
+                                    {brands.map((brand, index) => (
+                                        <option key={index} value={brand}>
+                                            {brand}
+                                        </option>
+                                    ))}
+                                </Form.Control>
+                            </Form.Group>
+
                         </Modal.Body>
                         <Modal.Footer>
                             <Button variant="secondary" onClick={handleClosePricesModal}>

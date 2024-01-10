@@ -16,10 +16,11 @@ const UserManage = () => {
     const [loading, setLoading] = useState(true);
     const [users, setUsers] = useState([]);
     const [newUser, setNewUser] = useState({
-        email: null,
-        password: null,
-        displayName: null,
-        photoURL: null,
+        email: '',
+        password: '',
+        displayName: '',
+        photoURL: '',
+        phoneNumber: '',
     });
     const [selectedUserDetails, setSelectedUserDetails] = useState(null);
     const [showAddModal, setShowAddModal] = useState(false);
@@ -78,6 +79,7 @@ const UserManage = () => {
         formData.append("password", newUser.password);
         formData.append("displayName", newUser.displayName);
         formData.append("profileImage", newUser.photoURL, newUser.photoURL.name);
+        formData.append("phoneNumber", newUser.phoneNumber);
 
         // Verificar si la contraseña tiene al menos 6 caracteres
         if (newUser.password.length < 6) {
@@ -124,7 +126,7 @@ const UserManage = () => {
 
     const formatDateTime = (dateTimeString) => {
         const date = new Date(dateTimeString);
-    
+
         const addLeadingZero = (num) => (num < 10 ? `0${num}` : num);
         const day = addLeadingZero(date.getDate());
         const month = addLeadingZero(date.getMonth() + 1);
@@ -132,17 +134,17 @@ const UserManage = () => {
         const hours = addLeadingZero(date.getHours());
         const minutes = addLeadingZero(date.getMinutes());
         const seconds = addLeadingZero(date.getSeconds());
-    
+
         return `${day}/${month}/${year} | ${hours}:${minutes}:${seconds} hr`;
     };
 
     const handleViewDetails = (user) => {
-        setSelectedUserDetails(user);
+        setSelectedUserDetails(user);       
         const formattedDateTime = formatDateTime(user.lastSignInTime);
         setFormattedDateTime(formattedDateTime);
         setShowDetailsModal(true);
     };
-    
+
 
     const handleDeleteUser = async (uid) => {
         try {
@@ -188,6 +190,7 @@ const UserManage = () => {
         }
     };
 
+    
 
     return (
         <>
@@ -212,7 +215,7 @@ const UserManage = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {users.map((user) => {
+                                        {Array.isArray(users) && users.map((user, index) => {
                                             const formattedDateTime = formatDateTime(user.lastSignInTime);
                                             return (
                                                 <tr key={user.uid}>
@@ -239,6 +242,7 @@ const UserManage = () => {
                                             );
                                         })}
                                     </tbody>
+
 
                                 </table>
                             </>
@@ -281,6 +285,15 @@ const UserManage = () => {
                                         onChange={(e) => setNewUser({ ...newUser, displayName: e.target.value })}
                                     />
                                 </Form.Group>
+                                <Form.Group className="mb-3" controlId="formDisplayPhoneAdd">
+                                    <Form.Label>Teléfono:</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Ingrese el Nro de Teléfono"
+                                        value={newUser.phoneNumber}
+                                        onChange={(e) => setNewUser({ ...newUser, phoneNumber: e.target.value })}
+                                    />
+                                </Form.Group>
                                 <Form.Group className="mb-3" controlId="formProfileImageAdd">
                                     <Form.Label>Imagen de Perfil:</Form.Label>
                                     <Form.Control
@@ -291,9 +304,6 @@ const UserManage = () => {
                                         accept="image/*"
                                     />
                                 </Form.Group>
-
-
-
                             </Form>
                         </Modal.Body>
                         <Modal.Footer>
@@ -321,6 +331,7 @@ const UserManage = () => {
                                     <p><strong>Email:</strong> {selectedUserDetails.email}</p>
                                     <p><strong>Nombre:</strong> {selectedUserDetails.displayName}</p>
                                     <p><strong>Última Conexión:</strong> {formattedDateTime}</p>
+                                    <p><strong>Teléfono:</strong> {selectedUserDetails.phoneNumber}</p>
                                 </>
                             )}
                         </Modal.Body>

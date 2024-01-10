@@ -1,4 +1,4 @@
-import { getAuth, createUserWithEmailAndPassword, updateProfile, deleteUser, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, updateProfile, deleteUser, updatePhoneNumber } from 'firebase/auth';
 import { firebaseApp } from '../controllers/firebase.controller.js';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
 
@@ -7,24 +7,37 @@ class UserModel {
 
     async createUser(userData) {
         const auth = getAuth(firebaseApp);
-
+    
         try {
             if (!userData.email || !userData.password) {
                 throw new Error('Email y contraseña son campos obligatorios.');
             }
-
+    
             const userCredential = await createUserWithEmailAndPassword(auth, userData.email, userData.password);
-            const user = userCredential.user;
-
-            if (userData.displayName || userData.photoURL) {
-                await updateProfile(user, { displayName: userData.displayName, photoURL: userData.photoURL });
+            const user = userCredential.user;           
+            const profileUpdates = {
+                displayName: userData.displayName,
+                photoURL: userData.photoURL,
+            };
+    
+            if (userData.phoneNumber) {
+                try {
+                    // Agrega el número de teléfono
+                    await updatePhoneNumber(user, userData.phoneNumber);
+                    console.log('Número de teléfono agregado correctamente');
+                } catch (phoneError) {
+                    console.error('Error al agregar el número de teléfono:', phoneError);
+                }
             }
-
+    
+            await updateProfile(user, profileUpdates);
+    
             return user.uid;
         } catch (error) {
             throw new Error(`Error al crear el usuario: ${error.message}`);
         }
     }
+    
 
     async getUser(uid) {
         const auth = getAuth(firebaseApp);
@@ -75,12 +88,13 @@ class UserModel {
             }
 
             // Obtén el usuario actual de manera síncrona
-            const currentUser = auth.currentUser;           
+            const currentUser = auth.currentUser;
 
             // Continuar con la actualización del perfil
             await updateProfile(currentUser, {
                 displayName: updatedUserData.displayName,
                 photoURL: updatedUserData.photoURL,
+                phoneNumber: updatedUserData.phoneNumber,
             });
 
 
@@ -95,7 +109,7 @@ class UserModel {
                 // Otros manejos de errores
             }
         }
-        
+
     }
 
 

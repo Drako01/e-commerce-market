@@ -25,6 +25,10 @@ const verifyTokenMiddleware = async (req, res, next) => {
         // Ahora, utiliza getIdToken() directamente en el usuario autenticado
         const decodedToken = await getIdToken(user);
 
+        if (!decodedToken) {
+            return res.status(401).json({ error: 'Error al obtener el token' });
+        }
+
         // Puedes acceder a la información del usuario desde decodedToken
         req.user = decodedToken;
 
@@ -32,7 +36,7 @@ const verifyTokenMiddleware = async (req, res, next) => {
         next();
     } catch (error) {
         console.error('Error al verificar el token:', error.message);
-        return res.status(401).json({ error: 'Token no válido' });
+        return res.status(401).json({ error: 'Token no válido', specificError: error.message });
     }
 };
 
