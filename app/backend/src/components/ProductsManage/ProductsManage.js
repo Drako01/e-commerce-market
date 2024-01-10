@@ -60,14 +60,17 @@ const ProductsManage = () => {
 
     const fetchData = useCallback(async () => {
         try {
-            const response = await axios.get(`${urlServer}/api/products/getAll`);
+            const response = await axios.get('http://localhost:8080/api/products/getAll');
             setProducts(response.data);
+            setLoading(false);
         } catch (error) {
-            console.error('Error al obtener la lista de productos:', error);
-        } finally {
+            console.error('Error fetching data:', error);
             setLoading(false);
         }
-    }, [urlServer]);
+    }, []);
+    useEffect(() => {
+        fetchData();
+    }, [fetchData]);
 
 
     const handleDeleteProduct = async (uid) => {
@@ -379,8 +382,8 @@ const ProductsManage = () => {
                         </thead>
                         <tbody>
                             {/* Generar filas y columnas de la tabla basadas en los productos */}
-                            {filteredProducts.map((product, index) => (
-                                <tr key={index}>
+                            {products.map((product) => (
+                                <tr key={product.uid}>
                                     {/* Filtrar las columnas basadas en el array 'items' */}
                                     {items.map((key, columnIndex) => (
                                         <td key={columnIndex}>
@@ -395,24 +398,23 @@ const ProductsManage = () => {
                                             ) : (
                                                 product[key.toLowerCase()]
                                             )}
-
                                         </td>
                                     ))}
 
                                     <td>
-                                        <Button variant="outline-danger" onClick={() => handleDeleteProduct(product.id)}>
+                                        <Button variant="outline-danger" onClick={() => handleDeleteProduct(product.uid)}>
                                             <FontAwesomeIcon icon={faTrash} />
                                         </Button>
-
                                     </td>
                                     <td>
-                                        <Button variant="outline-info" onClick={() => handleViewDetails(product.id)}>
+                                        <Button variant="outline-info" onClick={() => handleViewDetails(product.uid)}>
                                             <FontAwesomeIcon icon={faEye} />
                                         </Button>
                                     </td>
                                 </tr>
                             ))}
                         </tbody>
+
 
 
                     </table>

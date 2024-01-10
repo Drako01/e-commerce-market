@@ -1,12 +1,17 @@
 import ProductModel from '../models/product.model.js';
 import loggers from '../config/logger.js';
+import { doc, collection, getDoc, updateDoc, deleteDoc } from '@firebase/firestore';
+
+
+import { db } from '../controllers/firebase.controller.js';
+const productCollection = collection(db, 'productos');
 
 class ProductsController {
 
     async addProduct(req, res) {
         try {
             const productData = req.body;
-            const productId = await ProductModel.addProduct(productData);
+            const productId = await ProductModel.addProduct(productData, res); // Pasar res como parámetro
             const imageUrl = generateImageUrl(productData);
             res.status(201).json({ message: 'Producto agregado con éxito', productId });
         } catch (error) {
@@ -28,9 +33,11 @@ class ProductsController {
     async getProductById(req, res) {
         try {
             const productId = req.params.id;
-            const product = await ProductModel.getProductById(productId);
+            const productDoc = doc(productCollection, productId);
+            const productSnapshot = await getDoc(productDoc);
 
-            if (product) {
+            if (productSnapshot.exists()) {
+                const product = { id: productSnapshot.id, ...productSnapshot.data() };
                 res.status(200).json(product);
             } else {
                 res.status(404).json({ message: 'Producto no encontrado' });
@@ -57,11 +64,19 @@ class ProductsController {
         const { id } = req.params;
 
         try {
-            await ProductModel.deleteProduct(id);
-            res.json({ message: 'Producto eliminado correctamente' });
+            const productRef = doc(productCollection, id);  // Use doc function with the productCollection
+            const deletedProduct = await getDoc(productRef);
+
+            if (!deletedProduct.exists()) {
+                return res.status(404).json({ error: 'Producto no encontrado' });
+            }
+
+            await deleteDoc(productRef);
+
+            return res.json({ message: 'Producto eliminado correctamente' });
         } catch (error) {
             console.error('Error al eliminar producto desde el controlador:', error.message);
-            res.status(500).json({ error: 'Error interno del servidor' });
+            return res.status(500).json({ error: 'Error interno del servidor' });
         }
     }
 
@@ -92,3 +107,8 @@ export function generateImageUrl(productData) {
         return 'URL_por_defecto_o_manejo_de_error';
     }
 }
+
+
+
+
+

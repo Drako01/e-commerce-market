@@ -1,34 +1,20 @@
-import loggers from '../config/logger.js'
-import { getFirestore, collection, addDoc, getDocs, query, where, doc, updateDoc, deleteDoc } from '@firebase/firestore';
-import { firebaseConexion } from '../controllers/firebase.controller.js';
-import { generateImageUrl } from '../controllers/products.controler.js';
-
-const db = getFirestore(firebaseConexion);
-const productCollection = collection(db, 'productos');
+import { products } from './products.js';
 
 class ProductModel {
-    // Método para agregar un nuevo producto
     async addProduct(productData) {
         try {
-            const docRef = await addDoc(productCollection, {
-                ...productData,
-                imageUrl: generateImageUrl(productData),
-            });
-            return docRef.id;
+            const imageUrl = generateImageUrl(productData); // Ajusta según tu lógica
+            const newProduct = { ...productData, imageUrl, uid: products.length + 1 };
+            products.push(newProduct);
+            return newProduct.uid;
         } catch (error) {
             loggers.error('Error al agregar el producto:', error);
             throw error;
         }
     }
 
-    // Método para obtener todos los productos
     async getAllProducts() {
         try {
-            const querySnapshot = await getDocs(productCollection);
-            const products = [];
-            querySnapshot.forEach((doc) => {
-                products.push({ id: doc.id, ...doc.data() });
-            });
             return products;
         } catch (error) {
             loggers.error('Error al obtener los productos:', error);
@@ -36,62 +22,54 @@ class ProductModel {
         }
     }
 
-    // Método para obtener un producto por ID
     async getProductById(productId) {
         try {
-            const productDoc = doc(productCollection, productId);
-            const productSnapshot = await getDocs(productDoc);
-            if (productSnapshot.exists()) {
-                return { id: productSnapshot.id, ...productSnapshot.data() };
-            } else {
-                loggers.warn('Producto no encontrado');
-                return null;
-            }
+            const product = products.find((p) => p.uid === productId);
+            return product || null;
         } catch (error) {
             loggers.error('Error al obtener el producto por ID:', error);
             throw error;
         }
     }
 
-    // Método para actualizar un producto por ID
     async updateProductById(productId, updatedProductData) {
         try {
-            const productDoc = doc(productCollection, productId);
-            await updateDoc(productDoc, updatedProductData);            
+            const index = products.findIndex((p) => p.uid === productId);
+            if (index !== -1) {
+                products[index] = { ...products[index], ...updatedProductData };
+            } else {
+                throw new Error('Producto no encontrado');
+            }
         } catch (error) {
             loggers.error('Error al actualizar el producto:', error);
             throw error;
         }
     }
-    
-    // Método para eliminar un producto por ID
+
     async deleteProduct(productId) {
         try {
-            const productDoc = doc(productCollection, productId);
-            await deleteDoc(productDoc);
-            loggers.info('Producto eliminado con éxito');
+            const index = products.findIndex((p) => p.uid === productId);
+            if (index !== -1) {
+                products.splice(index, 1);
+                loggers.info('Producto eliminado con éxito');
+            } else {
+                throw new Error('Producto no encontrado');
+            }
         } catch (error) {
             loggers.error('Error al eliminar el producto desde Model:', error);
             throw error;
         }
     }
 
-    // Método para obtener productos por algún criterio (ej. categoría)
     async getProductsByCategory(category) {
         try {
-            const q = query(productCollection, where('categoria', '==', category));
-            const querySnapshot = await getDocs(q);
-            const products = [];
-            querySnapshot.forEach((doc) => {
-                products.push({ id: doc.id, ...doc.data() });
-            });
-            return products;
+            const filteredProducts = products.filter((p) => p.categoria === category);
+            return filteredProducts;
         } catch (error) {
             loggers.error('Error al obtener los productos por categoría:', error);
             throw error;
         }
     }
-
 }
 
 export default new ProductModel();
