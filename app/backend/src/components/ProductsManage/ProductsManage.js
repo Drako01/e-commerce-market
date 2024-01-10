@@ -29,6 +29,11 @@ const ProductsManage = () => {
     const [selectedCategory, setSelectedCategory] = useState([]);
     const [priceIncrement, setPriceIncrement] = useState(0);
     const [allCategories, setAllCategories] = useState([]);
+    // eslint-disable-next-line
+    const [filteredProducts, setFilteredProducts] = useState([]);
+    const [sortOrder, setSortOrder] = useState('asc'); // 'asc' o 'desc'
+    const [sortKey, setSortKey] = useState(null);
+
 
     const [newProduct, setNewProduct] = useState({
         marca: null,
@@ -279,6 +284,36 @@ const ProductsManage = () => {
         setAllCategories(uniqueCategories);
     }, [products]);
 
+    const filterProducts = (key) => {
+        const isPrecioColumn = key.toLowerCase() === 'precio';
+
+        if (isPrecioColumn) {
+            toggleSortOrder();
+        }
+
+        // Filtrar productos según la clave seleccionada
+        const filtered = products.filter((product) => {
+            return key.toLowerCase() === 'precio'
+                ? true
+                : product[key.toLowerCase()].toLowerCase().includes(filteredProducts[key.toLowerCase()].toLowerCase());
+        });
+
+        // Ordenar productos si la columna seleccionada es 'precio'
+        const sorted = isPrecioColumn
+            ? filtered.sort((a, b) => (sortOrder === 'asc' ? a[key.toLowerCase()] - b[key.toLowerCase()] : b[key.toLowerCase()] - a[key.toLowerCase()]))
+            : filtered;
+
+        setFilteredProducts(sorted);
+        setSortKey(isPrecioColumn ? key : null);
+    };
+
+
+    const toggleSortOrder = () => {
+        setSortOrder((prevOrder) => (prevOrder === 'asc' ? 'desc' : 'asc'));
+    };
+
+
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -297,7 +332,7 @@ const ProductsManage = () => {
         fetchData();
         fetchAllCategories();
     }, [fetchData, fetchAllCategories]);
-    
+
 
     if (loading) {
         return (
@@ -327,11 +362,15 @@ const ProductsManage = () => {
                                 {/* Generar las columnas de la tabla basadas en las claves del primer producto */}
                                 {products.length > 0 ? (
                                     items.map((key, index) => (
-                                        <th key={index}>{key.charAt(0).toUpperCase() + key.slice(1)}</th>
+                                        <th key={index} onClick={() => filterProducts(key)}>
+                                            {key.charAt(0).toUpperCase() + key.slice(1)}
+                                            {sortKey === key && <span>{sortOrder === 'asc' ? ' ▲' : ' ▼'}</span>}
+                                        </th>
+
                                     ))
                                 ) : (
                                     <th colSpan={items.length + 2}>
-                                        <h1>No hay productos para mostrar</h1>
+                                        <h4>No hay productos para mostrar!!</h4>
                                     </th>
                                 )}
                                 <th>Eliminar</th>
@@ -340,7 +379,7 @@ const ProductsManage = () => {
                         </thead>
                         <tbody>
                             {/* Generar filas y columnas de la tabla basadas en los productos */}
-                            {products.map((product, index) => (
+                            {filteredProducts.map((product, index) => (
                                 <tr key={index}>
                                     {/* Filtrar las columnas basadas en el array 'items' */}
                                     {items.map((key, columnIndex) => (
@@ -622,3 +661,14 @@ const ProductsManage = () => {
 };
 
 export default ProductsManage;
+
+/*
+necesito que en la thead de la tabla se aplique un método que me permita filtrar los productos según lo que diga el th
+Ejemplo: Puedo filtrar por Categoria, por Marca, por Subcategoria, etc.  mostrando solo lo que seleccione. Y en la de Precios quiero que me permita ordenar de forma actual, ascendente y descendente
+he visto que en algunas plataformas funciona asi. por eso recurro a tu capacidad para que me ayudes a lograrlo. 
+el Usuario puede solo ver la categoria seleccionada, o la marca seleccionada, etc.
+y ordenar todos lo productos por el precio
+Recurri a otra IA y no me dio ninguna solucion. Vos crees que podes hacerlo?
+el cambio de ' ▲' : ' ▼' no funciona, solo se pone el primero, pero no filtra nada. el filtro no funciona
+se muestran los productos bien de entrada, pero no funciona el filtro
+*/
