@@ -1,7 +1,7 @@
 import express from 'express';
 import compression from 'compression';
 import config from './config/config.js';
-import loggers from './config/logger.js'
+import loggers from './config/logger.js';
 import 'core-js';
 import cors from 'cors';
 import admin from 'firebase-admin';
@@ -18,35 +18,32 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
-let httpServer;
-
-// Configuracion de Compresion de Archivos Estaticos con Brotli
+// Configuración de compresión de archivos estáticos con Brotli
 app.use(compression({
     brotli: { enabled: true, zlib: {} }
 }));
 
-// Configuracion de Commander
+// Configuración de Commander
 import { Command } from 'commander';
 const program = new Command();
 program
-    .option('--mode <mode>', 'Puerto', 'prod')
+    .option('--mode <mode>', 'Puerto', 'prod');
 program.parse();
 
-
-// Configuracion de Path
+// Configuración de Path
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { readFileSync } from 'fs';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
-//  Configuracion de Handlebars
+// Configuración de Handlebars
 import configureHandlebars from './manager/handlebars.manager.js';
 import { registerHandlebarsHelpers } from './helpers/handlebars.helpers.js';
-registerHandlebarsHelpers(app)
+registerHandlebarsHelpers(app);
 configureHandlebars(app);
 
-// Configuracion de las Rutas y las Vistas Principales
+// Configuración de las rutas y las vistas principales
 import views from './manager/views.manager.js';
 app.use(express.static(path.resolve('..', 'public')));
 app.set('views', './views/');
@@ -75,30 +72,30 @@ admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
 });
 
-// Configuracion del puerto
+
+// Configuración del puerto
 let dominio = program.opts().mode === 'local' ? config.urls.urlProd : config.urls.urlLocal;
 const PORT = program.opts().mode === 'dev' ? config.ports.prodPort : config.ports.devPort;
 const upServer = `Server Up! => ${dominio}:${PORT}`;
 
-
 // Inicializar el servidor
 function startServer() {
-    httpServer = app.listen(PORT, () => {
+    const httpServer = app.listen(PORT, () => {
         loggers.http(upServer);
+    });
+
+    // Cerrar conexiones de Firebase u otras tareas de limpieza antes de apagar el servidor
+    process.on('SIGTERM', () => {
+        if (httpServer) {
+            httpServer.close(() => {
+                loggers.info('Servidor cerrado.');
+            });
+        }
+    });
+
+    process.on('unhandledRejection', (reason, promise) => {
+        loggers.error('Unhandled Rejection at:', promise, 'reason:', reason);
     });
 }
 
 startServer();
-
-// Cerrar conexiones de Firebase u otras tareas de limpieza antes de apagar el servidor
-process.on('SIGTERM', () => {    
-    if (httpServer) {
-        httpServer.close(() => {
-            loggers.info('Servidor cerrado.');
-        });
-    }
-});
-
-process.on('unhandledRejection', (reason, promise) => {
-    loggers.error('Unhandled Rejection at:', promise, 'reason:', reason);
-});

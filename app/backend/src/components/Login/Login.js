@@ -85,7 +85,7 @@ const Login = () => {
                 localStorage.setItem("user", JSON.stringify(user));
                 setError(""); // Limpiar el estado de error en caso de éxito
                 Swal.fire({
-                    title: `Bienvenido ${user.email}`,
+                    title: `Bienvenido ${user.displayName}`,
                     html: `Gracias por entrar a nuestro BackEnd`,
                     icon: 'success',
                     didClose: () => {

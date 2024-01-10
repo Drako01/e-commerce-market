@@ -24,7 +24,7 @@ const UserManage = () => {
     const [selectedUserDetails, setSelectedUserDetails] = useState(null);
     const [showAddModal, setShowAddModal] = useState(false);
     const [showDetailsModal, setShowDetailsModal] = useState(false);
-
+    const [formattedDateTime, setFormattedDateTime] = useState(null);
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -122,10 +122,27 @@ const UserManage = () => {
         }));
     };
 
+    const formatDateTime = (dateTimeString) => {
+        const date = new Date(dateTimeString);
+    
+        const addLeadingZero = (num) => (num < 10 ? `0${num}` : num);
+        const day = addLeadingZero(date.getDate());
+        const month = addLeadingZero(date.getMonth() + 1);
+        const year = date.getFullYear();
+        const hours = addLeadingZero(date.getHours());
+        const minutes = addLeadingZero(date.getMinutes());
+        const seconds = addLeadingZero(date.getSeconds());
+    
+        return `${day}/${month}/${year} | ${hours}:${minutes}:${seconds} hr`;
+    };
+
     const handleViewDetails = (user) => {
         setSelectedUserDetails(user);
+        const formattedDateTime = formatDateTime(user.lastSignInTime);
+        setFormattedDateTime(formattedDateTime);
         setShowDetailsModal(true);
     };
+    
 
     const handleDeleteUser = async (uid) => {
         try {
@@ -189,36 +206,40 @@ const UserManage = () => {
                                         <tr>
                                             <th>Email</th>
                                             <th>Nombre</th>
-                                            <th>ID</th>
+                                            <th>Ultima Vez</th>
                                             <th>Eliminar</th>
                                             <th>Detalles</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {users.map((user) => (
-                                            <tr key={user.uid}>
-                                                <td>{user.email}</td>
-                                                <td>{user.displayName}</td>
-                                                <td>{user.uid}</td>
-                                                <td>
-                                                    <button
-                                                        className="btn btn-danger"
-                                                        onClick={() => handleDeleteUser(user.uid)}
-                                                    >
-                                                        <FontAwesomeIcon icon={faTrash} />
-                                                    </button>
-                                                </td>
-                                                <td>
-                                                    <button
-                                                        className="btn btn-info"
-                                                        onClick={() => handleViewDetails(user)}
-                                                    >
-                                                        <FontAwesomeIcon icon={faEye} />
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        ))}
+                                        {users.map((user) => {
+                                            const formattedDateTime = formatDateTime(user.lastSignInTime);
+                                            return (
+                                                <tr key={user.uid}>
+                                                    <td>{user.email}</td>
+                                                    <td>{user.displayName}</td>
+                                                    <td>{formattedDateTime}</td>
+                                                    <td>
+                                                        <button
+                                                            className="btn btn-danger"
+                                                            onClick={() => handleDeleteUser(user.uid)}
+                                                        >
+                                                            <FontAwesomeIcon icon={faTrash} />
+                                                        </button>
+                                                    </td>
+                                                    <td>
+                                                        <button
+                                                            className="btn btn-info"
+                                                            onClick={() => handleViewDetails(user)}
+                                                        >
+                                                            <FontAwesomeIcon icon={faEye} />
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            );
+                                        })}
                                     </tbody>
+
                                 </table>
                             </>
                         )}
@@ -299,7 +320,7 @@ const UserManage = () => {
                                     </div>
                                     <p><strong>Email:</strong> {selectedUserDetails.email}</p>
                                     <p><strong>Nombre:</strong> {selectedUserDetails.displayName}</p>
-                                    <p><strong>ID:</strong> {selectedUserDetails.uid}</p>
+                                    <p><strong>Última Conexión:</strong> {formattedDateTime}</p>
                                 </>
                             )}
                         </Modal.Body>
@@ -309,6 +330,7 @@ const UserManage = () => {
                             </Button>
                         </Modal.Footer>
                     </Modal>
+
 
                 </>
             ) : (

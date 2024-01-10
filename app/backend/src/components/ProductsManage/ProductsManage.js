@@ -40,7 +40,7 @@ const ProductsManage = () => {
         stock: null,
     });
 
-    const items = ['categoria', 'subcategoria', 'marca', 'descripcion', 'foto', 'precio', 'stock'];
+    const items = ['categoria', 'subcategoria', 'marca', 'foto', 'precio', 'stock'];
 
 
     // Función para abrir el modal de agregar producto

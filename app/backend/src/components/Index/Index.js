@@ -13,10 +13,10 @@ const Index = () => {
     const auth = getAuth();
     const [currentUser, setCurrentUser] = useState(null);
     const [selectedUserDetails, setSelectedUserDetails] = useState(null);
-    const [showDetailsModal, setShowDetailsModal] = useState(false);    
+    const [showDetailsModal, setShowDetailsModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
     const [editingUser, setEditingUser] = useState({
-        uid: null,
+        uid: '',
         email: null,
         displayName: null,
         photoURL: null,
@@ -44,34 +44,51 @@ const Index = () => {
     };
 
     const handleEditUser = (user) => {
-        setEditingUser(user);
+        setEditingUser({
+            uid: user.uid,
+            email: user.email,
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+        });
         setShowEditModal(true);
         setShowDetailsModal(false);
     };
 
+
     //Cambiar por la que esta en Signup
     const handleSaveChanges = async () => {
         try {
+            if (!editingUser || !currentUser) {
+                console.error('No se ha seleccionado un usuario para editar o el usuario no está autenticado.');
+                return;
+            }
+    
             const updatedUserData = {
                 displayName: editingUser.displayName,
-                photoURL: editingUser.photoURL, 
+                photoURL: editingUser.photoURL,
             };
+    
+            // Verifica que el usuario esté autenticado antes de intentar obtener el token
+            const token = await currentUser.getIdToken(true);
 
-            const response = await fetch(`${urlServer}/users/${editingUser.uid}`, {
+    
+            const response = await fetch(`${urlServer}/api/users/${editingUser.uid}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify(updatedUserData),
             });
-
+            
             if (!response.ok) {
                 throw new Error(`Error en la solicitud: ${response.statusText}`);
             }
-
-            setShowEditModal(false);            
+    
+            setShowEditModal(false);
         } catch (error) {
             console.error('Error al guardar cambios:', error.message);
+    
             // Puedes manejar otros errores aquí si es necesario
             Swal.fire({
                 icon: 'error',
@@ -80,6 +97,9 @@ const Index = () => {
             });
         }
     };
+    
+    
+    
 
     return (
         <div className="App-index container inicio">
@@ -148,7 +168,7 @@ const Index = () => {
                                 onChange={(e) => setEditingUser({ ...editingUser, displayName: e.target.value })}
                             />
                         </Form.Group>
-                        
+
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>

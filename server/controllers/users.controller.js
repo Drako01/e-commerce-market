@@ -97,17 +97,24 @@ class UserController {
     }
 
     async updateUser(req, res) {
-        const uid = req.params.uid;
-        const updatedUserData = req.body;
-
         try {
-            await UserModel.updateUser(uid, updatedUserData);
-            res.status(200).json({ message: 'Usuario actualizado exitosamente' });
+            if (req.user && req.user.getIdToken) {
+                const uid = req.params.uid;
+                const updatedUserData = req.body;
+    
+                await UserModel.updateUser(uid, updatedUserData);
+                res.status(200).json({ message: 'Usuario actualizado exitosamente' });
+            } else {
+                // Manejar el caso cuando req.user es null o req.user.getIdToken no es una función
+                res.status(401).json({ error: 'Usuario no autenticado' });
+            }
         } catch (error) {
-            loggers.error('Error al actualizar el usuario:', error);
+            console.error('Error al actualizar el usuario desde controller:', error);
             res.status(error.status || 500).json({ error: 'Error interno del servidor' });
         }
     }
+    
+    
 
     async deleteUser(req, res) {
         const uid = req.params.uid;
