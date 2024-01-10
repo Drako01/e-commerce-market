@@ -1,0 +1,902 @@
+[
+    {
+        "marca": "Marca3",
+        "subcategoria": "Subcategoría5",
+        "categoria": "Categoria1",
+        "precio": 86.16,
+        "stock": 32,
+        "descripcion": "Cupidatat mollit incididunt aute dolore occaecat est. Magna fugiat do dolor pariatur do excepteur sint id mollit irure ipsum. Sit amet nostrud sint veniam minim occaecat aliquip duis. Tempor qui minim eu voluptate aute eu aliquip eiusmod fugiat irure quis. In occaecat sit duis ea exercitation mollit ea laboris et sunt. Eiusmod deserunt ut culpa nostrud elit magna. Amet consectetur amet labore exercitation.\r\n",
+        "foto": "url_imagen_5.jpg"
+    },
+    {
+        "marca": "Marca1",
+        "subcategoria": "Subcategoría4",
+        "categoria": "Categoria4",
+        "precio": 32.96,
+        "stock": 55,
+        "descripcion": "Minim aliqua non ad eu proident dolore do ea anim qui amet cupidatat tempor fugiat. Magna esse minim non eiusmod anim tempor ex mollit sint. Qui in ullamco qui occaecat quis ipsum culpa consequat Lorem sit. Ipsum et et consequat elit aute ea ipsum Lorem incididunt aute excepteur. Anim aute deserunt dolor cupidatat amet.\r\n",
+        "foto": "url_imagen_3.jpg"
+    },
+    {
+        "marca": "Marca4",
+        "subcategoria": "Subcategoría2",
+        "categoria": "Categoria3",
+        "precio": 66.57,
+        "stock": 15,
+        "descripcion": "Consequat aliquip nostrud dolor laboris dolor qui qui pariatur. Veniam pariatur non velit labore fugiat fugiat velit pariatur pariatur est ea cillum laboris. Sunt duis pariatur sint veniam duis qui. Sunt et ex non dolore amet duis reprehenderit ad dolore magna ex ipsum Lorem aliquip.\r\n",
+        "foto": "url_imagen_4.jpg"
+    },
+    {
+        "marca": "Marca4",
+        "subcategoria": "Subcategoría1",
+        "categoria": "Categoria4",
+        "precio": 93.07,
+        "stock": 95,
+        "descripcion": "Consectetur reprehenderit aliqua consectetur incididunt cillum anim ex. Cillum ex adipisicing nulla nulla velit. Aute ex id aute sint esse.\r\n",
+        "foto": "url_imagen_4.jpg"
+    },
+    {
+        "marca": "Marca1",
+        "subcategoria": "Subcategoría5",
+        "categoria": "Categoria3",
+        "precio": 47.72,
+        "stock": 17,
+        "descripcion": "Do velit quis ut anim. Proident adipisicing consectetur id in excepteur qui excepteur non minim. Officia non aliqua deserunt voluptate et ea ullamco id qui. Do elit non amet aute est nisi exercitation et commodo. Aute commodo elit deserunt cillum mollit culpa ullamco officia adipisicing esse consequat proident eiusmod. Ullamco proident pariatur elit consectetur. Esse ipsum sunt enim est id cupidatat eu aute nostrud.\r\n",
+        "foto": "url_imagen_5.jpg"
+    },
+    {
+        "marca": "Marca3",
+        "subcategoria": "Subcategoría4",
+        "categoria": "Categoria4",
+        "precio": 98.52,
+        "stock": 25,
+        "descripcion": "Labore et ut cupidatat reprehenderit fugiat amet enim labore tempor eu do aliquip do irure. Proident eiusmod qui amet reprehenderit eu labore adipisicing nostrud voluptate elit ullamco anim ex laborum. Elit non aliquip id in non incididunt quis eu. Ea sit ullamco non sit. Cupidatat consequat mollit non aute do aliqua voluptate cupidatat do do voluptate cupidatat pariatur.\r\n",
+        "foto": "url_imagen_2.jpg"
+    },
+    {
+        "marca": "Marca3",
+        "subcategoria": "Subcategoría5",
+        "categoria": "Categoria4",
+        "precio": 78.94,
+        "stock": 87,
+        "descripcion": "Deserunt eu aliqua quis pariatur dolore occaecat est. Pariatur non ex exercitation officia proident in aute aute qui. Exercitation sunt labore aliqua id sunt eiusmod eiusmod irure incididunt pariatur proident occaecat nostrud excepteur. Amet sit reprehenderit ut fugiat eiusmod ut incididunt. Amet anim culpa dolor eu cupidatat officia et ipsum. Qui aute exercitation mollit mollit aute do culpa qui sunt deserunt exercitation sunt.\r\n",
+        "foto": "url_imagen_5.jpg"
+    },
+    {
+        "marca": "Marca5",
+        "subcategoria": "Subcategoría1",
+        "categoria": "Categoria5",
+        "precio": 33.79,
+        "stock": 75,
+        "descripcion": "Do irure elit irure excepteur minim. Aliqua eiusmod elit sint exercitation eu proident velit aliqua pariatur pariatur minim veniam aute. Ex minim et eiusmod anim aliqua esse aute esse ut occaecat reprehenderit reprehenderit do. Ad nulla duis proident commodo velit magna irure exercitation do consequat ex et elit veniam. Non dolore eu reprehenderit do enim deserunt mollit aute officia ea dolore nulla irure. Consectetur labore incididunt ea incididunt eu quis aliquip incididunt. Fugiat occaecat velit amet eu nisi veniam ad ad laborum magna ad.\r\n",
+        "foto": "url_imagen_4.jpg"
+    },
+    {
+        "marca": "Marca1",
+        "subcategoria": "Subcategoría3",
+        "categoria": "Categoria5",
+        "precio": 65.62,
+        "stock": 85,
+        "descripcion": "In laboris eiusmod exercitation cillum adipisicing consectetur proident culpa. Id minim velit et in commodo in exercitation. Officia laborum non minim enim. Mollit tempor ipsum incididunt adipisicing velit sint occaecat non eu irure nisi reprehenderit officia ullamco. Id labore ad dolore nostrud.\r\n",
+        "foto": "url_imagen_5.jpg"
+    },
+    {
+        "marca": "Marca5",
+        "subcategoria": "Subcategoría5",
+        "categoria": "Categoria3",
+        "precio": 90.39,
+        "stock": 94,
+        "descripcion": "Ea incididunt nostrud id sit adipisicing fugiat enim fugiat. Quis fugiat minim ut minim. Quis Lorem do sint eiusmod nisi occaecat cillum do velit aliquip velit.\r\n",
+        "foto": "url_imagen_1.jpg"
+    },
+    {
+        "marca": "Marca2",
+        "subcategoria": "Subcategoría2",
+        "categoria": "Categoria3",
+        "precio": 95.91,
+        "stock": 95,
+        "descripcion": "Eu eu ex id minim exercitation pariatur ullamco aliqua sunt. Qui nulla consequat sint dolor fugiat mollit laboris deserunt. In id veniam eu nulla. Proident id sit non aute pariatur est nisi adipisicing excepteur ea ipsum incididunt. Sit magna mollit nulla ex voluptate eiusmod Lorem mollit dolore consequat irure anim dolore. Consequat dolor occaecat fugiat dolore tempor proident amet laboris commodo.\r\n",
+        "foto": "url_imagen_4.jpg"
+    },
+    {
+        "marca": "Marca4",
+        "subcategoria": "Subcategoría5",
+        "categoria": "Categoria5",
+        "precio": 74.33,
+        "stock": 34,
+        "descripcion": "Dolor ipsum cillum do anim exercitation fugiat qui ullamco ea duis cupidatat. Anim occaecat sit officia in ullamco ipsum nostrud. Commodo incididunt cupidatat minim cillum eiusmod occaecat pariatur ex esse in. Lorem cillum aliqua dolor cupidatat cupidatat labore. Id esse ex et eiusmod aliquip et quis eiusmod. Pariatur dolor duis minim eu commodo id voluptate cillum aliqua. Aliqua nisi adipisicing commodo qui commodo excepteur.\r\n",
+        "foto": "url_imagen_4.jpg"
+    },
+    {
+        "marca": "Marca4",
+        "subcategoria": "Subcategoría3",
+        "categoria": "Categoria1",
+        "precio": 60.01,
+        "stock": 45,
+        "descripcion": "Aliquip et proident anim Lorem. Quis irure ea ea amet ex amet nisi. Consectetur ullamco veniam eu velit cillum adipisicing magna labore. Deserunt reprehenderit laboris id mollit amet ullamco dolor occaecat culpa ut commodo pariatur nostrud. Cillum laborum qui fugiat ullamco qui tempor tempor cillum et tempor. Anim irure officia sit irure mollit. Eiusmod officia duis commodo ullamco commodo duis.\r\n",
+        "foto": "url_imagen_2.jpg"
+    },
+    {
+        "marca": "Marca4",
+        "subcategoria": "Subcategoría5",
+        "categoria": "Categoria5",
+        "precio": 60.5,
+        "stock": 32,
+        "descripcion": "Ut tempor ut veniam cupidatat. Eiusmod proident eiusmod sit reprehenderit cillum Lorem. Do fugiat labore consequat proident sit culpa sint adipisicing sit aliquip amet. Minim eu elit exercitation veniam occaecat. Pariatur dolore dolore exercitation ad nisi aute esse pariatur labore qui cupidatat. Voluptate aliquip consectetur aute et reprehenderit elit veniam duis commodo.\r\n",
+        "foto": "url_imagen_2.jpg"
+    },
+    {
+        "marca": "Marca5",
+        "subcategoria": "Subcategoría4",
+        "categoria": "Categoria2",
+        "precio": 55.75,
+        "stock": 11,
+        "descripcion": "Duis laboris Lorem mollit aliquip ipsum. Qui id proident tempor irure magna. Labore esse ullamco in nulla. Occaecat sint ex proident labore in esse exercitation quis sit sint. Nostrud minim nisi incididunt duis fugiat sint consectetur sit nostrud nisi magna labore eu reprehenderit. Et dolor eiusmod esse cupidatat occaecat sint do aliqua fugiat ullamco ea cillum. Eiusmod mollit dolor nulla incididunt cupidatat in aliquip.\r\n",
+        "foto": "url_imagen_4.jpg"
+    },
+    {
+        "marca": "Marca5",
+        "subcategoria": "Subcategoría4",
+        "categoria": "Categoria3",
+        "precio": 31.4,
+        "stock": 43,
+        "descripcion": "Lorem qui sunt do occaecat ipsum do nulla ea elit culpa officia excepteur est. Ullamco Lorem sint tempor consequat dolor nostrud cupidatat aliquip fugiat tempor laboris irure laboris. Cillum ullamco dolore velit magna.\r\n",
+        "foto": "url_imagen_1.jpg"
+    },
+    {
+        "marca": "Marca2",
+        "subcategoria": "Subcategoría3",
+        "categoria": "Categoria1",
+        "precio": 72.17,
+        "stock": 97,
+        "descripcion": "Non laborum Lorem tempor excepteur culpa Lorem officia nostrud laborum consectetur irure. Magna proident duis ex ipsum nostrud ea esse reprehenderit eu deserunt in. Culpa qui aliqua enim consequat ea id voluptate nisi enim amet aliqua nisi dolor esse.\r\n",
+        "foto": "url_imagen_4.jpg"
+    },
+    {
+        "marca": "Marca3",
+        "subcategoria": "Subcategoría3",
+        "categoria": "Categoria2",
+        "precio": 65.52,
+        "stock": 33,
+        "descripcion": "Sint id voluptate deserunt nulla minim esse eiusmod nostrud occaecat. Nulla minim voluptate in commodo. Et culpa nostrud aliqua anim in magna laboris ut. Adipisicing aliqua anim culpa laboris esse ipsum proident nisi. Laboris nisi sit pariatur cillum voluptate nisi aliqua ipsum est.\r\n",
+        "foto": "url_imagen_5.jpg"
+    },
+    {
+        "marca": "Marca5",
+        "subcategoria": "Subcategoría4",
+        "categoria": "Categoria1",
+        "precio": 18.6,
+        "stock": 96,
+        "descripcion": "Sunt proident ea mollit deserunt nostrud laboris. Duis do fugiat sunt dolor sint sint irure minim. Adipisicing esse ad cupidatat ullamco aliqua deserunt non consectetur commodo dolor aliqua laboris. Reprehenderit nisi tempor velit Lorem fugiat ex quis.\r\n",
+        "foto": "url_imagen_5.jpg"
+    },
+    {
+        "marca": "Marca3",
+        "subcategoria": "Subcategoría5",
+        "categoria": "Categoria5",
+        "precio": 85.07,
+        "stock": 100,
+        "descripcion": "Tempor do deserunt adipisicing incididunt. Dolor adipisicing ad Lorem sunt sint non eiusmod do cupidatat dolor consequat eu. Consequat sint aliquip laboris Lorem nulla fugiat duis irure. Occaecat amet amet eiusmod id reprehenderit incididunt sit cillum laborum elit mollit. Fugiat ex non esse consequat elit reprehenderit deserunt commodo duis.\r\n",
+        "foto": "url_imagen_4.jpg"
+    },
+    {
+        "marca": "Marca5",
+        "subcategoria": "Subcategoría4",
+        "categoria": "Categoria4",
+        "precio": 76.29,
+        "stock": 60,
+        "descripcion": "Officia est commodo ea sunt aliqua laborum minim ipsum. Mollit labore ad ullamco eu enim nulla esse ipsum do. Exercitation elit veniam nostrud sit fugiat fugiat proident ad. Magna cillum exercitation exercitation et deserunt adipisicing ipsum aliqua excepteur. Id sit laborum minim commodo est aute officia id culpa.\r\n",
+        "foto": "url_imagen_1.jpg"
+    },
+    {
+        "marca": "Marca5",
+        "subcategoria": "Subcategoría2",
+        "categoria": "Categoria4",
+        "precio": 51.41,
+        "stock": 50,
+        "descripcion": "Sint ex aliqua consequat proident esse duis aute dolor exercitation Lorem incididunt. Incididunt ex Lorem cillum excepteur labore nulla veniam dolore. In id esse minim elit Lorem sit ipsum eu enim. Dolor sunt veniam id sit adipisicing dolore cupidatat in. Nostrud mollit incididunt sit non cillum eiusmod labore id esse nulla et aliquip laboris qui.\r\n",
+        "foto": "url_imagen_5.jpg"
+    },
+    {
+        "marca": "Marca5",
+        "subcategoria": "Subcategoría1",
+        "categoria": "Categoria1",
+        "precio": 14.29,
+        "stock": 7,
+        "descripcion": "Sit amet id in quis consectetur aute et tempor minim pariatur eu. Quis non irure eu nostrud deserunt culpa veniam proident proident. Deserunt laboris voluptate ex est minim ipsum aliquip. Deserunt enim eiusmod proident enim sunt proident dolore mollit Lorem. Nulla mollit tempor laboris est.\r\n",
+        "foto": "url_imagen_1.jpg"
+    },
+    {
+        "marca": "Marca4",
+        "subcategoria": "Subcategoría4",
+        "categoria": "Categoria1",
+        "precio": 23.54,
+        "stock": 16,
+        "descripcion": "Non est velit et irure nostrud. Quis non dolore occaecat in in. Nostrud non quis culpa minim esse labore nulla. Nostrud velit officia dolor amet duis ullamco dolore tempor minim sint ea consequat aute. Sit dolore consectetur in ex tempor tempor ut sunt ipsum consectetur. Et aliquip esse reprehenderit adipisicing laborum incididunt amet occaecat laboris reprehenderit laborum proident nisi. Exercitation laborum aliqua laborum dolore voluptate tempor laborum occaecat ullamco cupidatat proident ullamco.\r\n",
+        "foto": "url_imagen_5.jpg"
+    },
+    {
+        "marca": "Marca1",
+        "subcategoria": "Subcategoría3",
+        "categoria": "Categoria3",
+        "precio": 85.14,
+        "stock": 61,
+        "descripcion": "Ad et proident quis incididunt laborum. Mollit veniam proident laboris elit laboris anim non in. Tempor tempor aliquip in nisi laboris laborum nisi esse. Cillum esse aute qui magna quis magna dolor aliquip magna cupidatat eu eiusmod culpa. Non ea ipsum fugiat dolor dolor do eiusmod dolore. Minim ipsum ex mollit consectetur proident adipisicing ipsum occaecat adipisicing non laboris nisi.\r\n",
+        "foto": "url_imagen_4.jpg"
+    },
+    {
+        "marca": "Marca5",
+        "subcategoria": "Subcategoría4",
+        "categoria": "Categoria4",
+        "precio": 71.93,
+        "stock": 18,
+        "descripcion": "Deserunt elit ipsum duis velit irure quis commodo officia nulla est labore consectetur consequat. Occaecat laboris ullamco reprehenderit ut. Occaecat anim laborum Lorem minim et voluptate ullamco ut elit adipisicing quis aliquip amet ut. Ut mollit deserunt nostrud adipisicing quis ipsum exercitation sunt velit consequat irure. In tempor ea nostrud eu est aliquip ad aliquip nulla. Occaecat cupidatat irure incididunt nostrud consequat nostrud in. Fugiat dolore laboris magna nulla mollit occaecat.\r\n",
+        "foto": "url_imagen_1.jpg"
+    },
+    {
+        "marca": "Marca4",
+        "subcategoria": "Subcategoría1",
+        "categoria": "Categoria3",
+        "precio": 52.78,
+        "stock": 6,
+        "descripcion": "Aliqua laboris pariatur culpa aliquip nisi non tempor ut ad quis labore. Nostrud nulla voluptate velit pariatur eu ut sit pariatur fugiat est. Occaecat occaecat occaecat amet minim laboris voluptate ad ad proident ullamco enim aliqua veniam. Occaecat dolor duis velit qui esse ea irure non velit reprehenderit voluptate in velit est. Amet ut voluptate irure occaecat veniam deserunt veniam commodo ea commodo exercitation cillum aliquip mollit.\r\n",
+        "foto": "url_imagen_2.jpg"
+    },
+    {
+        "marca": "Marca1",
+        "subcategoria": "Subcategoría2",
+        "categoria": "Categoria1",
+        "precio": 53.49,
+        "stock": 18,
+        "descripcion": "Qui commodo dolore excepteur occaecat in irure cillum duis proident est veniam magna non eu. Do in aliqua magna dolor elit velit voluptate non amet Lorem veniam. Aliqua veniam ipsum non ut aute dolore irure occaecat id. Cupidatat nisi reprehenderit dolore pariatur nulla id aute duis et et proident elit eu dolor.\r\n",
+        "foto": "url_imagen_2.jpg"
+    },
+    {
+        "marca": "Marca5",
+        "subcategoria": "Subcategoría1",
+        "categoria": "Categoria5",
+        "precio": 89.36,
+        "stock": 63,
+        "descripcion": "Quis sint dolore nisi ad nostrud sit id culpa. Consequat dolore ut sint officia consequat cillum. Consequat voluptate et reprehenderit consectetur cillum sit sunt cupidatat occaecat exercitation quis tempor.\r\n",
+        "foto": "url_imagen_2.jpg"
+    },
+    {
+        "marca": "Marca2",
+        "subcategoria": "Subcategoría5",
+        "categoria": "Categoria1",
+        "precio": 52.52,
+        "stock": 11,
+        "descripcion": "Incididunt cupidatat ipsum nisi ea ut amet in amet ea aliqua anim sit reprehenderit sit. Ea ut cillum qui esse ipsum. Deserunt duis excepteur incididunt aliqua consectetur irure reprehenderit magna excepteur ut in. Minim commodo veniam consectetur aliqua commodo consectetur velit elit magna aliqua ad dolor dolor.\r\n",
+        "foto": "url_imagen_4.jpg"
+    },
+    {
+        "marca": "Marca3",
+        "subcategoria": "Subcategoría1",
+        "categoria": "Categoria3",
+        "precio": 46.25,
+        "stock": 61,
+        "descripcion": "Proident deserunt in tempor dolor ad fugiat occaecat magna consectetur magna cupidatat dolor do. Lorem voluptate nisi commodo occaecat. Et sunt quis amet aliqua ad id in consequat qui.\r\n",
+        "foto": "url_imagen_5.jpg"
+    },
+    {
+        "marca": "Marca3",
+        "subcategoria": "Subcategoría1",
+        "categoria": "Categoria2",
+        "precio": 12.98,
+        "stock": 6,
+        "descripcion": "Id ex irure in proident consectetur ut veniam. Voluptate enim mollit sint sit excepteur dolore cupidatat cillum pariatur non Lorem. Fugiat dolor nisi cillum aute dolore ex do esse commodo anim. Commodo labore sit non eu cillum. Adipisicing irure cillum consectetur nisi deserunt ea quis dolor culpa veniam eiusmod. Consequat ea ex sint culpa quis amet. Eiusmod dolore sint exercitation tempor aliquip adipisicing quis et voluptate.\r\n",
+        "foto": "url_imagen_1.jpg"
+    },
+    {
+        "marca": "Marca4",
+        "subcategoria": "Subcategoría5",
+        "categoria": "Categoria1",
+        "precio": 87.22,
+        "stock": 94,
+        "descripcion": "Consequat dolore pariatur exercitation eiusmod nisi anim nisi aliquip culpa consectetur. Ipsum id non nisi pariatur duis culpa. Lorem irure deserunt ad adipisicing labore. Elit esse non id exercitation eu ex. Et sit dolor est ut non labore pariatur ex eu culpa aliquip. Nulla dolore mollit deserunt sit duis in nulla laboris qui duis reprehenderit tempor voluptate pariatur. Occaecat dolor ea tempor tempor culpa excepteur mollit.\r\n",
+        "foto": "url_imagen_1.jpg"
+    },
+    {
+        "marca": "Marca5",
+        "subcategoria": "Subcategoría2",
+        "categoria": "Categoria2",
+        "precio": 55.23,
+        "stock": 57,
+        "descripcion": "Cillum incididunt pariatur proident consectetur enim non minim est cillum minim duis. Laborum duis ad et culpa dolor. Veniam adipisicing fugiat velit do. Esse culpa sit mollit ex amet proident.\r\n",
+        "foto": "url_imagen_2.jpg"
+    },
+    {
+        "marca": "Marca3",
+        "subcategoria": "Subcategoría5",
+        "categoria": "Categoria2",
+        "precio": 21.25,
+        "stock": 15,
+        "descripcion": "Dolor quis cupidatat incididunt dolor officia tempor exercitation non. Labore ex mollit id amet ex velit nulla commodo. Sint dolore ut ea labore ullamco labore eu ex sint do commodo quis sunt.\r\n",
+        "foto": "url_imagen_5.jpg"
+    },
+    {
+        "marca": "Marca4",
+        "subcategoria": "Subcategoría5",
+        "categoria": "Categoria4",
+        "precio": 55.08,
+        "stock": 81,
+        "descripcion": "Aute pariatur velit reprehenderit consectetur ullamco aliqua et. Minim aliquip qui aute nulla cillum ea aliqua et exercitation fugiat minim qui deserunt cupidatat. Officia cillum deserunt adipisicing cillum.\r\n",
+        "foto": "url_imagen_5.jpg"
+    },
+    {
+        "marca": "Marca3",
+        "subcategoria": "Subcategoría1",
+        "categoria": "Categoria1",
+        "precio": 34.67,
+        "stock": 98,
+        "descripcion": "Magna duis ipsum enim nostrud minim. Eiusmod id enim deserunt reprehenderit labore eu do nulla labore. Cillum eu veniam id consequat reprehenderit aute elit excepteur. Nulla mollit id ullamco anim sunt ea duis. Nostrud voluptate ipsum proident pariatur nisi anim excepteur enim in non dolore veniam. Reprehenderit laborum magna ipsum amet ut nisi labore proident pariatur ullamco veniam magna laboris minim.\r\n",
+        "foto": "url_imagen_4.jpg"
+    },
+    {
+        "marca": "Marca4",
+        "subcategoria": "Subcategoría2",
+        "categoria": "Categoria5",
+        "precio": 12.66,
+        "stock": 32,
+        "descripcion": "Occaecat ut sunt officia cillum excepteur id ullamco veniam occaecat dolore ipsum exercitation duis. Deserunt officia aliquip aute magna ipsum deserunt anim non irure labore enim tempor. Labore enim officia ut aliquip consectetur nisi pariatur sit voluptate ut. Ex irure ex qui officia excepteur aute id.\r\n",
+        "foto": "url_imagen_1.jpg"
+    },
+    {
+        "marca": "Marca2",
+        "subcategoria": "Subcategoría4",
+        "categoria": "Categoria4",
+        "precio": 72.61,
+        "stock": 83,
+        "descripcion": "Laboris consectetur dolor deserunt consectetur ea velit sunt non ea anim. Eiusmod incididunt officia in tempor aute irure incididunt do qui exercitation consequat quis non. Occaecat ad nulla laboris officia ullamco irure sit officia ea nisi fugiat. Est ad sint ullamco excepteur tempor voluptate ex.\r\n",
+        "foto": "url_imagen_3.jpg"
+    },
+    {
+        "marca": "Marca3",
+        "subcategoria": "Subcategoría2",
+        "categoria": "Categoria2",
+        "precio": 98.23,
+        "stock": 43,
+        "descripcion": "Duis elit nostrud anim dolor ullamco velit occaecat consequat minim. Sint nulla quis sit officia veniam dolor laborum anim culpa. Dolor magna elit in occaecat do tempor non dolore occaecat ea ex eu. Magna occaecat velit Lorem ut dolor duis minim ex sint aliquip ullamco.\r\n",
+        "foto": "url_imagen_4.jpg"
+    },
+    {
+        "marca": "Marca1",
+        "subcategoria": "Subcategoría4",
+        "categoria": "Categoria1",
+        "precio": 25.77,
+        "stock": 69,
+        "descripcion": "Cupidatat anim ex nostrud qui do pariatur irure exercitation. Lorem sint pariatur Lorem sunt est cillum aliquip. Cillum amet quis reprehenderit magna. Eiusmod dolore veniam eiusmod nulla occaecat culpa velit laborum deserunt Lorem veniam irure. Aute adipisicing aliqua incididunt duis. Non tempor labore esse aliquip commodo cupidatat nulla.\r\n",
+        "foto": "url_imagen_3.jpg"
+    },
+    {
+        "marca": "Marca3",
+        "subcategoria": "Subcategoría1",
+        "categoria": "Categoria3",
+        "precio": 35.59,
+        "stock": 69,
+        "descripcion": "Lorem cillum dolor incididunt cillum ea pariatur deserunt. Pariatur laboris commodo reprehenderit proident tempor cillum ex consequat aliquip tempor cillum ut. Non duis pariatur minim culpa dolore laborum reprehenderit id deserunt do cupidatat. Ea voluptate qui anim voluptate cillum proident veniam deserunt est.\r\n",
+        "foto": "url_imagen_2.jpg"
+    },
+    {
+        "marca": "Marca1",
+        "subcategoria": "Subcategoría5",
+        "categoria": "Categoria2",
+        "precio": 53.07,
+        "stock": 83,
+        "descripcion": "Proident enim nulla veniam adipisicing nisi eu ad amet nulla. Ex irure et et ex laboris ad dolor culpa mollit eu ut irure. Ea occaecat culpa sint ea consectetur. Laboris proident labore officia aute officia do adipisicing eiusmod velit enim quis in tempor. Exercitation fugiat nulla ipsum in esse tempor.\r\n",
+        "foto": "url_imagen_2.jpg"
+    },
+    {
+        "marca": "Marca1",
+        "subcategoria": "Subcategoría2",
+        "categoria": "Categoria1",
+        "precio": 88.92,
+        "stock": 22,
+        "descripcion": "Consectetur minim dolor incididunt enim. Nulla sit eu aliqua irure deserunt consequat deserunt eiusmod eu culpa dolor amet laborum consectetur. Ut duis do deserunt ut Lorem ad aliqua amet. Cillum proident ut amet sit excepteur magna consequat voluptate labore tempor nostrud nostrud irure quis.\r\n",
+        "foto": "url_imagen_3.jpg"
+    },
+    {
+        "marca": "Marca3",
+        "subcategoria": "Subcategoría3",
+        "categoria": "Categoria3",
+        "precio": 44.84,
+        "stock": 97,
+        "descripcion": "In laborum est occaecat excepteur laboris officia commodo irure consectetur aliquip. Sit reprehenderit laborum in laboris culpa occaecat pariatur culpa. Proident aliqua amet ullamco deserunt veniam culpa in aute qui excepteur. Culpa ullamco pariatur eu irure. Proident magna pariatur anim esse. Commodo esse pariatur deserunt eiusmod ea laborum anim est. Non et velit laborum in sint Lorem.\r\n",
+        "foto": "url_imagen_1.jpg"
+    },
+    {
+        "marca": "Marca4",
+        "subcategoria": "Subcategoría4",
+        "categoria": "Categoria4",
+        "precio": 44.43,
+        "stock": 58,
+        "descripcion": "Exercitation ea excepteur cupidatat ad ipsum laborum aliquip qui dolore. Voluptate anim sunt adipisicing eu mollit culpa irure aute irure veniam. Aute cupidatat duis aliqua nostrud sit excepteur irure tempor mollit mollit laboris aliqua pariatur. Culpa incididunt consectetur exercitation cupidatat dolore sint ullamco mollit consectetur anim amet proident eiusmod do. Et culpa sint mollit labore amet do.\r\n",
+        "foto": "url_imagen_2.jpg"
+    },
+    {
+        "marca": "Marca2",
+        "subcategoria": "Subcategoría3",
+        "categoria": "Categoria4",
+        "precio": 69.77,
+        "stock": 43,
+        "descripcion": "Mollit anim nisi adipisicing consectetur non reprehenderit magna. Anim consectetur sint elit ullamco nisi ullamco sit mollit esse cillum in commodo pariatur ex. Ipsum eiusmod aliqua cillum qui cillum quis proident non ea nisi mollit.\r\n",
+        "foto": "url_imagen_5.jpg"
+    },
+    {
+        "marca": "Marca3",
+        "subcategoria": "Subcategoría4",
+        "categoria": "Categoria1",
+        "precio": 75.08,
+        "stock": 74,
+        "descripcion": "Laboris consectetur commodo consectetur fugiat consectetur velit non do enim. Exercitation dolore laboris cillum dolor proident laborum id ullamco laboris fugiat. Magna consectetur aliqua elit aliqua quis tempor nulla nulla cupidatat duis aliqua. Aliqua officia laborum sit mollit anim est occaecat magna cillum. Consequat commodo consequat eiusmod tempor in veniam. Excepteur duis veniam pariatur non anim ex qui eu qui aliquip eiusmod pariatur id do.\r\n",
+        "foto": "url_imagen_3.jpg"
+    },
+    {
+        "marca": "Marca2",
+        "subcategoria": "Subcategoría4",
+        "categoria": "Categoria4",
+        "precio": 12.55,
+        "stock": 48,
+        "descripcion": "Nulla aliquip voluptate deserunt voluptate reprehenderit. Velit officia elit aliqua qui mollit aute consectetur nulla proident cupidatat velit irure enim. Proident laboris ad do ipsum mollit aliqua est pariatur commodo nisi nisi ex aliquip ut. Exercitation sint et ex aliqua aliqua eu irure est ad excepteur. Sint ipsum irure non est dolor et labore velit. Incididunt ex ut dolore ipsum magna quis magna ea ex est excepteur. Adipisicing veniam in occaecat commodo ad minim aliquip sunt id nostrud labore.\r\n",
+        "foto": "url_imagen_3.jpg"
+    },
+    {
+        "marca": "Marca1",
+        "subcategoria": "Subcategoría2",
+        "categoria": "Categoria1",
+        "precio": 78.48,
+        "stock": 4,
+        "descripcion": "Lorem tempor incididunt commodo cupidatat velit cillum. Do amet aliqua magna velit fugiat nostrud consectetur non voluptate et sit deserunt reprehenderit. Reprehenderit non deserunt esse Lorem anim consectetur commodo amet sunt aliqua labore culpa quis. Amet sunt adipisicing cupidatat excepteur ea do velit enim sint nostrud ad dolore et non. Veniam nostrud pariatur consectetur amet.\r\n",
+        "foto": "url_imagen_5.jpg"
+    },
+    {
+        "marca": "Marca1",
+        "subcategoria": "Subcategoría3",
+        "categoria": "Categoria1",
+        "precio": 18,
+        "stock": 28,
+        "descripcion": "Velit Lorem nostrud incididunt mollit ea amet adipisicing ea. Sunt ea sit veniam proident in irure eu ut commodo. Ut anim minim tempor aliquip reprehenderit elit.\r\n",
+        "foto": "url_imagen_5.jpg"
+    },
+    {
+        "marca": "Marca3",
+        "subcategoria": "Subcategoría5",
+        "categoria": "Categoria5",
+        "precio": 48.75,
+        "stock": 38,
+        "descripcion": "Et esse nisi dolore tempor quis id. Quis nulla consequat Lorem elit aute tempor magna minim sit aute aliquip. Consequat consequat nostrud duis consequat dolor exercitation ex adipisicing consectetur enim non. Sint elit ad mollit veniam in aute nulla Lorem incididunt cillum velit magna laborum. Minim cillum elit elit ipsum sint sunt enim cupidatat nulla duis.\r\n",
+        "foto": "url_imagen_5.jpg"
+    },
+    {
+        "marca": "Marca2",
+        "subcategoria": "Subcategoría2",
+        "categoria": "Categoria5",
+        "precio": 15.59,
+        "stock": 4,
+        "descripcion": "Laborum occaecat duis laboris velit. Qui sit occaecat do culpa proident ea. Est deserunt eiusmod sit duis reprehenderit in nisi dolore fugiat non voluptate enim voluptate. Commodo minim quis Lorem occaecat incididunt.\r\n",
+        "foto": "url_imagen_5.jpg"
+    },
+    {
+        "marca": "Marca5",
+        "subcategoria": "Subcategoría1",
+        "categoria": "Categoria1",
+        "precio": 36.37,
+        "stock": 98,
+        "descripcion": "Pariatur quis officia eu Lorem nulla fugiat sit ut consectetur tempor commodo velit. Ipsum aliqua quis incididunt Lorem magna mollit dolor nisi. Veniam sit dolore officia Lorem non. Velit minim commodo reprehenderit elit reprehenderit consequat quis quis. Adipisicing sunt quis labore excepteur aliqua elit non. Dolor cupidatat enim veniam cillum fugiat est aute nostrud laboris reprehenderit veniam consectetur ipsum. Ut voluptate officia sit non enim esse consequat.\r\n",
+        "foto": "url_imagen_4.jpg"
+    },
+    {
+        "marca": "Marca3",
+        "subcategoria": "Subcategoría3",
+        "categoria": "Categoria4",
+        "precio": 95.92,
+        "stock": 52,
+        "descripcion": "Occaecat dolore aliqua irure pariatur in sint reprehenderit aliquip. Cupidatat et incididunt ad deserunt occaecat adipisicing voluptate consequat. Quis eiusmod elit velit pariatur ea.\r\n",
+        "foto": "url_imagen_5.jpg"
+    },
+    {
+        "marca": "Marca4",
+        "subcategoria": "Subcategoría4",
+        "categoria": "Categoria2",
+        "precio": 83.54,
+        "stock": 11,
+        "descripcion": "Magna irure dolore et officia consequat in occaecat culpa eiusmod commodo. Exercitation duis quis culpa qui sunt dolor sunt sit consectetur proident quis magna reprehenderit. Ipsum sint culpa do velit. Exercitation elit ex id cupidatat. Ex deserunt dolore culpa cillum esse veniam excepteur magna pariatur. Ad irure officia mollit adipisicing dolor quis.\r\n",
+        "foto": "url_imagen_1.jpg"
+    },
+    {
+        "marca": "Marca1",
+        "subcategoria": "Subcategoría5",
+        "categoria": "Categoria4",
+        "precio": 96.67,
+        "stock": 4,
+        "descripcion": "Eu ullamco fugiat duis id aute anim ullamco et commodo velit do eiusmod aliqua culpa. Excepteur amet consectetur labore irure sint dolor culpa est reprehenderit. Labore commodo amet aliqua laboris ea pariatur elit proident aliquip reprehenderit pariatur do. Quis esse deserunt deserunt proident. Nostrud tempor exercitation dolor irure fugiat occaecat pariatur in dolore. Magna enim sit adipisicing enim.\r\n",
+        "foto": "url_imagen_1.jpg"
+    },
+    {
+        "marca": "Marca2",
+        "subcategoria": "Subcategoría1",
+        "categoria": "Categoria1",
+        "precio": 60.52,
+        "stock": 80,
+        "descripcion": "Nisi sint est officia eu tempor cupidatat sint in. Laborum minim officia aute consequat et voluptate commodo. Nisi laboris et occaecat nulla consequat irure labore eu. Magna consectetur esse officia quis ipsum quis nulla pariatur irure minim sit nostrud. Sunt ipsum tempor est labore duis cillum ad excepteur consequat amet fugiat excepteur enim quis.\r\n",
+        "foto": "url_imagen_5.jpg"
+    },
+    {
+        "marca": "Marca2",
+        "subcategoria": "Subcategoría1",
+        "categoria": "Categoria2",
+        "precio": 70.69,
+        "stock": 68,
+        "descripcion": "In laborum consectetur ea excepteur proident nisi mollit fugiat labore. Magna magna esse consectetur occaecat magna laboris pariatur. Ipsum nulla laborum eu adipisicing deserunt eiusmod pariatur cillum eiusmod. Veniam officia tempor dolor elit officia sunt eu velit. Laboris nisi velit pariatur nulla est irure incididunt do reprehenderit mollit. Voluptate amet fugiat deserunt est proident nulla.\r\n",
+        "foto": "url_imagen_4.jpg"
+    },
+    {
+        "marca": "Marca5",
+        "subcategoria": "Subcategoría4",
+        "categoria": "Categoria1",
+        "precio": 94.88,
+        "stock": 18,
+        "descripcion": "Ullamco laboris exercitation veniam dolore sit magna. Consectetur deserunt labore ea sunt nisi do ea duis pariatur. Velit commodo non laboris velit duis do.\r\n",
+        "foto": "url_imagen_1.jpg"
+    },
+    {
+        "marca": "Marca3",
+        "subcategoria": "Subcategoría1",
+        "categoria": "Categoria3",
+        "precio": 31.08,
+        "stock": 63,
+        "descripcion": "Sunt sunt labore est duis cupidatat magna ipsum laborum. Enim exercitation velit ex aute culpa laboris eiusmod dolor. Sit pariatur adipisicing Lorem ut sit nisi. Nostrud eu exercitation quis consectetur voluptate ullamco anim cillum dolor velit ad. Veniam non ad aliquip nostrud reprehenderit magna nostrud id ex labore incididunt laboris culpa magna.\r\n",
+        "foto": "url_imagen_5.jpg"
+    },
+    {
+        "marca": "Marca4",
+        "subcategoria": "Subcategoría5",
+        "categoria": "Categoria2",
+        "precio": 78.14,
+        "stock": 10,
+        "descripcion": "Aliquip quis ut deserunt excepteur minim exercitation veniam. Laborum irure duis dolor in quis duis exercitation nisi consectetur. Aliqua anim eu irure excepteur eu incididunt ut non excepteur minim incididunt sunt qui. Duis aliquip fugiat sunt eu. Minim culpa amet sint in adipisicing mollit aliqua quis. Excepteur minim labore cillum ipsum sunt occaecat esse qui et fugiat do. Veniam nulla dolor consectetur et magna exercitation adipisicing amet non dolore.\r\n",
+        "foto": "url_imagen_2.jpg"
+    },
+    {
+        "marca": "Marca5",
+        "subcategoria": "Subcategoría4",
+        "categoria": "Categoria5",
+        "precio": 11.88,
+        "stock": 13,
+        "descripcion": "Nostrud consequat occaecat laboris commodo adipisicing ad enim culpa fugiat qui nostrud officia sint. Mollit magna Lorem magna ex reprehenderit sint aliquip excepteur ad est. Anim magna exercitation exercitation nisi velit eu ex excepteur nisi cillum cillum adipisicing non. Commodo minim laboris eu magna magna et aliquip. Consectetur minim velit eiusmod aute qui sunt aliquip.\r\n",
+        "foto": "url_imagen_3.jpg"
+    },
+    {
+        "marca": "Marca1",
+        "subcategoria": "Subcategoría3",
+        "categoria": "Categoria4",
+        "precio": 30.1,
+        "stock": 49,
+        "descripcion": "Aliqua officia tempor ea do Lorem ipsum nisi ea voluptate pariatur commodo pariatur fugiat minim. Dolor cupidatat nisi proident anim. Ex enim laborum sunt fugiat laboris adipisicing ipsum cillum duis esse sunt. Deserunt aliqua enim anim pariatur proident pariatur sint.\r\n",
+        "foto": "url_imagen_4.jpg"
+    },
+    {
+        "marca": "Marca3",
+        "subcategoria": "Subcategoría4",
+        "categoria": "Categoria5",
+        "precio": 37.26,
+        "stock": 45,
+        "descripcion": "Qui irure sunt aute laboris culpa ad qui dolore sit minim officia culpa mollit. Commodo ea est voluptate ullamco deserunt aliqua. Nostrud mollit sint amet cillum amet ex reprehenderit labore. Proident irure ea deserunt nulla qui. Esse consequat proident veniam quis eu. Ad duis ut elit qui exercitation nisi velit reprehenderit veniam commodo enim irure eiusmod do.\r\n",
+        "foto": "url_imagen_2.jpg"
+    },
+    {
+        "marca": "Marca2",
+        "subcategoria": "Subcategoría5",
+        "categoria": "Categoria5",
+        "precio": 80,
+        "stock": 42,
+        "descripcion": "Non consectetur anim proident duis consectetur ipsum quis dolore quis voluptate laborum ipsum. Non elit est anim ut commodo enim commodo ea laborum nostrud est. Incididunt laboris veniam eiusmod ut commodo. Et ad ea sit dolore.\r\n",
+        "foto": "url_imagen_3.jpg"
+    },
+    {
+        "marca": "Marca1",
+        "subcategoria": "Subcategoría4",
+        "categoria": "Categoria5",
+        "precio": 12.53,
+        "stock": 94,
+        "descripcion": "Consequat laborum id enim dolore commodo proident reprehenderit. Non mollit qui commodo Lorem fugiat occaecat quis. Commodo ullamco esse laborum qui et duis cupidatat officia tempor eu. Consectetur fugiat incididunt elit id commodo exercitation duis aliquip incididunt eiusmod aliquip et. Sit ea officia occaecat et officia ullamco minim tempor aliquip excepteur. Dolore quis sunt ipsum culpa do cillum incididunt minim reprehenderit qui mollit duis sint.\r\n",
+        "foto": "url_imagen_1.jpg"
+    },
+    {
+        "marca": "Marca3",
+        "subcategoria": "Subcategoría4",
+        "categoria": "Categoria1",
+        "precio": 48.91,
+        "stock": 86,
+        "descripcion": "Non id eiusmod Lorem veniam mollit aliqua. Mollit aliquip laborum culpa cupidatat mollit ad laborum ad minim culpa magna magna. Adipisicing eiusmod est pariatur dolore magna. Fugiat ullamco est occaecat nostrud occaecat laboris. Minim enim fugiat dolor adipisicing est anim consequat adipisicing ullamco culpa incididunt. Qui excepteur adipisicing ea magna anim cillum ut non sint enim cupidatat. Sit ipsum proident consequat qui non aliqua velit et eu excepteur adipisicing nisi adipisicing sunt.\r\n",
+        "foto": "url_imagen_3.jpg"
+    },
+    {
+        "marca": "Marca3",
+        "subcategoria": "Subcategoría4",
+        "categoria": "Categoria2",
+        "precio": 52.12,
+        "stock": 34,
+        "descripcion": "Dolore aliqua reprehenderit Lorem labore labore non. Amet sunt minim mollit id. Magna est ex laborum duis incididunt labore nisi enim occaecat. Mollit Lorem Lorem nostrud velit. Do irure sint pariatur esse eiusmod eu. Veniam tempor ipsum laboris sint deserunt. Quis minim Lorem nisi incididunt cupidatat sit veniam nulla occaecat do.\r\n",
+        "foto": "url_imagen_4.jpg"
+    },
+    {
+        "marca": "Marca5",
+        "subcategoria": "Subcategoría5",
+        "categoria": "Categoria3",
+        "precio": 57.54,
+        "stock": 86,
+        "descripcion": "Minim anim voluptate duis in aliqua sint nulla reprehenderit ad nulla laboris pariatur ea. Duis esse fugiat aute minim. Enim aliquip eiusmod sit nulla fugiat deserunt adipisicing in in quis ex enim eu.\r\n",
+        "foto": "url_imagen_1.jpg"
+    },
+    {
+        "marca": "Marca2",
+        "subcategoria": "Subcategoría2",
+        "categoria": "Categoria5",
+        "precio": 53.99,
+        "stock": 40,
+        "descripcion": "Laborum consequat dolore consectetur pariatur labore officia. Tempor ipsum eu excepteur exercitation Lorem magna nostrud quis adipisicing. In irure sunt est cupidatat cillum nisi magna ut. Fugiat excepteur voluptate aute reprehenderit. Duis nisi exercitation occaecat Lorem labore consectetur esse non nostrud commodo sint laboris ea. Occaecat esse eiusmod deserunt anim est enim consectetur proident duis pariatur commodo ut pariatur.\r\n",
+        "foto": "url_imagen_3.jpg"
+    },
+    {
+        "marca": "Marca5",
+        "subcategoria": "Subcategoría5",
+        "categoria": "Categoria1",
+        "precio": 39.83,
+        "stock": 88,
+        "descripcion": "Voluptate excepteur aliqua culpa tempor deserunt minim do elit cupidatat. Cillum anim nisi sit irure excepteur sint nostrud excepteur ad. Eiusmod eiusmod proident exercitation pariatur enim quis irure. Esse cupidatat Lorem mollit in voluptate nostrud. Esse velit quis occaecat nisi esse eu fugiat culpa consequat do cupidatat excepteur. Qui nostrud occaecat consectetur deserunt qui cupidatat velit cupidatat sit qui nostrud.\r\n",
+        "foto": "url_imagen_1.jpg"
+    },
+    {
+        "marca": "Marca2",
+        "subcategoria": "Subcategoría2",
+        "categoria": "Categoria1",
+        "precio": 96.62,
+        "stock": 84,
+        "descripcion": "Eu do ut duis consequat culpa ullamco mollit mollit dolor dolor ullamco. Aliqua commodo aliquip aliquip proident nisi eu dolor. Laboris ipsum laborum excepteur duis laborum voluptate laborum nostrud laboris. Nisi officia mollit nisi minim consectetur consequat. Deserunt laboris ut proident ad tempor.\r\n",
+        "foto": "url_imagen_2.jpg"
+    },
+    {
+        "marca": "Marca2",
+        "subcategoria": "Subcategoría5",
+        "categoria": "Categoria4",
+        "precio": 70.75,
+        "stock": 68,
+        "descripcion": "Incididunt consectetur dolore magna pariatur commodo dolor nulla veniam reprehenderit laboris sunt mollit reprehenderit exercitation. Ipsum laboris sit consectetur et in voluptate incididunt velit ad. Labore excepteur ut deserunt ea dolore adipisicing sunt. Sint ipsum sint id laboris. Consequat consequat cupidatat est do culpa commodo cillum veniam sit sit enim aliqua culpa consequat.\r\n",
+        "foto": "url_imagen_5.jpg"
+    },
+    {
+        "marca": "Marca4",
+        "subcategoria": "Subcategoría3",
+        "categoria": "Categoria2",
+        "precio": 63.55,
+        "stock": 24,
+        "descripcion": "Velit eiusmod enim ea veniam ea quis mollit duis. Enim excepteur amet magna laborum aliquip. Dolor voluptate incididunt id dolor elit cillum nisi enim in sint commodo cillum nostrud labore. Deserunt laborum ad esse in. Tempor cupidatat veniam tempor et do ea culpa deserunt. Labore non ipsum in ut. Lorem eiusmod fugiat voluptate commodo mollit cupidatat fugiat labore nostrud tempor.\r\n",
+        "foto": "url_imagen_5.jpg"
+    },
+    {
+        "marca": "Marca5",
+        "subcategoria": "Subcategoría4",
+        "categoria": "Categoria5",
+        "precio": 19.19,
+        "stock": 10,
+        "descripcion": "Ea ipsum commodo eu ex ex officia id deserunt laborum eu quis. Excepteur non cupidatat nulla cillum velit tempor pariatur officia fugiat et consequat. Minim reprehenderit nostrud incididunt eu eiusmod officia irure officia nulla Lorem.\r\n",
+        "foto": "url_imagen_2.jpg"
+    },
+    {
+        "marca": "Marca4",
+        "subcategoria": "Subcategoría5",
+        "categoria": "Categoria5",
+        "precio": 46.28,
+        "stock": 69,
+        "descripcion": "Eu fugiat esse duis nulla id magna nisi proident anim ut velit voluptate. Nisi qui anim occaecat aliqua adipisicing dolor adipisicing aliqua sint ullamco amet magna. Laboris ea magna exercitation in pariatur cupidatat dolor do nisi. Proident labore voluptate minim incididunt dolore aliquip deserunt dolor cillum cupidatat velit cillum sunt eiusmod. Aute culpa incididunt cupidatat sunt irure labore.\r\n",
+        "foto": "url_imagen_4.jpg"
+    },
+    {
+        "marca": "Marca5",
+        "subcategoria": "Subcategoría2",
+        "categoria": "Categoria1",
+        "precio": 77.14,
+        "stock": 89,
+        "descripcion": "Eu velit eu nostrud eiusmod commodo irure. Officia do pariatur amet veniam. Officia tempor minim nulla duis aute consequat ad. Ipsum ullamco laborum mollit non nulla do irure enim reprehenderit do exercitation labore proident voluptate. Adipisicing laboris elit veniam aliqua amet qui ea pariatur laborum culpa ex consequat. Duis id non fugiat aliquip cupidatat aliquip ut anim nostrud tempor veniam aliqua dolor proident.\r\n",
+        "foto": "url_imagen_4.jpg"
+    },
+    {
+        "marca": "Marca4",
+        "subcategoria": "Subcategoría1",
+        "categoria": "Categoria1",
+        "precio": 52.92,
+        "stock": 1,
+        "descripcion": "Enim nulla enim adipisicing amet. Minim pariatur non laboris tempor excepteur quis. Aliqua qui ex ipsum ullamco laborum sit consequat ex exercitation et id irure.\r\n",
+        "foto": "url_imagen_5.jpg"
+    },
+    {
+        "marca": "Marca2",
+        "subcategoria": "Subcategoría5",
+        "categoria": "Categoria3",
+        "precio": 64.98,
+        "stock": 78,
+        "descripcion": "Ullamco Lorem enim sit consectetur. Amet sint mollit ex do reprehenderit ut enim eu veniam elit laboris voluptate cillum velit. Sint est velit amet minim aliquip cupidatat excepteur amet ullamco cillum dolor nulla sunt. Quis officia dolore elit fugiat sit nostrud.\r\n",
+        "foto": "url_imagen_1.jpg"
+    },
+    {
+        "marca": "Marca2",
+        "subcategoria": "Subcategoría2",
+        "categoria": "Categoria5",
+        "precio": 81.13,
+        "stock": 98,
+        "descripcion": "Ut veniam exercitation occaecat occaecat eu pariatur deserunt laborum commodo eiusmod et excepteur. Incididunt ad aute ea amet nostrud sint ex excepteur velit Lorem consequat. Culpa non anim eu nostrud.\r\n",
+        "foto": "url_imagen_2.jpg"
+    },
+    {
+        "marca": "Marca5",
+        "subcategoria": "Subcategoría5",
+        "categoria": "Categoria4",
+        "precio": 94.04,
+        "stock": 42,
+        "descripcion": "Enim culpa quis magna reprehenderit. Aliqua et velit minim sunt. Non nostrud ea laboris mollit reprehenderit nostrud sint consequat tempor officia mollit eiusmod non. Velit ullamco irure amet excepteur laboris. Sit consectetur sunt proident mollit sit minim aliqua enim esse incididunt. Mollit Lorem adipisicing ex fugiat. Id ex aliquip veniam tempor incididunt velit labore commodo quis elit ullamco cupidatat duis.\r\n",
+        "foto": "url_imagen_1.jpg"
+    },
+    {
+        "marca": "Marca1",
+        "subcategoria": "Subcategoría5",
+        "categoria": "Categoria3",
+        "precio": 80.54,
+        "stock": 36,
+        "descripcion": "Anim culpa ex anim officia. Do est pariatur esse Lorem dolore non. Non aliqua amet mollit elit occaecat.\r\n",
+        "foto": "url_imagen_5.jpg"
+    },
+    {
+        "marca": "Marca4",
+        "subcategoria": "Subcategoría2",
+        "categoria": "Categoria5",
+        "precio": 26.61,
+        "stock": 32,
+        "descripcion": "Cupidatat mollit eiusmod in non minim aliqua laboris. Et magna magna qui proident amet aute. Sint elit sit minim veniam et et laborum non sit.\r\n",
+        "foto": "url_imagen_3.jpg"
+    },
+    {
+        "marca": "Marca4",
+        "subcategoria": "Subcategoría1",
+        "categoria": "Categoria1",
+        "precio": 73.93,
+        "stock": 8,
+        "descripcion": "Incididunt ullamco sit dolor eiusmod. Eiusmod duis eu minim irure cupidatat. Exercitation fugiat tempor aliqua amet sint. Tempor ipsum mollit magna esse minim. Id esse aliqua anim non esse voluptate ex anim consectetur cupidatat excepteur consequat.\r\n",
+        "foto": "url_imagen_3.jpg"
+    },
+    {
+        "marca": "Marca2",
+        "subcategoria": "Subcategoría1",
+        "categoria": "Categoria4",
+        "precio": 23.45,
+        "stock": 42,
+        "descripcion": "Excepteur Lorem sunt do voluptate consectetur et non dolor aute. Proident consectetur occaecat velit esse fugiat. Sit ipsum ex non cupidatat veniam minim mollit duis quis eiusmod et tempor labore. Deserunt officia dolore ad laborum reprehenderit aute cupidatat velit id. Ullamco laboris fugiat deserunt Lorem labore qui. Sunt dolor in velit voluptate aute sint aliqua non. Nostrud dolor dolor dolor est sit tempor id ad voluptate cillum sint adipisicing fugiat.\r\n",
+        "foto": "url_imagen_2.jpg"
+    },
+    {
+        "marca": "Marca3",
+        "subcategoria": "Subcategoría4",
+        "categoria": "Categoria3",
+        "precio": 88.55,
+        "stock": 58,
+        "descripcion": "Nostrud fugiat dolor ad dolore eu cillum qui deserunt. Magna irure est cupidatat nulla consequat cupidatat occaecat qui. Et aute laboris laborum nostrud esse magna sit quis.\r\n",
+        "foto": "url_imagen_2.jpg"
+    },
+    {
+        "marca": "Marca3",
+        "subcategoria": "Subcategoría3",
+        "categoria": "Categoria1",
+        "precio": 53.92,
+        "stock": 53,
+        "descripcion": "Ea Lorem pariatur nostrud culpa est aliqua magna pariatur ullamco laboris pariatur et officia. Ipsum aliquip ex sint elit non laboris velit. Est dolore cupidatat voluptate incididunt veniam. Mollit sint dolore occaecat voluptate irure do qui laborum nisi. Minim ad proident cupidatat pariatur cillum enim sint ad consectetur.\r\n",
+        "foto": "url_imagen_3.jpg"
+    },
+    {
+        "marca": "Marca4",
+        "subcategoria": "Subcategoría4",
+        "categoria": "Categoria2",
+        "precio": 33.08,
+        "stock": 30,
+        "descripcion": "Consectetur non do elit officia do duis. Aliquip eu nisi ex consectetur Lorem ad reprehenderit id. Mollit culpa elit fugiat elit adipisicing. Qui minim eiusmod ad ut qui pariatur consequat eu esse sunt voluptate culpa non adipisicing. Commodo ipsum dolore quis officia commodo ea dolore. Deserunt deserunt et fugiat proident occaecat ad consequat exercitation do consequat pariatur. Est ut reprehenderit consequat commodo nisi ullamco sunt do nostrud non sit cupidatat.\r\n",
+        "foto": "url_imagen_3.jpg"
+    },
+    {
+        "marca": "Marca2",
+        "subcategoria": "Subcategoría3",
+        "categoria": "Categoria1",
+        "precio": 71.49,
+        "stock": 19,
+        "descripcion": "Eu occaecat irure eiusmod anim amet enim mollit. Veniam sint ad incididunt consectetur quis excepteur eu minim amet pariatur consequat. Magna commodo culpa nulla cupidatat irure cillum ipsum laborum sit nisi amet aliquip aute ex.\r\n",
+        "foto": "url_imagen_5.jpg"
+    },
+    {
+        "marca": "Marca5",
+        "subcategoria": "Subcategoría2",
+        "categoria": "Categoria2",
+        "precio": 80.12,
+        "stock": 47,
+        "descripcion": "Irure consectetur et ut non et dolore est esse sint cillum voluptate aliquip. Laboris incididunt nisi labore adipisicing reprehenderit ipsum officia. Sunt sunt do reprehenderit ad. Do dolore ut proident duis eu cupidatat cillum voluptate nisi cupidatat consequat laboris amet consequat. In sit Lorem duis aliquip nisi ad.\r\n",
+        "foto": "url_imagen_4.jpg"
+    },
+    {
+        "marca": "Marca1",
+        "subcategoria": "Subcategoría3",
+        "categoria": "Categoria5",
+        "precio": 96.68,
+        "stock": 72,
+        "descripcion": "Consequat magna commodo commodo amet laboris adipisicing veniam eiusmod non adipisicing incididunt reprehenderit exercitation. Aliquip amet Lorem eiusmod esse mollit quis fugiat ipsum dolore officia enim. Voluptate do laboris consectetur cillum magna id. Enim ea cillum exercitation laborum ex do voluptate dolore. Qui minim aliquip ex magna velit incididunt amet commodo ad.\r\n",
+        "foto": "url_imagen_5.jpg"
+    },
+    {
+        "marca": "Marca2",
+        "subcategoria": "Subcategoría4",
+        "categoria": "Categoria3",
+        "precio": 80.74,
+        "stock": 68,
+        "descripcion": "Deserunt nisi laboris proident amet consectetur veniam sunt irure elit cillum id veniam id. Dolore non culpa cillum id velit aliquip est proident. Qui et et do id ea adipisicing ad proident ex sint ad id culpa. Cupidatat ipsum et sint dolore ad consectetur labore reprehenderit incididunt nisi qui labore. Et ullamco ut enim ipsum ad amet do irure aute culpa est irure voluptate dolor.\r\n",
+        "foto": "url_imagen_4.jpg"
+    },
+    {
+        "marca": "Marca5",
+        "subcategoria": "Subcategoría3",
+        "categoria": "Categoria4",
+        "precio": 83.7,
+        "stock": 51,
+        "descripcion": "Ex qui proident deserunt duis. Exercitation elit quis dolor id consectetur cillum dolor proident est anim sunt mollit eiusmod. Do minim ea adipisicing pariatur consectetur aliqua eu proident dolore. Minim aliquip quis pariatur quis duis ullamco irure aliquip sint labore.\r\n",
+        "foto": "url_imagen_4.jpg"
+    },
+    {
+        "marca": "Marca4",
+        "subcategoria": "Subcategoría5",
+        "categoria": "Categoria2",
+        "precio": 13.78,
+        "stock": 57,
+        "descripcion": "Duis voluptate veniam magna excepteur enim Lorem fugiat minim deserunt et sint laborum. Id et sit deserunt occaecat consequat velit ex velit adipisicing deserunt. Eiusmod sint quis non eu. Lorem nulla magna nulla eu eiusmod ex commodo duis cupidatat pariatur eu laborum. Proident laboris enim aliqua amet.\r\n",
+        "foto": "url_imagen_4.jpg"
+    },
+    {
+        "marca": "Marca1",
+        "subcategoria": "Subcategoría4",
+        "categoria": "Categoria1",
+        "precio": 40.36,
+        "stock": 77,
+        "descripcion": "Eu ea velit nulla do id exercitation fugiat dolor consequat do voluptate. Velit Lorem ea anim sunt ullamco deserunt cillum tempor voluptate. Nulla anim reprehenderit ad esse consectetur nisi.\r\n",
+        "foto": "url_imagen_2.jpg"
+    },
+    {
+        "marca": "Marca3",
+        "subcategoria": "Subcategoría1",
+        "categoria": "Categoria2",
+        "precio": 37.02,
+        "stock": 51,
+        "descripcion": "Duis qui irure exercitation aliquip excepteur pariatur proident ullamco dolore. Dolore in anim ea sit dolore dolore ea laborum sunt consectetur est excepteur elit. Exercitation ea dolor et aliqua elit labore officia excepteur mollit excepteur ea proident nulla.\r\n",
+        "foto": "url_imagen_3.jpg"
+    },
+    {
+        "marca": "Marca4",
+        "subcategoria": "Subcategoría4",
+        "categoria": "Categoria1",
+        "precio": 45.79,
+        "stock": 59,
+        "descripcion": "Qui non ex culpa esse ex aliqua veniam laboris magna dolor labore quis consectetur consequat. Ex velit laboris minim pariatur et elit ad non nostrud elit pariatur incididunt ipsum. Nostrud anim qui eu ut mollit irure aliquip eiusmod id consectetur quis in tempor non. Exercitation laborum sit ex cupidatat. Anim ipsum excepteur aliquip in laboris veniam ea fugiat sit eu minim ipsum commodo.\r\n",
+        "foto": "url_imagen_3.jpg"
+    },
+    {
+        "marca": "Marca1",
+        "subcategoria": "Subcategoría3",
+        "categoria": "Categoria5",
+        "precio": 86.47,
+        "stock": 48,
+        "descripcion": "Laborum voluptate anim anim cillum nostrud elit duis. Elit ad ex do sint dolor non laboris labore esse incididunt ad. Duis ea dolor qui ut excepteur minim adipisicing magna et et proident pariatur aute. Elit enim irure tempor quis ad proident non est aliqua sunt dolore pariatur. Nostrud adipisicing velit exercitation culpa reprehenderit duis dolore mollit Lorem culpa. Nulla consequat esse aliquip irure tempor quis eu aute exercitation aute esse.\r\n",
+        "foto": "url_imagen_5.jpg"
+    },
+    {
+        "marca": "Marca3",
+        "subcategoria": "Subcategoría3",
+        "categoria": "Categoria4",
+        "precio": 86.07,
+        "stock": 97,
+        "descripcion": "Irure dolor proident commodo duis tempor laborum quis laboris fugiat irure veniam aliquip. Lorem aute consectetur qui tempor sint eu est ex sint sunt cillum cillum irure. Nulla excepteur laborum voluptate aliquip duis ipsum. Deserunt excepteur voluptate irure fugiat minim id sit eiusmod. Tempor ullamco aliquip est dolore deserunt velit aliquip duis cupidatat eiusmod. Aliquip labore id dolor labore nulla ipsum. Deserunt aliquip minim ut irure velit tempor magna enim dolore est deserunt.\r\n",
+        "foto": "url_imagen_5.jpg"
+    }
+]
