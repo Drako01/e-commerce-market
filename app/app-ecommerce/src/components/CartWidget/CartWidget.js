@@ -48,16 +48,30 @@ const CartWidget = () => {
                 (location.pathname === '/history' || location.pathname === '/contact') ?
                     <Link to={'/cart'} className="delay09 CartWidget None" onMouseMove={handleActivity}>
                         <img src={carrito} className="logo-navbar" alt="icono" />
-                        <h4>{totalQuantity}</h4>
-                        <h4>Total: ${getTotalPrice().toFixed(2)}</h4>
+                        {totalQuantity !== 0 ? (
+                            <>
+                                <div className='CantidadSpan'>
+                                    <h4>{totalQuantity}</h4>
+                                </div>
+                                <h3><span>Total: </span>${getTotalPrice().toFixed(2)}</h3>
+                            </>
+                        ) : (
+                            <h3><span>Vacío</span></h3>
+                        )}
                     </Link>
                     :
                     <Link to={'/cart'} className="delay09 CartWidget" onMouseMove={handleActivity}>
                         <img src={carrito} className="logo-navbar" alt="icono" />
-                        <div className='CantidadSpan'>
-                            <h4>{totalQuantity}</h4>
-                        </div>
-                        <h3><span>Total: </span>${getTotalPrice().toFixed(2)}</h3>
+                        {totalQuantity !== 0 ? (
+                            <>
+                                <div className='CantidadSpan'>
+                                    <h4>{totalQuantity}</h4>
+                                </div>
+                                <h3><span>Total: </span>${getTotalPrice().toFixed(2)}</h3>
+                            </>
+                        ) : (
+                            <h3><span>Vacío</span></h3>
+                        )}
                     </Link>
             }
         </>
