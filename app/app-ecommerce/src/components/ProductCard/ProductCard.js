@@ -39,23 +39,34 @@ const useStyles = makeStyles({
 const ProductCard = ({ product, buttonVariant, buttonColor, buttonName, clase, classButton, stock = 0, initial = 1, onAdd }) => {
     const classes = useStyles();
     const [isFavoritoAdded, setFavoritoAdded] = useState(false);
-
+    const [quantity, setQuantity] = useState(initial);
+    
     const handleFavoritosClick = () => {
         setFavoritoAdded(!isFavoritoAdded);
     };
-    const [quantity, setQuantity] = useState(initial);
 
-    const increment = () => {
+    const increment = () => {        
         if (quantity < stock) {
-            setQuantity(quantity + 1);
+            setQuantity(prevQuantity => {
+                const newQuantity = prevQuantity + 1;                
+                return newQuantity;
+            });
+        } else {
+            console.log('No se puede incrementar, alcanzado el stock máximo');
         }
     };
-
-    const decrement = () => {
+        
+    const decrement = () => {        
         if (quantity > 1) {
-            setQuantity(quantity - 1);
+            setQuantity(prevQuantity => {
+                const newQuantity = prevQuantity - 1;
+                return newQuantity;
+            });
+        } else {
+            console.log('No se puede decrementar, cantidad mínima alcanzada');
         }
     };
+    
 
     return (
         <Card className={classes.productCard}>
@@ -101,7 +112,8 @@ const ProductCard = ({ product, buttonVariant, buttonColor, buttonName, clase, c
                             </button>
                         </div>
 
-                        <Button variant={buttonVariant} color={buttonColor} nombre={buttonName} classButton={classButton} onClick={() => onAdd(quantity)} />
+                        <Button variant={buttonVariant} color={buttonColor} nombre={buttonName} classButton={classButton} 
+                            onClick={() => onAdd(quantity)} />{' '}
 
                     </div>
 
