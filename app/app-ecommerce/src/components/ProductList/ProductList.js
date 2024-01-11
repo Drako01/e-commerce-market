@@ -1,5 +1,6 @@
 import React from 'react';
-import { Card, CardContent, CardMedia, Typography, Button, IconButton } from '@mui/material';
+import { Card, CardContent, CardMedia, Typography, IconButton } from '@mui/material';
+import Button from '../Boton/Boton'
 import { makeStyles } from '@material-ui/core';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import './ProductList.css';
@@ -32,7 +33,7 @@ const useStyles = makeStyles({
   },
 });
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, buttonVariant, buttonColor, buttonName }) => {
   const classes = useStyles();
 
   return (
@@ -67,9 +68,7 @@ const ProductCard = ({ product }) => {
         <IconButton className='IconFavorito'>
           <FavoriteIcon />
         </IconButton>
-        <Button variant="contained" color="primary">
-          Agregar al carrito
-        </Button>
+        <Button variant={buttonVariant} color={buttonColor} nombre={buttonName} />
       </div>
     </Card>
   );
@@ -79,7 +78,12 @@ const ProductList = ({ products }) => {
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap' }} className='ProductList'>
       {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
+        <ProductCard
+          key={product.id}
+          product={product}
+          buttonVariant={'contained'}
+          buttonColor={'primary'}
+          buttonName={'Agregar al carrito'}/>
       ))}
     </div>
   );
