@@ -23,7 +23,7 @@ const ProductList = ({ products }) => {
           clase={'IconFavorito'}
           classButton={'classButtonCards'}
           stock={product.stock}
-          onAdd={(quantity) => handleAddToCart(quantity, product.id)}
+          onAdd={(quantity) => handleAddToCart(quantity, product)}
         />
       ))}
     </div>

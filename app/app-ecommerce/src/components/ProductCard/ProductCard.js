@@ -4,12 +4,13 @@ import Button from '../Boton/Boton';
 import Favoritos from '../Favoritos/Favoritos';
 import { makeStyles } from '@material-ui/core';
 import './ProductCard.css';
+import { useCart } from '../../context/CartContext';
 
 const useStyles = makeStyles({
     productCard: {
         width: 280,
         margin: 10,
-        height: 512,
+        height: 540,
         border: '0.1px solid #eee',
         display: 'flex',
         flexDirection: 'column',
@@ -40,23 +41,23 @@ const ProductCard = ({ product, buttonVariant, buttonColor, buttonName, clase, c
     const classes = useStyles();
     const [isFavoritoAdded, setFavoritoAdded] = useState(false);
     const [quantity, setQuantity] = useState(initial);
-    
+    const { addItem } = useCart();
     const handleFavoritosClick = () => {
         setFavoritoAdded(!isFavoritoAdded);
     };
 
-    const increment = () => {        
+    const increment = () => {
         if (quantity < stock) {
             setQuantity(prevQuantity => {
-                const newQuantity = prevQuantity + 1;                
+                const newQuantity = prevQuantity + 1;
                 return newQuantity;
             });
         } else {
             console.log('No se puede incrementar, alcanzado el stock máximo');
         }
     };
-        
-    const decrement = () => {        
+
+    const decrement = () => {
         if (quantity > 1) {
             setQuantity(prevQuantity => {
                 const newQuantity = prevQuantity - 1;
@@ -65,6 +66,11 @@ const ProductCard = ({ product, buttonVariant, buttonColor, buttonName, clase, c
         } else {
             console.log('No se puede decrementar, cantidad mínima alcanzada');
         }
+    };
+    const handleAddToCart = (quantity) => {
+        console.log('Product:', product);
+        console.log('Quantity:', quantity);
+        addItem(product, quantity);
     };
     
 
@@ -112,8 +118,8 @@ const ProductCard = ({ product, buttonVariant, buttonColor, buttonName, clase, c
                             </button>
                         </div>
 
-                        <Button variant={buttonVariant} color={buttonColor} nombre={buttonName} classButton={classButton} 
-                            onClick={() => onAdd(quantity)} />{' '}
+                        <Button variant={buttonVariant} color={buttonColor} nombre={buttonName} classButton={classButton}
+                            onClick={() => handleAddToCart(quantity)} />{' '}
 
                     </div>
 

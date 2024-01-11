@@ -67,7 +67,7 @@ const Navbar = () => {
                                 </Link>
                             </ListItem>
                         ))}
-                        <CartWidget />
+                        <CartWidget /> 
                     </List>
                 </Drawer>
             </Toolbar>

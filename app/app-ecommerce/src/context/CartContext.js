@@ -25,9 +25,11 @@ export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState(getCartFromLocalStorage());
     const [purchaseHistory, setPurchaseHistory] = useState(getPurchaseHistoryFromLocalStorage());
 
-    const addItem = (productToAdd) => {
+    
+    const addItem = (productToAdd, quantity) => {
         if (!isInCart(productToAdd.id)) {
-            setCart(prev => [...prev, productToAdd])
+            // Actualiza el estado del carrito agregando el producto con su cantidad
+            setCart(prev => [...prev, { ...productToAdd, quantity }]);
             Swal.fire({
                 title: 'Producto agregado al carrito',
                 icon: 'success',
@@ -38,19 +40,34 @@ export const CartProvider = ({ children }) => {
                 timerProgressBar: true
             });
         } else {
+            const updatedCart = cart.map((item) => {
+                if (item.id === productToAdd.id) {
+                    return { ...item, quantity: item.quantity + quantity };
+                }
+                return item;
+            });
+            setCart(updatedCart);
+
             Swal.fire({
-                title: 'Error al agregar producto',
-                text: 'Producto no agregado.!',
-                icon: 'error',
-                confirmButtonText: 'OK',
-                confirmButtonColor: 'var(--brick)'
+                title: 'Cantidad actualizada en el carrito',
+                icon: 'success',
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1200,
+                timerProgressBar: true
             });
         }
     };
 
+
+
+
     const isInCart = (id) => {
         return cart.some(prod => prod.id === id);
     };
+
+
 
     const removeItem = (id) => {
         const updatedCart = cart.filter(prod => prod.id !== id);
@@ -73,8 +90,16 @@ export const CartProvider = ({ children }) => {
         let totalPrice = 0;
 
         cart.forEach(prod => {
-            totalPrice += prod.price * prod.quantity;
-        });
+        // Convertir la cadena de precio a número
+        const priceAsNumber = parseFloat(prod.precio);
+
+        if (!isNaN(priceAsNumber)) {
+            totalPrice += priceAsNumber * prod.quantity;
+        } else {
+            // Manejar productos con precio no válido
+            console.error(`Error: El producto ${prod.descripcion} tiene un precio no válido.`);
+        }
+    });
 
         return totalPrice;
     };
@@ -123,7 +148,8 @@ export const CartProvider = ({ children }) => {
             removeItem,
             isInCart,
             clearCart,
-            updateQuantity
+            updateQuantity,
+            getTotalPrice
         }}>
             {children}
         </CartContext.Provider>

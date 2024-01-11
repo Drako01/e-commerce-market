@@ -50,3 +50,7 @@ a{
     display: none;
 }
 
+.swal2-popup{
+    margin-top: 8rem !important;
+    z-index: 1000 !important;
+}
