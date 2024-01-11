@@ -4,7 +4,7 @@ export const products = [
         "oferta" : "si",
         "subcategoria": "Dulce de Leche",
         "precio": "3099.25",
-        "stock": "1500",
+        "stock": 0,
         "descripcion": "Dulce de Leche por 400gr - Estilo Colonial",
         "categoria": "Alimentos",
         "marca": "La Serenisima",
@@ -16,7 +16,7 @@ export const products = [
         "oferta" : "si",
         "imageUrl": "Products%2FSamsung%2FElectr%C3%B3nica%2FSmartphones%2FD_NQ_NP_899252-MLA54334212764_032023-O.webp?alt=media&token=c6a27b26-ddd6-4988-a8ff-d0e46ae03323",
         "foto": "https://firebasestorage.googleapis.com/v0/b/e-commerce-backend-ae6f6.appspot.com/o/Products%2FSamsung%2FElectr%C3%B3nica%2FSmartphones%2FD_NQ_NP_899252-MLA54334212764_032023-O.webp?alt=media&token=c6a27b26-ddd6-4988-a8ff-d0e46ae03323",
-        "stock": "200",
+        "stock": 200,
         "subcategoria": "Smartphones",
         "marca": "Samsung",
         "descripcion": "Celular Samsung Galaxy S22 Ultra 5g 256 Gb Phantom",
@@ -27,7 +27,7 @@ export const products = [
         "id": "dofa7ujHIfsOl9oneywv",
         "oferta" : "si",
         "marca": "Terrabusi",
-        "stock": "5000",
+        "stock": 5000,
         "imageUrl": "Products%2FTerrabusi%2FAlimentos%2FGalletitas%20Dulces%2Fterrabusi.png?alt=media&token=d2c7a625-4043-44ef-854a-d134ebe91ce2",
         "categoria": "Alimentos",
         "descripcion": "Galletitas Dulces Surtidas por 1/2 Kg",
@@ -44,7 +44,7 @@ export const products = [
         "subcategoria": "Televisores",
         "descripcion": "Smart TV LG AI ThinQ 60UP7750PSB LCD 4K 60\" 100V/240V",
         "imageUrl": "Products%2FLG%2FElectrodom%C3%A9sticos%2FTelevisores%2FD_NQ_NP_646729-MLA51185421870_082022-O.webp?alt=media&token=2852c4f7-e446-4cc0-81df-06e03d064f52",
-        "stock": "50",
+        "stock": 50,
         "marca": "LG"
     },
     {
@@ -55,7 +55,7 @@ export const products = [
         "subcategoria": "Yerba Mate",
         "imageUrl": "Products/Alhild/Alimentos/Yerba Mate/undefined",
         "marca": "Alhild",
-        "stock": "1300",
+        "stock": 1300,
         "categoria": "Alimentos",
         "descripcion": "Yerba Mate Orgánica 1/2 Kg"
     },
@@ -66,7 +66,7 @@ export const products = [
         "categoria": "Alimentos",
         "marca": "Ledezma",
         "imageUrl": "Products%2FLedezma%2FAlimentos%2FAzucar%2FLEDESMA-azucar-x1Kg-WEB.png?alt=media&token=15798d9f-6bf1-4372-9d4e-c5cb89063ea1",
-        "stock": "16500",
+        "stock": 16500,
         "precio": "1563.54",
         "foto": "https://firebasestorage.googleapis.com/v0/b/e-commerce-backend-ae6f6.appspot.com/o/Products%2FLedezma%2FAlimentos%2FAzucar%2FLEDESMA-azucar-x1Kg-WEB.png?alt=media&token=15798d9f-6bf1-4372-9d4e-c5cb89063ea1",
         "descripcion": "Azúcar Blanca Tipo A 1 Kg"
@@ -79,7 +79,7 @@ export const products = [
         "categoria": "Alimentos",
         "marca": "Union",
         "imageUrl": "https://jumboargentina.vtexassets.com/arquivos/ids/625718/Yerba-Mate-Union-4flex-1-2kg-1-853196.jpg?v=637524120692170000",
-        "stock": "6400",
+        "stock": 6400,
         "precio": "1203.54",
         "foto": "https://jumboargentina.vtexassets.com/arquivos/ids/625718/Yerba-Mate-Union-4flex-1-2kg-1-853196.jpg?v=637524120692170000",
         "descripcion": "Yerba Mate 4flex Union 1/2 Kg"
@@ -92,7 +92,7 @@ export const products = [
         "categoria": "Alimentos",
         "marca": "Andina",
         "imageUrl": "https://arcordiezb2c.vteximg.com.br/arquivos/ids/177145/Azucar-Comun-Tipo-A-Andina-1-Kg-1-10165.jpg?v=638085405668030000",
-        "stock": "56100",
+        "stock": 0,
         "precio": "1563.54",
         "foto": "https://arcordiezb2c.vteximg.com.br/arquivos/ids/177145/Azucar-Comun-Tipo-A-Andina-1-Kg-1-10165.jpg?v=638085405668030000",
         "descripcion": "Azucar Comun Tipo A Andina 1 Kg"
@@ -106,7 +106,7 @@ export const products = [
         "subcategoria": "Televisores",
         "descripcion": "LG HD SMART AI TV 32",
         "imageUrl": "Products%2FLG%2FElectrodom%C3%A9sticos%2FTelevisores%2FD_NQ_NP_646729-MLA51185421870_082022-O.webp?alt=media&token=2852c4f7-e446-4cc0-81df-06e03d064f52",
-        "stock": "50",
+        "stock": 50,
         "marca": "LG"
     },
     {
@@ -114,7 +114,7 @@ export const products = [
         "oferta" : "no",
         "imageUrl": "Products%2FSamsung%2FElectr%C3%B3nica%2FSmartphones%2FD_NQ_NP_899252-MLA54334212764_032023-O.webp?alt=media&token=c6a27b26-ddd6-4988-a8ff-d0e46ae03323",
         "foto": "https://multipoint.com.ar/Image/0/750_750-178431-800-auto.jpg",
-        "stock": "350",
+        "stock": 0,
         "subcategoria": "Smartphones",
         "marca": "Samsung",
         "descripcion": "Celular Samsung Galaxy S22 128 Gb",

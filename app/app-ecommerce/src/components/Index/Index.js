@@ -4,8 +4,15 @@ import { products } from '../ProductList/products.js';
 import ProductList from '../ProductList/ProductList';
 
 const Index = () => {
-    // Filtra los productos que tienen "oferta: si"
-    const ofertaProducts = products.filter((product) => product.oferta === 'si');
+    const ofertaProducts = [];
+    // Filtra los productos que tienen "stock: 0"
+    
+    products.forEach((product) => {
+        if (product.oferta === 'si') {
+            ofertaProducts.push(product);
+        }
+        
+    });
 
     return (
         <>

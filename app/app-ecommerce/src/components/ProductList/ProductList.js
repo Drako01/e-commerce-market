@@ -5,7 +5,9 @@ import './ProductList.css'
 const ProductList = ({ products }) => {
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap' }} className='ProductList'>
+      
       {products.map((product) => (
+        
         <ProductCard
           key={product.id}
           product={product}

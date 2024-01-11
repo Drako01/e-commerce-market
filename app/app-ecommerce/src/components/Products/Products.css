@@ -1,3 +1,9 @@
+.ProductList{
+    width: calc(100% - 4rem);
+    justify-content: center;
+    gap: 1.2rem;
+    margin-bottom: 5rem;
+}
 .logotipo {
     margin-top: 2rem;
     width: 300px;

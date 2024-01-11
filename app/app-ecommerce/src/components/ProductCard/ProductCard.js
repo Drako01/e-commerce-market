@@ -3,7 +3,7 @@ import { Card, CardContent, CardMedia, Typography } from '@mui/material';
 import Button from '../Boton/Boton';
 import Favoritos from '../Favoritos/Favoritos';
 import { makeStyles } from '@material-ui/core';
-import './ProductCard.css'
+import './ProductCard.css';
 
 const useStyles = makeStyles({
     productCard: {
@@ -27,9 +27,10 @@ const useStyles = makeStyles({
     price: {},
     actions: {
         display: 'flex',
-        justifyContent: 'space-evenly',
+        justifyContent: 'space-between',
         alignItems: 'center',
         padding: '1rem',
+        margin: ' 0 .5rem'
     },
 });
 
@@ -71,7 +72,11 @@ const ProductCard = ({ product, buttonVariant, buttonColor, buttonName, clase, c
             </CardContent>
             <div className={classes.actions}>
                 <Favoritos onClick={handleFavoritosClick} clase={isFavoritoAdded ? 'IconFavoritoAdded' : clase} />
-                <Button variant={buttonVariant} color={buttonColor} nombre={buttonName} classButton={classButton} />
+                {product.stock === 0 ? (
+                    <span>Sin stock</span>
+                ) : (
+                    <Button variant={buttonVariant} color={buttonColor} nombre={buttonName} classButton={classButton} />
+                )}
             </div>
         </Card>
     );
