@@ -4,19 +4,22 @@ import Main from './components/Main/Main'
 import { BrowserRouter } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext';
+import { FavoritosProvider } from './context/FavoritosContext'
 import './App.css';
 
 function App() {
   return (
     <>
-    <AuthProvider>
-      <CartProvider>
-        <BrowserRouter>
-          <Header />
-          <Main />
-          <Footer />
-        </BrowserRouter>
-      </CartProvider>
+      <AuthProvider>
+        <FavoritosProvider>
+          <CartProvider>
+            <BrowserRouter>
+              <Header />
+              <Main />
+              <Footer />
+            </BrowserRouter>
+          </CartProvider>
+        </FavoritosProvider>
       </AuthProvider>
     </>
   );

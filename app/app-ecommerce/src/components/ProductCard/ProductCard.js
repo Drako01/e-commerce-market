@@ -32,26 +32,19 @@ const useStyles = makeStyles({
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: '1rem',
-        margin: ' 0 .5rem',
+        margin: '0 .5rem',
         marginBottom: '1rem',
     },
 });
 
 const ProductCard = ({ product, buttonVariant, buttonColor, buttonName, clase, classButton, stock = 0, initial = 1, onAdd }) => {
     const classes = useStyles();
-    const [isFavoritoAdded, setFavoritoAdded] = useState(false);
     const [quantity, setQuantity] = useState(initial);
     const { addItem } = useCart();
-    const handleFavoritosClick = () => {
-        setFavoritoAdded(!isFavoritoAdded);
-    };
 
     const increment = () => {
         if (quantity < stock) {
-            setQuantity(prevQuantity => {
-                const newQuantity = prevQuantity + 1;
-                return newQuantity;
-            });
+            setQuantity((prevQuantity) => prevQuantity + 1);
         } else {
             console.log('No se puede incrementar, alcanzado el stock máximo');
         }
@@ -59,18 +52,15 @@ const ProductCard = ({ product, buttonVariant, buttonColor, buttonName, clase, c
 
     const decrement = () => {
         if (quantity > 1) {
-            setQuantity(prevQuantity => {
-                const newQuantity = prevQuantity - 1;
-                return newQuantity;
-            });
+            setQuantity((prevQuantity) => prevQuantity - 1);
         } else {
             console.log('No se puede decrementar, cantidad mínima alcanzada');
         }
     };
-    const handleAddToCart = (quantity) => {       
+
+    const handleAddToCart = () => {
         addItem(product, quantity);
     };
-    
 
     return (
         <Card className={classes.productCard}>
@@ -101,7 +91,7 @@ const ProductCard = ({ product, buttonVariant, buttonColor, buttonName, clase, c
                 </Typography>
             </CardContent>
             <div className={classes.actions}>
-                <Favoritos onClick={handleFavoritosClick} clase={isFavoritoAdded ? 'IconFavoritoAdded' : clase} />
+                <Favoritos product={product} />
                 {product.stock === 0 ? (
                     <span>Sin stock</span>
                 ) : (
@@ -115,12 +105,14 @@ const ProductCard = ({ product, buttonVariant, buttonColor, buttonName, clase, c
                                 +
                             </button>
                         </div>
-
-                        <Button variant={buttonVariant} color={buttonColor} nombre={buttonName} classButton={classButton}
-                            onClick={() => handleAddToCart(quantity)} />{' '}
-
+                        <Button
+                            variant={buttonVariant}
+                            color={buttonColor}
+                            nombre={buttonName}
+                            classButton={classButton}
+                            onClick={handleAddToCart}
+                        />
                     </div>
-
                 )}
             </div>
         </Card>
