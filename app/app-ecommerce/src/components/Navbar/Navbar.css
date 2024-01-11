@@ -1,5 +1,7 @@
 .appBar {
     background-color: var(--colour-second) !important;
+    min-height: 100px;
+    justify-content: center;
 }
 
 .logo {
@@ -12,41 +14,52 @@
     flex-grow: 1;
 }
 
-.logo-navbar{
+.logo-navbar {
     padding: .7rem;
+    display: flex;
+    align-items: center;
 }
 
-.logo-navbar img{
+.logo-navbar p {
+    color: var(--colour-first);
+    font-size: 1.2rem;
+    margin-left: 1rem;
+}
+
+.logo-navbar img {
     width: 3.2rem;
 }
 
 .navLinksDesktop {
     display: flex;
     align-items: center;
-
-    a {
-        color: var(--colour-first);
-        text-decoration: none;
-        padding: 1rem;
-        transition: 0.4s;
-        font-size: max(1rem, calc(.5rem + .5vw + .8vh)); 
-    }
-    h4{
-        color: var(--colour-first);
-        font-size: 1rem;
-    }
-
-    a:hover {
-        opacity: 0.75;
-    }
 }
 
-.MuiDrawer-paper{
+.navLinksDesktop a {
+    color: var(--colour-first);
+    text-decoration: none;
+    padding: 1rem;
+    transition: 0.4s;
+    font-size: max(1rem, calc(.5rem + .5vw + .8vh));
+}
+
+.navLinksDesktop h4 {
+    color: var(--colour-first);
+    font-size: 1rem;
+}
+
+.navLinksDesktop a:hover {
+    opacity: 0.75;
+}
+
+.MuiDrawer-paper {
     background-color: var(--colour-second) !important;
 }
-.MuiDrawer-paper a{
+
+.MuiDrawer-paper a {
     color: var(--colour-first) !important;
 }
+
 .burger {
     color: var(--colour-first) !important;
     display: none !important;

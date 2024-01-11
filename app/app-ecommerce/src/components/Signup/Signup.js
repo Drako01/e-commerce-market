@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { getAuth, createUserWithEmailAndPassword, updateProfile, onAuthStateChanged } from "firebase/auth";
+import React, { useState } from "react";
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import Swal from 'sweetalert2';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { makeStyles, Typography, Button, TextField } from '@material-ui/core';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
-import foto from '../../assets/img/people.png';
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import foto from '../assets/icons/perfil.png';
 import './Signup.css'
+
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const theme = createTheme({
     breakpoints: {
@@ -42,7 +43,9 @@ const useStyles = makeStyles((theme) => ({
     button: {
         marginTop: theme.spacing(2),
         width: '100%',
-    },
+        marginBottom: '.5rem',
+        backgroundColor: 'var(--colour-second)',
+    }
 }));
 
 const Signup = () => {
@@ -57,27 +60,12 @@ const Signup = () => {
     const [profileImage, setProfileImage] = useState(null);
     const navigate = useNavigate();
 
-    const [currentUser, setCurrentUser] = useState(null);
     const handleDisplayNameChange = (event) => setDisplayName(event.target.value);
     const handleEmailChange = (event) => setEmail(event.target.value);
     const handlePasswordChange = (event) => setPassword(event.target.value);
     const handleRePasswordChange = (event) => setRePassword(event.target.value);
     const handleProfileImageChange = (event) => setProfileImage(event.target.files[0]);
-    // Escucha los cambios en la autenticación y actualiza el estado del usuario
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
-            if (user) {
-                // El usuario está autenticado
-                setCurrentUser(user);
-            } else {
-                // El usuario no está autenticado
-                setCurrentUser(null);
-            }
-        });
 
-        // Asegúrate de desuscribirte cuando el componente se desmonte
-        return () => unsubscribe();
-    }, [auth]);
     const handleSignup = (event) => {
         event.preventDefault();
         if (password !== rePassword) {
@@ -90,15 +78,7 @@ const Signup = () => {
                 const user = userCredential.user;
 
                 if (profileImage) {
-                    function convertToSlug(text) {
-                        return text
-                            .toLowerCase() 
-                            .replace(/[\s_]+/g, '_') 
-                            .replace(/[^\w-]+/g, ''); 
-                    }
-                    
-                    const slug = convertToSlug(user.displayName);
-                    const storageRef = ref(storage, `profileImages/${slug}/${user.uid}`);
+                    const storageRef = ref(storage, `profileImages/${user.uid}`);
                     uploadBytes(storageRef, profileImage)
                         .then((snapshot) => {
                             getDownloadURL(storageRef)
@@ -111,7 +91,7 @@ const Signup = () => {
                                             localStorage.setItem("user", JSON.stringify(user));
                                             Swal.fire({
                                                 title: `Cuenta creada para ${user.email}`,
-                                                html: `Gracias por registrarse en nuestro BackEnd`,
+                                                html: `Gracias por registrarse en nuestro Pro-Shop`,
                                                 icon: 'success',
                                                 didClose: () => {
                                                     navigate('/');
@@ -140,7 +120,7 @@ const Signup = () => {
                             localStorage.setItem("user", JSON.stringify(user));
                             Swal.fire({
                                 title: `Cuenta creada para ${user.email}`,
-                                html: `Gracias por registrarse en nuestro BackEnd`,
+                                html: `Gracias por registrarse en nuestro Pro-Shop`,
                                 icon: 'success',
                                 didClose: () => {
                                     navigate('/');
@@ -159,15 +139,9 @@ const Signup = () => {
             });
     };
 
-    useEffect(() => {
-        if (currentUser ) {
-            navigate('/');
-        }
-    }, [currentUser, navigate]);
-
     return (
-        <ThemeProvider theme={theme} >
-            <div className='LoginAndSignup'>
+        <ThemeProvider theme={theme}>
+            <div className="LoginModule">
                 <Typography variant="h1" className="Mini">Crear cuenta</Typography>
                 {error &&
                     <Typography variant="body1">{error}</Typography>

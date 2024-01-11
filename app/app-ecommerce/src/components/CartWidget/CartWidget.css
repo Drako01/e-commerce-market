@@ -1,10 +1,11 @@
 .CartWidget {
     position: relative;
-    min-width:15rem;
-    max-width: 20rem;    
+    min-width: 15rem;
+    max-width: 20rem;
     font-size: 1.2rem;
-    background: transparent;    
+    background: transparent;
     display: flex;
+    flex-direction: row;
     align-items: center;
     text-decoration: none;
     border: none;
@@ -12,103 +13,190 @@
     cursor: pointer;
     outline: inherit;
 }
-.CantidadSpan{
+
+.CantidadSpan {
     background-color: var(--colour-first);
     padding: .5rem;
     border-radius: 50%;
     width: 1.4rem;
     height: 1.4rem;
 }
-.CartWidget h4{
-    color: var(--colour-second) !important;    
+
+.CartWidget h4 {
+    color: var(--colour-second) !important;
     text-align: center;
     vertical-align: middle;
-    margin: 0;    
-    font-weight: lighter;    
+    margin: 0;
+    font-weight: lighter;
     font-weight: bold;
     padding: 0;
 }
 
 
-.CartWidget h3{
+.CartWidget h3 {
     margin-left: 1rem;
     font-size: 1.2rem;
 }
-.CartWidget span{
+
+.CartWidget span {
     font-weight: 100;
     font-size: 1rem;
 }
-.ModalCarrito{
+
+.ModalCarrito {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.ModalCarrito .modal-content{
+
+.ModalCarrito .modal-content {
     background-color: var(--colour-first);
-    min-width: 620px;
     max-width: calc(100% - 4rem);
     padding: 2rem;
     border-radius: .5rem;
 }
-.ModalCarrito .modal-content span{
+
+.ModalCarrito .modal-content span {
     font-weight: 600;
 }
-.ModalCarrito .modal-content button{
+
+.ModalCarrito .modal-content button {
     margin: 1rem;
 }
-.ContenedorCompra{
+
+.ContenedorCompra {
     margin: 2rem 0;
 }
-.ItemsCart{
+
+.ItemsCart {
     display: flex;
     justify-content: flex-end;
     height: 48px;
     width: 100%;
 }
-.ParrafoCart{
+
+.ParrafoCart {
     display: flex;
     justify-content: flex-end;
 }
-.ParrafoCart p{
+
+.ParrafoCart p {
     text-align: right !important;
     margin-inline-start: 1rem;
     margin-inline-end: 1rem;
 }
+
 .ItemsCart .ImagenItemCart {
     display: flex;
     justify-content: center;
     align-items: center;
     object-fit: cover;
 }
-.ItemsCart img{
+
+.ItemsCart img {
     height: 42px;
-    margin-left: auto;
     margin-right: auto;
 }
 
-.TotalAPagar{
+.TotalAPagar {
     font-size: 1.5rem;
     font-weight: 100;
 }
 
-.classButtonClearCards{
+.classButtonClearCards {
     background-color: var(--brick) !important;
 }
-.CarritoVacio{
-    padding: 0 0 2.2rem 0!important;
+
+.CarritoVacio {
+    padding: 0 0 2.2rem 0 !important;
     text-align: center;
     color: var(--brick);
+    min-width: 580px;
 }
-.ContenedorDeBotonCerrarX{
+
+.ContenedorDeBotonCerrarX {
     display: flex;
     justify-content: flex-end;
 }
-.CarritoVacio button{
+
+.CarritoVacio button {
     right: 0;
     font-size: 1.2rem;
-    
+
 }
+
 .EliminarItem {
     fill: var(--brick) !important;
+}
+
+.ImagenItemCart {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ImagenItemCart p {
+    margin-left: 1rem;
+}
+
+
+@media (max-width: 640px) {
+    .ModalCarrito .modal-content {
+        width: calc(100% - 4rem) !important;
+        margin: 0 4rem;
+        padding: 1rem;
+    }
+
+    .ContenedorCompra {
+        margin: 1rem 0;
+    }
+
+    .ItemsCart {
+        height: auto;
+    }
+
+    .ItemsCart .ImagenItemCart {
+        margin-bottom: 1rem;
+    }
+
+    .ItemsCart img {
+        margin-right: 0;
+    }
+
+    .ParrafoCart {
+        flex-direction: column;
+    }
+
+    .ParrafoCart p {
+        text-align: left !important;
+        margin: 0;
+    }
+
+    .CarritoVacio button {
+        font-size: 1rem;
+    }
+
+    .ImagenItemCart {
+        display: flex;
+        flex-direction: column !important;
+    }
+    .CartWidget{
+        flex-direction: column;
+    }
+}
+
+
+@media (max-width: 480px) {
+
+    .BotonesCart {
+        display: flex;
+        flex-direction: column !important;
+    }
+    .CarritoVacio {
+        padding: 0 0 2.2rem 0 !important;
+        text-align: center;
+        color: var(--brick);
+        min-width: 320px;
+    }
 }

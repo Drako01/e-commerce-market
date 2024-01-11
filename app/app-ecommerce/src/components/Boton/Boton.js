@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '@mui/material/Button';
+import './Boton.css'
 
 const Boton = ({ nombre, onClick, color, variant, classButton }) => {
     return (

@@ -109,9 +109,8 @@ const CartWidget = () => {
                                     <div key={product.id} className='ItemsCart'>
                                         <div className='ImagenItemCart'>
                                             <img src={product.foto} alt={product.descripcion} />
-                                        </div>
-                                        <div className='ParrafoCart'>
-                                            <p><span>{product.descripcion}</span> - Cantidad: <span>{product.quantity}</span></p>
+                                        
+                                            <p><span>{product.marca} {product.subcategoria}</span> - Cantidad: <span>{product.quantity}</span></p>
                                         </div>
                                         <IconButton onClick={() => removeItem(product.id)} aria-label="Eliminar">
                                             <DeleteIcon className='EliminarItem' />
@@ -121,6 +120,7 @@ const CartWidget = () => {
                             </div>
                             <hr />
                             <p className='TotalAPagar'>Total: <span>${getTotalPrice().toFixed(2)}</span></p>
+                            <div className='BotonesCart'>                            
                             <Boton
                                 nombre={'Cerrar'}
                                 onClick={handleCloseModal}
@@ -144,6 +144,7 @@ const CartWidget = () => {
                                 classButton={'classButtonCards'}
                             >
                             </Boton>
+                            </div>
                         </div>
                     </>
                 ) : (
