@@ -1,22 +1,20 @@
 import React from 'react';
-import './Index.css';
+import './Products.css';
 import { products } from '../ProductList/products.js';
 import ProductList from '../ProductList/ProductList';
 
-const Index = () => {
-    // Filtra los productos que tienen "oferta: si"
-    const ofertaProducts = products.filter((product) => product.oferta === 'si');
+const Products = () => {
 
     return (
         <>
             <section className='Titulo'>
-                <h1>Ofertas</h1>
+                <h1>Listado de Productos</h1>
             </section>
             <div className="App-index inicio">
-                <ProductList products={ofertaProducts} />
+                <ProductList products={products} />
             </div>
         </>
     );
 };
 
-export default Index;
+export default Products;

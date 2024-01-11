@@ -27,7 +27,7 @@ const Footer = () => {
     return (
         <div className="Footer oculto-impresion">
             <footer className='Top'>
-                <img src={logo} alt='Lonne Open' />
+                <img src={logo} alt='ArmoTuSitio.com' />
                 <section className='Links'>
                     <div>
                         <NavLink to='/'><li>Inicio</li></NavLink>

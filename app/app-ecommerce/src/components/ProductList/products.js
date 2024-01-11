@@ -1,6 +1,7 @@
 export const products = [
     {
         "id": "0LIq9bslTvvbBL5of39A",
+        "oferta" : "si",
         "subcategoria": "Dulce de Leche",
         "precio": "3099.25",
         "stock": "1500",
@@ -12,6 +13,7 @@ export const products = [
     },
     {
         "id": "Ibl9WiMDZ342Y2AlFNg2",
+        "oferta" : "si",
         "imageUrl": "Products%2FSamsung%2FElectr%C3%B3nica%2FSmartphones%2FD_NQ_NP_899252-MLA54334212764_032023-O.webp?alt=media&token=c6a27b26-ddd6-4988-a8ff-d0e46ae03323",
         "foto": "https://firebasestorage.googleapis.com/v0/b/e-commerce-backend-ae6f6.appspot.com/o/Products%2FSamsung%2FElectr%C3%B3nica%2FSmartphones%2FD_NQ_NP_899252-MLA54334212764_032023-O.webp?alt=media&token=c6a27b26-ddd6-4988-a8ff-d0e46ae03323",
         "stock": "200",
@@ -23,6 +25,7 @@ export const products = [
     },
     {
         "id": "dofa7ujHIfsOl9oneywv",
+        "oferta" : "si",
         "marca": "Terrabusi",
         "stock": "5000",
         "imageUrl": "Products%2FTerrabusi%2FAlimentos%2FGalletitas%20Dulces%2Fterrabusi.png?alt=media&token=d2c7a625-4043-44ef-854a-d134ebe91ce2",
@@ -34,6 +37,7 @@ export const products = [
     },
     {
         "id": "jdFgOSOqYb3ZKFAtP3BH",
+        "oferta" : "si",
         "categoria": "Electrodomésticos",
         "foto": "https://firebasestorage.googleapis.com/v0/b/e-commerce-backend-ae6f6.appspot.com/o/Products%2FLG%2FElectrodom%C3%A9sticos%2FTelevisores%2FD_NQ_NP_646729-MLA51185421870_082022-O.webp?alt=media&token=2852c4f7-e446-4cc0-81df-06e03d064f52",
         "precio": "3299998.90",
@@ -45,6 +49,7 @@ export const products = [
     },
     {
         "id": "p3oQvVV8PnJsaGSCYIYE",
+        "oferta" : "no",
         "precio": "1454.75",
         "foto": "https://firebasestorage.googleapis.com/v0/b/e-commerce-backend-ae6f6.appspot.com/o/Products%2FAlhild%2FAlimentos%2FYerba%20Mate%2Fpaquete-new.png?alt=media&token=4b7987b8-c762-41dd-81e5-e56d6c54f060",
         "subcategoria": "Yerba Mate",
@@ -56,6 +61,7 @@ export const products = [
     },
     {
         "id": "uuiodBWkfPHdnFFfL7JW",
+        "oferta" : "no",
         "subcategoria": "Azucar",
         "categoria": "Alimentos",
         "marca": "Ledezma",
@@ -68,6 +74,7 @@ export const products = [
     ,
     {
         "id": "uuiodBWkfPHsssfL7JW",
+        "oferta" : "no",
         "subcategoria": "Yerba Mate",
         "categoria": "Alimentos",
         "marca": "Union",
@@ -80,6 +87,7 @@ export const products = [
     ,
     {
         "id": "uuiossskfPHdnFFfL7JW",
+        "oferta" : "no",
         "subcategoria": "Azucar",
         "categoria": "Alimentos",
         "marca": "Andina",
@@ -88,6 +96,30 @@ export const products = [
         "precio": "1563.54",
         "foto": "https://arcordiezb2c.vteximg.com.br/arquivos/ids/177145/Azucar-Comun-Tipo-A-Andina-1-Kg-1-10165.jpg?v=638085405668030000",
         "descripcion": "Azucar Comun Tipo A Andina 1 Kg"
-    }
+    },
+    {
+        "id": "jdFgOSssYb3ZKFAtP3BH",
+        "oferta" : "no",
+        "categoria": "Electrodomésticos",
+        "foto": "https://www.lg.com/ar/images/televisores/md07538141/gallery/2_32LM620BPSAb.jpg",
+        "precio": "759998.80",
+        "subcategoria": "Televisores",
+        "descripcion": "LG HD SMART AI TV 32",
+        "imageUrl": "Products%2FLG%2FElectrodom%C3%A9sticos%2FTelevisores%2FD_NQ_NP_646729-MLA51185421870_082022-O.webp?alt=media&token=2852c4f7-e446-4cc0-81df-06e03d064f52",
+        "stock": "50",
+        "marca": "LG"
+    },
+    {
+        "id": "Ibl9WiMDZsss2AlFNg2",
+        "oferta" : "no",
+        "imageUrl": "Products%2FSamsung%2FElectr%C3%B3nica%2FSmartphones%2FD_NQ_NP_899252-MLA54334212764_032023-O.webp?alt=media&token=c6a27b26-ddd6-4988-a8ff-d0e46ae03323",
+        "foto": "https://multipoint.com.ar/Image/0/750_750-178431-800-auto.jpg",
+        "stock": "350",
+        "subcategoria": "Smartphones",
+        "marca": "Samsung",
+        "descripcion": "Celular Samsung Galaxy S22 128 Gb",
+        "categoria": "Electrónica",
+        "precio": "1399990"
+    },
 ];
 

@@ -2,34 +2,5 @@
     width: calc(100% - 4rem);
     justify-content: center;
     gap: 1.2rem;
-}
-.cardMediaImage{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 240px;
-    margin-left: auto;
-    margin-right: auto;
-    height: 220px;
-    
-}
-.css-o69gx8-MuiCardMedia-root{
-    width: auto !important;
-    height: auto !important;
-}
-.cardMediaImage img{
-    max-width: calc(100% - 1rem);
-    max-height: 200px;
-}
-
-.css-1yr8029-MuiTypography-root{
-    font-size: 1.1rem !important;
-    font-weight: 600 !important;
-}
-.IconFavorito{
-    color: var(--colour-fifth) !important;   
-}
-
-.IconFavoritoAdded{
-    color: var(--brick) !important;   
+    margin-bottom: 5rem;
 }

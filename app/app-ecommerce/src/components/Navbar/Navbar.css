@@ -1,187 +1,52 @@
-.burguer,
-.menu,
-.background{
-    position: fixed;
-    background-repeat: no-repeat;
+.appBar {
+    background-color: var(--colour-second) !important;
 }
-li{
+
+.logo {
+    color: white;
     text-decoration: none;
-    list-style: none;
+    font-size: 1.2rem;
 }
 
-.menu,
-.menu a,
-.background{
-    transition: 0.5s;
-}
-.menu a img{
-    width: 24px;
-    height: 24px;
-}
-button.burguer{
-    background-color: transparent;
-    width: 24px;
-    height: 24px;
-}
-.burguer{
-    z-index: 30;
-    top: 20px;
-    left: 20px;
-    place-items: center;
-    width: 30px;
-    min-width: 30px;
-    height: 30px;
-    background-image: url('../../../public/img/menu.svg');
-    border: 0;
-    padding: 0;
-    cursor: pointer;
+.spacer {
+    flex-grow: 1;
 }
 
-.menu{
-    z-index: 20;
-    top: 0;
-    left: 0;
-    display: grid;
-    place-items: center;
-    width: 100%;
-    height: 100%;
-    background: hsla(0, 0%, 0%, 0.6);
-    opacity: 0;
-    visibility: hidden;
+.logo-navbar{
+    padding: .7rem;
 }
-.menu nav:hover a{
-    opacity: 0.25;
+
+.logo-navbar img{
+    width: 3.2rem;
 }
-.menu nav a:hover{
-    opacity: 1;
-}
-.menu nav{
+
+.navLinksDesktop {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-.menu a,
-.IconosMenu{
-    position: relative;
-    color: var(--light);
-    font-size: min( calc(.8rem + 1vw), 1.6rem);
-    padding: min( calc(.3rem + 1vw), 1rem);
-    line-height: 1.5rem;
-    width: 400px;
-    text-decoration: none;
-    transition: 0.4s;
-}
-.IconosMenu{
-    padding:  0;
-}
-.IconosMenu a li{
-    padding: 20px 0;
-}
 
-.menu a::after{
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 10px;
-    width: 100%;
-    height: 2px;
-    border-radius: 2px;
-    background: #f7f7f7;
-    transform: scaleX(0);
-    transform-origin: 0% 50%;
-    transition: 0.4s;
-}
-@keyframes appear {
-    0%{
-        opacity: 0;
-        translate: 0 50px;
+    a {
+        color: var(--colour-first);
+        text-decoration: none;
+        padding: 1rem;
+        transition: 0.4s;
+        font-size: max(1rem, calc(.5rem + .5vw + .8vh)); 
     }
-    100%{
-        opacity: 1;
+
+    a:hover {
+        opacity: 0.75;
     }
 }
-.menu a:hover::after{
-    transform: scaleX(1);
-}
-body.open .burguer{
-    background-image: url(../../../public/img/close.svg);
-}
-body.open .menu{
-    opacity: 1;
-    visibility: visible;
-}
-body.open .menu a{
-    animation: appear 0.3s backwards;
-}
-body.open .background{
-    filter: blur(10px);
+
+.burger {
+    color: white !important;
+    display: none !important;
 }
 
-.delay00{
-    animation-delay: 0.1s;
-}
-.delay01{
-    animation-delay: 0.2s;
-}
-.delay02{
-    animation-delay: 0.3s;
-}
-.delay03{
-    animation-delay: 0.4s;
-}
-.delay04{
-    animation-delay: 0.5s;
-}
-.delay05{
-    animation-delay: 0.6s;
-}
-.delay06{
-    animation-delay: 0.6s;
-}
-.delay06{
-    animation-delay: 0.7s;
-}
-.delay07{
-    animation-delay: 0.8s;
-}
-.delay08{
-    animation-delay: 0.9s;
-}
-.delay09{
-    animation-delay: 1s;
-    text-align: left;
-}
-.delay10{
-    animation-delay: 1.1s;
-}
-
-
-.CartImg {
-    margin-right: 1rem;
-}
-.LoginName{
-    display: flex;
-    justify-content: center;
-}
-.LoginName h3{
-    color: var(--light);
-    text-shadow: .1rem .1rem .25rem var(--dark);
-    font-size: 1.8rem;
-    padding: 2rem 0;
-}
-.AdminList li{
-    text-shadow: .1rem .1rem .25rem var(--dark);
-}
-@media (width <= 740px) {
-
-    .menu{
-        padding-left: 4rem;
-        padding-top: 4rem;
-        align-items: start;
+@media (max-width: 740px) {
+    .navLinksDesktop {
+        display: none;
     }
-    
-    .menu a, .IconosMenu a li{
-        padding: 1rem 0;
+
+    .burger {
+        display: block !important;
     }
 }

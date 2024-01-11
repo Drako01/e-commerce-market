@@ -1,32 +1,72 @@
-import { NavLink } from 'react-router-dom';
-import './Navbar.css'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import {
+    AppBar,
+    Toolbar,
+    IconButton,
+    Drawer,
+    List,
+    ListItem,
+    ListItemText,
+} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
+import logo from '../assets/img/logo.svg'
+import './Navbar.css';
 
 const Navbar = () => {
+    const [isDrawerOpen, setDrawerOpen] = useState(false);
 
-    const toggleMenu = () => {
-        const liElements = document.querySelectorAll('.menu li');
-        const nonNavLinkElements = Array.from(liElements).filter(
-            (li) => !li.querySelector('a')
-        );
-        document.body.classList.toggle('open');
-        nonNavLinkElements.forEach((elem) =>
-            elem.addEventListener('click', () => {
-                document.body.classList.remove('open');
-            })
-        );
+    const toggleDrawer = (open) => () => {
+        setDrawerOpen(open);
     };
 
+    const navLinks = [
+        { to: '/', text: 'Inicio' },
+        { to: '/productos', text: 'Productos' },
+        { to: '/contacto', text: 'Contáctenos' },
+    ];
+
     return (
-        <section>
-            <button className='burguer' onClick={toggleMenu}></button>
-            <div className='menu'>
-                <nav>
-                    <NavLink to='/' className={'delay00'}><li>Inicio</li></NavLink>
-                    <NavLink to='/' className={'delay01'}><li>Productos</li></NavLink>
-                    <NavLink to='/' className={'delay02'}><li>Contactenos</li></NavLink>
-                </nav>
-            </div>
-        </section>
+        <AppBar position="sticky" className="appBar">
+            <Toolbar>
+                <Link to="/" className="logo-navbar">
+                    <img src={logo} alt='ArmoTuSitio.com' />
+                </Link>
+                <div className="spacer" />
+                <div className="navLinksDesktop">
+                    {navLinks.map((link, index) => (
+                        <Link to={link.to} key={index}>
+                            {link.text}
+                        </Link>
+                    ))}
+                </div>
+                <IconButton
+                    className="burger"
+                    onClick={toggleDrawer(!isDrawerOpen)}
+                >
+                    {isDrawerOpen ? <CloseIcon /> : <MenuIcon />}
+                </IconButton>
+                <Drawer
+                    anchor="right"
+                    open={isDrawerOpen}
+                    onClose={toggleDrawer(false)}
+                >
+                    <List>
+                        {navLinks.map((link, index) => (
+                            <ListItem button key={index}>
+                                <Link
+                                    to={link.to}
+                                    onClick={toggleDrawer(false)}
+                                >
+                                    <ListItemText primary={link.text} />
+                                </Link>
+                            </ListItem>
+                        ))}
+                    </List>
+                </Drawer>
+            </Toolbar>
+        </AppBar>
     );
 };
 
