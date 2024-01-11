@@ -67,9 +67,7 @@ const ProductCard = ({ product, buttonVariant, buttonColor, buttonName, clase, c
             console.log('No se puede decrementar, cantidad mínima alcanzada');
         }
     };
-    const handleAddToCart = (quantity) => {
-        console.log('Product:', product);
-        console.log('Quantity:', quantity);
+    const handleAddToCart = (quantity) => {       
         addItem(product, quantity);
     };
     

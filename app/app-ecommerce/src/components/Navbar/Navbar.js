@@ -26,6 +26,7 @@ const Navbar = () => {
         { to: '/', text: 'Inicio' },
         { to: '/productos', text: 'Productos' },
         { to: '/contacto', text: 'Contáctenos' },
+        { to: '/login', text: 'Login' },
     ];
 
     return (

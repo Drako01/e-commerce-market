@@ -38,3 +38,77 @@
     font-weight: 100;
     font-size: 1rem;
 }
+.ModalCarrito{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.ModalCarrito .modal-content{
+    background-color: var(--colour-first);
+    min-width: 620px;
+    max-width: calc(100% - 4rem);
+    padding: 2rem;
+    border-radius: .5rem;
+}
+.ModalCarrito .modal-content span{
+    font-weight: 600;
+}
+.ModalCarrito .modal-content button{
+    margin: 1rem;
+}
+.ContenedorCompra{
+    margin: 2rem 0;
+}
+.ItemsCart{
+    display: flex;
+    justify-content: flex-end;
+    height: 48px;
+    width: 100%;
+}
+.ParrafoCart{
+    display: flex;
+    justify-content: flex-end;
+}
+.ParrafoCart p{
+    text-align: right !important;
+    margin-inline-start: 1rem;
+    margin-inline-end: 1rem;
+}
+.ItemsCart .ImagenItemCart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: cover;
+}
+.ItemsCart img{
+    height: 42px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.TotalAPagar{
+    font-size: 1.5rem;
+    font-weight: 100;
+}
+
+.classButtonClearCards{
+    background-color: var(--brick) !important;
+}
+.CarritoVacio{
+    padding: 0 0 2.2rem 0!important;
+    text-align: center;
+    color: var(--brick);
+}
+.ContenedorDeBotonCerrarX{
+    display: flex;
+    justify-content: flex-end;
+}
+.CarritoVacio button{
+    right: 0;
+    font-size: 1.2rem;
+    
+}
+.EliminarItem {
+    fill: var(--brick) !important;
+}
