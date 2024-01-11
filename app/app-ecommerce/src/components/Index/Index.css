@@ -1,0 +1,19 @@
+.logotipo{
+    margin-top: 2rem;
+    width: 300px;
+}
+.avatar {
+    width: 200px;
+    border-radius: 2rem;
+    margin-top: 2rem;
+    cursor: pointer;
+    margin-bottom: 2rem;
+}
+
+.App-index {
+    width: calc(100% - 2rem);
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+}
