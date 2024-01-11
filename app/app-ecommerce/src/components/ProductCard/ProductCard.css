@@ -49,3 +49,53 @@
 .AddedQuantity h4{
     color: var(--colour-second);
 }
+
+@media (max-width: 564px) {
+    body {
+        zoom: 80%;
+    }
+
+    .cardMediaImage {
+        width: 192px;
+        height: 176px;
+    }
+
+    .css-o69gx8-MuiCardMedia-root {
+        width: auto !important;
+        height: auto !important;
+    }
+
+    .cardMediaImage img {
+        max-width: calc(100% - 1rem);
+        max-height: 160px;
+    }
+
+    .css-1yr8029-MuiTypography-root {
+        font-size: 0.88rem !important;
+        font-weight: 600 !important;
+    }
+
+    .IconFavorito {
+        color: var(--colour-fifth) !important;
+    }
+
+    .IconFavoritoAdded {
+        color: var(--brick) !important;
+    }
+
+    .classButtonCards {
+        background-color: var(--colour-second) !important;
+    }
+
+    .AddedQuantity {
+        min-height: 0.8rem;
+    }
+
+    .AddedQuantity .ButtonControls {
+        font-size: 1.2rem;
+    }
+
+    .AddedQuantity h4 {
+        font-size: 0.8rem;
+    }
+}
