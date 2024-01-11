@@ -22,6 +22,7 @@
 
 .navLinksDesktop {
     display: flex;
+    align-items: center;
 
     a {
         color: var(--colour-first);
@@ -36,8 +37,14 @@
     }
 }
 
+.MuiDrawer-paper{
+    background-color: var(--colour-second) !important;
+}
+.MuiDrawer-paper a{
+    color: var(--colour-first) !important;
+}
 .burger {
-    color: white !important;
+    color: var(--colour-first) !important;
     display: none !important;
 }
 

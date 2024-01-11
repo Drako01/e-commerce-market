@@ -1,0 +1,19 @@
+.CartWidget {
+    position: relative;
+    min-width:5rem;
+    max-width: 8rem;    
+    font-size: 1.2rem;
+    background: transparent;    
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    border: none;
+    border-style: none;
+    cursor: pointer;
+    outline: inherit;
+}
+.CartWidget h4{
+    color: var(--colour-fourth);
+    margin-left: 1rem;
+    font-weight: lighter;
+}

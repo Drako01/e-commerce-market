@@ -12,6 +12,7 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import logo from '../assets/img/logo.svg'
+import CartWidget from '../CartWidget/CartWidget';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -39,7 +40,9 @@ const Navbar = () => {
                         <Link to={link.to} key={index}>
                             {link.text}
                         </Link>
+                        
                     ))}
+                    <CartWidget />
                 </div>
                 <IconButton
                     className="burger"
@@ -51,6 +54,7 @@ const Navbar = () => {
                     anchor="right"
                     open={isDrawerOpen}
                     onClose={toggleDrawer(false)}
+                    className='Contenido'
                 >
                     <List>
                         {navLinks.map((link, index) => (
@@ -63,6 +67,7 @@ const Navbar = () => {
                                 </Link>
                             </ListItem>
                         ))}
+                        <CartWidget />
                     </List>
                 </Drawer>
             </Toolbar>

@@ -9,7 +9,7 @@ const useStyles = makeStyles({
     productCard: {
         width: 280,
         margin: 10,
-        height: 480,
+        height: 512,
         border: '0.1px solid #eee',
         display: 'flex',
         flexDirection: 'column',
@@ -18,6 +18,7 @@ const useStyles = makeStyles({
         maxHeight: 240,
         maxWidth: 240,
         objectFit: 'cover',
+        marginTop: '1rem',
     },
     content: {
         display: 'flex',
@@ -30,16 +31,30 @@ const useStyles = makeStyles({
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: '1rem',
-        margin: ' 0 .5rem'
+        margin: ' 0 .5rem',
+        marginBottom: '1rem',
     },
 });
 
-const ProductCard = ({ product, buttonVariant, buttonColor, buttonName, clase, classButton }) => {
+const ProductCard = ({ product, buttonVariant, buttonColor, buttonName, clase, classButton, stock = 0, initial = 1, onAdd }) => {
     const classes = useStyles();
     const [isFavoritoAdded, setFavoritoAdded] = useState(false);
 
     const handleFavoritosClick = () => {
         setFavoritoAdded(!isFavoritoAdded);
+    };
+    const [quantity, setQuantity] = useState(initial);
+
+    const increment = () => {
+        if (quantity < stock) {
+            setQuantity(quantity + 1);
+        }
+    };
+
+    const decrement = () => {
+        if (quantity > 1) {
+            setQuantity(quantity - 1);
+        }
     };
 
     return (
@@ -75,7 +90,21 @@ const ProductCard = ({ product, buttonVariant, buttonColor, buttonName, clase, c
                 {product.stock === 0 ? (
                     <span>Sin stock</span>
                 ) : (
-                    <Button variant={buttonVariant} color={buttonColor} nombre={buttonName} classButton={classButton} />
+                    <div>
+                        <div className='AddedQuantity'>
+                            <button className='ButtonControls' onClick={decrement}>
+                                -
+                            </button>
+                            <h4 className='Number'>{quantity}</h4>
+                            <button className='ButtonControls' onClick={increment}>
+                                +
+                            </button>
+                        </div>
+
+                        <Button variant={buttonVariant} color={buttonColor} nombre={buttonName} classButton={classButton} onClick={() => onAdd(quantity)} />
+
+                    </div>
+
                 )}
             </div>
         </Card>

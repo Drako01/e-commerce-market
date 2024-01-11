@@ -1,9 +1,9 @@
 import React from 'react';
-import './Products.css';
+import './ProductsPage.css';
 import { products } from '../ProductList/products.js';
 import ProductList from '../ProductList/ProductList.js';
 
-const Products = () => {
+const ProductsPage = () => {
 
     return (
         <>
@@ -17,4 +17,4 @@ const Products = () => {
     );
 };
 
-export default Products;
+export default ProductsPage;

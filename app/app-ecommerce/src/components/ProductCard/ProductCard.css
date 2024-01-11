@@ -32,3 +32,20 @@
 .classButtonCards{
     background-color: var(--colour-second) !important;
 }
+
+.AddedQuantity{
+    display: flex;
+    min-height: 1rem;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.AddedQuantity .ButtonControls{
+    background-color: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--colour-second);
+    cursor: pointer;
+}
+.AddedQuantity h4{
+    color: var(--colour-second);
+}
