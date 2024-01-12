@@ -14,6 +14,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import logo from '../assets/img/logo.svg'
 import CartWidget from '../CartWidget/CartWidget';
+import FavoriteWidget from '../FavoriteWidget/FavoriteWidget';
 import { auth } from '../../Firebase/firebaseConfig';
 import './Navbar.css';
 
@@ -62,13 +63,16 @@ const Navbar = () => {
         <AppBar position="sticky" className="appBar">
             <Toolbar>
                 {authenticated && userProfile ? (
-                    <Link to="/" className="logo-navbar Avatar">
-                        <Avatar alt={userProfile.displayName} src={userProfile.photoURL} />
-                        <p>{userProfile.displayName}</p>
-                    </Link>
+                    <>
+                        <Link to="/" className="logo-navbar Avatar">
+                            <Avatar alt={userProfile.displayName} src={userProfile.photoURL} />
+                            <p>{userProfile.displayName}</p>
+                        </Link>
+                        <FavoriteWidget />
+                    </>
                 ) : (
                     <Link to="/" className="logo-navbar">
-                        <Avatar src={logo} alt='ArmoTuSitio.com' />                        
+                        <Avatar src={logo} alt='ArmoTuSitio.com' />
                     </Link>
                 )}
 

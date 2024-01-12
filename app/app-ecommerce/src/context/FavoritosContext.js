@@ -1,30 +1,31 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 
 const FavoritosContext = createContext();
 
+const getFavoritosFromLocalStorage = () => {
+    const favoritosString = localStorage.getItem("favoritos");
+    if (favoritosString) {
+        return JSON.parse(favoritosString);
+    } else {
+        return [];
+    }
+};
+
 export const FavoritosProvider = ({ children }) => {
-    const [favoritos, setFavoritos] = useState([]);
-
-    // Cargar favoritos del local storage al montar el componente
-    useEffect(() => {
-        const storedFavoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
-        setFavoritos(storedFavoritos);
-    }, []);
-
-    // Update local storage cuando cambian los favoritos
-    useEffect(() => {
-        localStorage.setItem('favoritos', JSON.stringify(favoritos));
-    }, [favoritos]);
+    const [favoritos, setFavoritos] = useState(getFavoritosFromLocalStorage());
 
     const addFavorito = (product) => {
         setFavoritos((prevFavoritos) => [...prevFavoritos, product]);
     };
 
     const removeFavorito = (productId) => {
-        setFavoritos((prevFavoritos) =>
-            prevFavoritos.filter((product) => product.id !== productId)
-        );
+        const updatedFavoritos = favoritos.filter((product) => product.id !== productId);
+        setFavoritos(updatedFavoritos);
     };
+
+    useEffect(() => {
+        localStorage.setItem("favoritos", JSON.stringify(favoritos));
+    }, [favoritos]);
 
     return (
         <FavoritosContext.Provider value={{ favoritos, addFavorito, removeFavorito }}>

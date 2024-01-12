@@ -1,0 +1,149 @@
+.FavoriteWidget {
+    position: relative;
+    min-width: 15rem;
+    max-width: 20rem;
+    font-size: 1.2rem;
+    background: transparent;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none;
+    border: none;
+    border-style: none;
+    cursor: pointer;
+    outline: inherit;
+}
+
+.CantidadSpan {
+    background-color: var(--colour-first);
+    padding: .5rem;
+    border-radius: 50%;
+    width: 1.4rem;
+    height: 1.4rem;
+    margin-left: 1rem;
+}
+
+.FavoriteWidget h4 {
+    color: var(--colour-second) !important;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0;
+    font-weight: lighter;
+    font-weight: bold;
+    padding: 0;
+}
+
+.ModalFavoritos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.ModalFavoritos .modal-content {
+    background-color: var(--colour-first);
+    max-width: calc(100% - 4rem);
+    padding: 2rem;
+    border-radius: .5rem;
+}
+
+.ModalFavoritos .modal-content span {
+    font-weight: 600;
+}
+
+.ModalFavoritos .modal-content button {
+    margin: 1rem;
+}
+
+.ContenedorFavoritos {
+    margin: 2rem 0;
+}
+
+.ItemFavorito {
+    display: flex;
+    justify-content: flex-end;
+    height: 48px;
+    width: 100%;
+}
+
+.ImagenItemFavorito {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: cover;
+}
+
+.ImagenItemFavorito img {
+    height: 42px;
+    margin-right: auto;
+}
+
+.BotonesFavoritos {
+    display: flex;
+    flex-direction: column !important;
+}
+
+.FavoritosVacios {
+    padding: 0 0 2.2rem 0 !important;
+    text-align: center;
+    color: var(--brick);
+    min-width: 320px;
+}
+
+.FavoritosVacios button {
+    font-size: 1rem;
+}
+
+@media (max-width: 640px) {
+    .ModalFavoritos .modal-content {
+        width: calc(100% - 4rem) !important;
+        margin: 0 4rem;
+        padding: 1rem;
+    }
+
+    .ContenedorFavoritos {
+        margin: 1rem 0;
+    }
+
+    .ItemFavorito {
+        height: auto;
+    }
+
+    .ItemFavorito .ImagenItemFavorito {
+        margin-bottom: 1rem;
+    }
+
+    .ItemFavorito img {
+        margin-right: 0;
+    }
+
+    .BotonesFavoritos {
+        display: flex;
+        flex-direction: column !important;
+    }
+
+    .FavoritosVacios {
+        padding: 0 0 2.2rem 0 !important;
+        text-align: center;
+        color: var(--brick);
+        min-width: 320px;
+    }
+}
+
+@media (max-width: 480px) {
+    .BotonesFavoritos {
+        display: flex;
+        flex-direction: column !important;
+    }
+
+    .FavoritosVacios {
+        padding: 0 0 2.2rem 0 !important;
+        text-align: center;
+        color: var(--brick);
+        min-width: 320px;
+    }
+
+    .FavoritosVacios button {
+        font-size: 1rem;
+    }
+}
