@@ -73,8 +73,23 @@ const CartWidget = () => {
         });
     };
 
-    const handlePayCart = () => {
-        console.log('Se compraron estos productos: ', cart)
+    const handlePayCart = () => { 
+        handleCloseModal(true);       
+        Swal.fire({
+            title: 'Confirmación',
+            text: '¿Estás seguro de que deseas comprar todo el carrito?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, Obvio',
+            cancelButtonText: 'Cancelar',
+        }).then((result) => {
+            if (result.isConfirmed) {    
+                clearCart();            
+                localStorage.removeItem('cart');
+                
+                Swal.fire('Feliciaciones', 'Tu compra ha sido procesada correctamente.', 'success');
+            }
+        });
     }
 
     return (
