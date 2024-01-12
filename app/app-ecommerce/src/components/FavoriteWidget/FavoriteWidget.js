@@ -21,8 +21,8 @@ const FavoriteWidget = () => {
     return (
         <>
             <div className="FavoriteWidget" onClick={handleOpenModal}>
-                <p>| Mis Favoritos</p>
-                {/* <FavoriteIcon className="favorite-icon" /> */}
+                <p>| Mis Favoritos </p>
+                <FavoriteIcon className="favorite-icon" />
                 {favoritos.length !== 0 ? (
                     <div className='CantidadSpan'>
                         <h4>{favoritos.length}</h4>
