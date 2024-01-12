@@ -2,8 +2,10 @@ import React from 'react';
 import './Index.css';
 import { products } from '../ProductList/products.js';
 import ProductList from '../ProductList/ProductList';
+import { Typography } from '@material-ui/core';
 
-const Index = () => {
+
+const Index = ({greeting}) => {
     const ofertaProducts = [];
     // Filtra los productos que tienen "stock: 0"
     
@@ -16,8 +18,8 @@ const Index = () => {
 
     return (
         <>
-            <section className='Titulo'>
-                <h1>Ofertas</h1>
+            <section className='Titulo'>                
+                <Typography variant="h1" className='Titular'>{greeting}</Typography>
             </section>
             <div className="App-index inicio">
                 <ProductList products={ofertaProducts} />

@@ -1,3 +1,5 @@
+// FavoritosContext.js
+
 import React, { createContext, useState, useContext, useEffect } from 'react';
 
 const FavoritosContext = createContext();
@@ -23,12 +25,21 @@ export const FavoritosProvider = ({ children }) => {
         setFavoritos(updatedFavoritos);
     };
 
+    const clearFavorite = () => {
+        setFavoritos([]);
+    };
+
     useEffect(() => {
         localStorage.setItem("favoritos", JSON.stringify(favoritos));
     }, [favoritos]);
 
     return (
-        <FavoritosContext.Provider value={{ favoritos, addFavorito, removeFavorito }}>
+        <FavoritosContext.Provider value={{ 
+            favoritos, 
+            addFavorito, 
+            removeFavorito,
+            clearFavorite
+            }}>
             {children}
         </FavoritosContext.Provider>
     );
@@ -41,3 +52,5 @@ export const useFavoritos = () => {
     }
     return context;
 };
+
+

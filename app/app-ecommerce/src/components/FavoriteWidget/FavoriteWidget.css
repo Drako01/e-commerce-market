@@ -14,24 +14,21 @@
     outline: inherit;
     gap: 1rem;
 }
-
 .CantidadSpan {
     background-color: var(--colour-first);
     padding: .5rem;
     border-radius: 50%;
     width: 1.4rem;
     height: 1.4rem;
-    margin-left: 1rem;
 }
 
 .FavoriteWidget h4 {
-    color: var(--colour-second) !important;
+    color: var(--colour-first) !important;
     text-align: center;
-    vertical-align: middle;
+    vertical-align: middle !important;
     margin: 0;
     font-weight: lighter;
-    font-weight: bold;
-    padding: 0;    
+    font-weight: bold;    
 }
 
 .ModalFavoritos {
@@ -53,7 +50,7 @@
 }
 
 .ModalFavoritos .modal-content button {
-    margin: 1rem;
+    margin: 1rem;    
 }
 
 .ContenedorFavoritos {
@@ -69,11 +66,23 @@
 
 .ImagenItemFavorito {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     object-fit: cover;
+    width: 100%;
 }
-
+.TextoAlineado{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.FavHeart{
+    color: var(--brick);
+}
+.TextoAlineado h2{
+    vertical-align: middle;
+}
 .ImagenItemFavorito img {
     height: 42px;
     margin-right: auto;
@@ -87,7 +96,7 @@
 .FavoritosVacios {
     padding: 0 0 2.2rem 0 !important;
     text-align: center;
-    color: var(--brick);
+    color: var(--brick) !important;
     min-width: 320px;
 }
 

@@ -63,3 +63,14 @@ a{
     border-radius: 50%;
     box-shadow: 3px 5px 20px var(--colour-second);
 }
+.Titulo{
+    padding: 2rem 0;
+}
+.Titulo h1{
+    text-align: center;
+    font-weight: lighter;
+    font-weight: bold;
+    font-family: var(--fontR);
+    color: var(--colour-second);
+    font-size: max(1rem, calc(1rem + 1.5vw + 1.5vh));  
+}

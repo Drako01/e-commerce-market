@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Signup = () => {
+const Signup = ({ greeting }) => {
     const classes = useStyles();
     const auth = getAuth();
     const storage = getStorage();
@@ -142,12 +142,16 @@ const Signup = () => {
     return (
         <ThemeProvider theme={theme}>
             <div className="LoginModule">
-                <Typography variant="h1" className="Mini">Crear cuenta</Typography>
+                <section className='Titulo'>
+                    <Typography variant="h1" className='Titular'>{greeting}</Typography>
+                </section>
                 {error &&
                     <Typography variant="body1">{error}</Typography>
                 }
                 <form onSubmit={handleSignup} className={classes.cardAdmin}>
-                    <img src={foto} alt='Foto de Perfil' className="FotoPerfilNull" />
+                    <div className="FotoPerfilNull">
+                        <img src={foto} alt='Foto de Perfil' />
+                    </div>
                     <Typography variant="body1">Ingrese su foto de perfil</Typography>
                     <TextField
                         type="file"

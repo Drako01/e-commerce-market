@@ -56,10 +56,22 @@ const CartWidget = () => {
     };
 
     const handleCrearCart = () => {
-        clearCart()
-        localStorage.removeItem('cart');
-        handleCloseModal(true)
-    }
+        handleCloseModal(true);
+        Swal.fire({
+            title: 'Confirmación',
+            text: '¿Estás seguro de que deseas vaciar el carrito?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, vaciar',
+            cancelButtonText: 'Cancelar',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                clearCart();
+                localStorage.removeItem('cart');                
+                Swal.fire('Vaciado', 'El carrito se ha sido vaciado correctamente.', 'success');
+            }
+        });
+    };
 
     const handlePayCart = () => {
         console.log('Se compraron estos productos: ', cart)
@@ -108,8 +120,7 @@ const CartWidget = () => {
                                 {cart.map((product) => (
                                     <div key={product.id} className='ItemsCart'>
                                         <div className='ImagenItemCart'>
-                                            <img src={product.foto} alt={product.descripcion} />
-                                        
+                                            <img src={product.foto} alt={product.descripcion} />                                        
                                             <p><span>{product.marca} {product.subcategoria}</span> - Cantidad: <span>{product.quantity}</span></p>
                                         </div>
                                         <IconButton onClick={() => removeItem(product.id)} aria-label="Eliminar">

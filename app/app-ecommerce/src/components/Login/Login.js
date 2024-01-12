@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Login = () => {
+const Login = ({greeting}) => {
     const classes = useStyles();
     const auth = getAuth();
     const [email, setEmail] = useState("");
@@ -104,7 +104,9 @@ const Login = () => {
     return (
         <ThemeProvider theme={theme}>
             <div className="LoginModule">
-                <Typography variant="h1" className="Mini">Login</Typography>
+            <section className='Titulo'>                
+                <Typography variant="h1" className='Titular'>{greeting}</Typography>
+            </section>
                 {error &&
                     <Typography variant="body1">{error}</Typography>
                 }

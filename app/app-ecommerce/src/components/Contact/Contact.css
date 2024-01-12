@@ -1,0 +1,15 @@
+.ContactoFrame{
+    align-items: normal;
+}
+.Contacto{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.Contacto iframe{
+    width: 680px;
+    height: 480px;
+    border: none;
+    border-radius: .5rem;
+}

@@ -19,10 +19,3 @@
     justify-content: center;
 }
 
-.Titulo {
-    text-align: center;
-    font-weight: lighter;
-    font-family: var(--fontR);
-    color: var(--colour-second);
-    font-size: max(1rem, calc(1rem + 1vw + 1vh));  
-}

@@ -37,7 +37,7 @@ const useStyles = makeStyles({
     },
 });
 
-const ProductCard = ({ product, buttonVariant, buttonColor, buttonName, clase, classButton, stock = 0, initial = 1, onAdd }) => {
+const ProductCard = ({ product, buttonVariant, buttonColor, buttonName, classButton, stock = 0, initial = 1 }) => {
     const classes = useStyles();
     const [quantity, setQuantity] = useState(initial);
     const { addItem } = useCart();

@@ -1,12 +1,7 @@
 .LoginModule{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-top: 5rem;
-    height: 70vh;
+    align-items: center;   
+    height: 100vh;
     margin-bottom: 1rem;
-}
-.LoginModule h1{
-    font-size: 2rem;
-    margin-bottom: 2rem;
 }
