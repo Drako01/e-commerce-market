@@ -67,14 +67,14 @@ const CartWidget = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 clearCart();
-                localStorage.removeItem('cart');                
+                localStorage.removeItem('cart');
                 Swal.fire('Vaciado', 'El carrito se ha sido vaciado correctamente.', 'success');
             }
         });
     };
 
-    const handlePayCart = () => { 
-        handleCloseModal(true);       
+    const handlePayCart = () => {
+        handleCloseModal(true);
         Swal.fire({
             title: 'Confirmación',
             text: '¿Estás seguro de que deseas comprar todo el carrito?',
@@ -83,14 +83,31 @@ const CartWidget = () => {
             confirmButtonText: 'Sí, Obvio',
             cancelButtonText: 'Cancelar',
         }).then((result) => {
-            if (result.isConfirmed) {    
-                clearCart();            
+            if (result.isConfirmed) {
+                clearCart();
                 localStorage.removeItem('cart');
-                
                 Swal.fire('Feliciaciones', 'Tu compra ha sido procesada correctamente.', 'success');
             }
         });
     }
+
+    const handleDeleteItem = (productId) => {
+        Swal.fire({
+            title: 'Confirmación',
+            text: '¿Estás seguro de que deseas eliminar este producto del carrito?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                removeItem(productId);
+                localStorage.removeItem('cart');
+                Swal.fire('Eliminado', 'El producto ha sido eliminado del carrito correctamente.', 'success');
+            }
+        });
+    };
+
 
     return (
         <>
@@ -135,10 +152,10 @@ const CartWidget = () => {
                                 {cart.map((product) => (
                                     <div key={product.id} className='ItemsCart'>
                                         <div className='ImagenItemCart'>
-                                            <img src={product.foto} alt={product.descripcion} />                                        
+                                            <img src={product.foto} alt={product.descripcion} />
                                             <p><span>{product.marca} {product.subcategoria}</span> - Cantidad: <span>{product.quantity}</span></p>
                                         </div>
-                                        <IconButton onClick={() => removeItem(product.id)} aria-label="Eliminar">
+                                        <IconButton onClick={() => handleDeleteItem(product.id)} aria-label="Eliminar">
                                             <DeleteIcon className='EliminarItem' />
                                         </IconButton>
                                     </div>
@@ -146,30 +163,30 @@ const CartWidget = () => {
                             </div>
                             <hr />
                             <p className='TotalAPagar'>Total: <span>${getTotalPrice().toFixed(2)}</span></p>
-                            <div className='BotonesCart'>                            
-                            <Boton
-                                nombre={'Cerrar'}
-                                onClick={handleCloseModal}
-                                color={'primary'}
-                                variant={'contained'}
-                            >
-                            </Boton>
-                            <Boton
-                                nombre={'Vaciar Carrito'}
-                                onClick={handleCrearCart}
-                                color={'primary'}
-                                variant={'contained'}
-                                classButton={'classButtonClearCards'}
-                            >
-                            </Boton>
-                            <Boton
-                                nombre={'Comprar'}
-                                onClick={handlePayCart}
-                                color={'primary'}
-                                variant={'contained'}
-                                classButton={'classButtonCards'}
-                            >
-                            </Boton>
+                            <div className='BotonesCart'>
+                                <Boton
+                                    nombre={'Cerrar'}
+                                    onClick={handleCloseModal}
+                                    color={'primary'}
+                                    variant={'contained'}
+                                >
+                                </Boton>
+                                <Boton
+                                    nombre={'Vaciar Carrito'}
+                                    onClick={handleCrearCart}
+                                    color={'primary'}
+                                    variant={'contained'}
+                                    classButton={'classButtonClearCards'}
+                                >
+                                </Boton>
+                                <Boton
+                                    nombre={'Comprar'}
+                                    onClick={handlePayCart}
+                                    color={'primary'}
+                                    variant={'contained'}
+                                    classButton={'classButtonCards'}
+                                >
+                                </Boton>
                             </div>
                         </div>
                     </>

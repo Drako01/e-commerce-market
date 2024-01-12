@@ -39,7 +39,22 @@ const FavoriteWidget = () => {
             }
         });
     }
-    
+    const handleDeleteItem = (productId) => {
+        Swal.fire({
+            title: 'Confirmación',
+            text: '¿Estás seguro de que deseas eliminar este producto de Favoritos?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                removeFavorito(productId);
+                localStorage.removeItem('cart');
+                Swal.fire('Eliminado', 'El producto ha sido eliminado de Favoritos correctamente.', 'success');
+            }
+        });
+    };
 
     return (
         <>
@@ -66,10 +81,10 @@ const FavoriteWidget = () => {
                                     <div className='ImagenItemFavorito'>
                                         <img src={product.foto} alt={product.descripcion} />
                                         <p><span>{product.marca} {product.subcategoria}</span></p>
-                                    </div>
-                                    <IconButton onClick={() => removeFavorito(product.id)} aria-label="Eliminar">
-                                        <DeleteIcon className='EliminarItem' />
-                                    </IconButton>
+                                    </div>                                    
+                                    <IconButton onClick={() => handleDeleteItem(product.id)} aria-label="Eliminar">
+                                            <DeleteIcon className='EliminarItem' />
+                                        </IconButton>
                                 </div>
                             ))}
                         </div>
