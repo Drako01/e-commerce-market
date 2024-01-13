@@ -1,8 +1,8 @@
 import { Routes, Route} from 'react-router-dom';
 import Index from '../Index/IndexFirebase';
 import ProductsPage from '../ProductsPage/ProductsPageFirebase';
-// import Index from '../Index/Index';
-// import ProductsPage from '../ProductsPage/ProductsPage';
+// import Index from '../Index/IndexLocal';
+// import ProductsPage from '../ProductsPage/ProductsPageLocal';
 import Login from '../Login/Login';
 import Signup from '../Signup/Signup';
 import Contact from '../Contact/Contact';
