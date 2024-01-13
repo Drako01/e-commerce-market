@@ -1,18 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Boton from '../Boton/Boton';
 import { Modal } from '@mui/material';
 import { useFavoritos } from '../../context/FavoritosContext';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
+import { auth } from '../../Firebase/firebaseConfig';
 import Swal from 'sweetalert2';
 import './FavoriteWidget.css';
 
 const FavoriteWidget = () => {
     const { favoritos, removeFavorito, clearFavorite } = useFavoritos();
-
+    const [authenticated, setAuthenticated] = useState(false);
+    const [userProfile, setUserProfile] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (user) {
+                setAuthenticated(true);
+                setUserProfile(user);
+            } else {
+                setAuthenticated(false);
+                setUserProfile(null);
+            }
+        });
+        return unsubscribe;
+    }, []);
     const handleOpenModal = () => {
         setIsModalOpen(true);
     };
@@ -57,7 +70,10 @@ const FavoriteWidget = () => {
     };
 
     return (
+        
         <>
+        {authenticated && userProfile ? (
+                    <>
             <div className="FavoriteWidget" onClick={handleOpenModal}>
                 <p>| Mis Favoritos </p>
                 {favoritos.length !== 0 ? (
@@ -117,6 +133,10 @@ const FavoriteWidget = () => {
                     </div>
                 )}
             </Modal>
+            </>
+                ) : (
+                    <div className='hiden'></div>
+                )}
         </>
     );
 };

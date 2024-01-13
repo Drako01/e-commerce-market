@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
     AppBar,
     Toolbar,
@@ -16,13 +16,14 @@ import logo from '../assets/img/logo.svg'
 import CartWidget from '../CartWidget/CartWidget';
 import FavoriteWidget from '../FavoriteWidget/FavoriteWidget';
 import { auth } from '../../Firebase/firebaseConfig';
+import Swal from 'sweetalert2';
 import './Navbar.css';
 
 const Navbar = () => {
     const [isDrawerOpen, setDrawerOpen] = useState(false);
     const [authenticated, setAuthenticated] = useState(false);
     const [userProfile, setUserProfile] = useState(null);
-
+    const navigate = useNavigate();
 
     const toggleDrawer = (open) => () => {
         setDrawerOpen(open);
@@ -49,12 +50,35 @@ const Navbar = () => {
         return unsubscribe;
     }, []);
 
-    const handleLogout = () => {
-        auth.signOut().then(() => {
-            // Hacer cualquier limpieza adicional si es necesario
-        }).catch((error) => {
-            // Manejar errores, si los hay
-            console.error('Error al hacer logout:', error.message);
+    const handleLogout = () => {    
+        Swal.fire({
+            title: "¿Estás seguro?",
+            text: "¿Deseas cerrar sesión?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "var(--colour-second)",
+            cancelButtonColor: "var(--brick)",
+            confirmButtonText: "Sí, cerrar sesión",
+            cancelButtonText: "Cancelar",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                auth.signOut()
+                    .then(() => {
+                        Swal.fire({
+                            title: "Cerrando sesión...",
+                            icon: "info",
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+
+                        localStorage.removeItem('user');
+                        setUserProfile(null);
+                        navigate('/');
+                    })
+                    .catch((error) => {
+                        Swal.fire('Error', error.message, 'error');
+                    });
+            }
         });
     };
 
