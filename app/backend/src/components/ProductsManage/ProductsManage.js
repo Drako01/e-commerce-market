@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { faEye, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2';
+import { auth } from '../../Firebase/firebaseConfig';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Modal, Form } from 'react-bootstrap';
@@ -13,8 +13,7 @@ import './ProductsManage.css'
 const ProductsManage = () => {
     const storage = getStorage();
     const urlServer = process.env.REACT_APP_URL_SERVER;
-    const [products, setProducts] = useState([]);
-    const auth = getAuth();
+    const [products, setProducts] = useState([]);    
     const [authenticated, setAuthenticated] = useState(false);
     const [currentUser, setCurrentUser] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -280,7 +279,7 @@ const ProductsManage = () => {
     }, [products]);
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
             if (user) {
                 setCurrentUser(user);
                 setAuthenticated(user.email === process.env.REACT_APP_MAIL_Admin);
@@ -291,7 +290,7 @@ const ProductsManage = () => {
         });
 
         return () => unsubscribe();
-    }, [auth]);
+    }, []);
 
     useEffect(() => {
         fetchData();

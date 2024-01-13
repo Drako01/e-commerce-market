@@ -6,11 +6,10 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
 import './UserManage.css';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../../Firebase/firebaseConfig';
 
 const UserManage = () => {
     const urlServer = process.env.REACT_APP_URL_SERVER;
-    const auth = getAuth();
     const [authenticated, setAuthenticated] = useState(false);
     const [currentUser, setCurrentUser] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -27,7 +26,7 @@ const UserManage = () => {
     const [formattedDateTime, setFormattedDateTime] = useState(null);
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
             if (user) {
                 // El usuario está autenticado
                 setCurrentUser(user);
@@ -44,7 +43,7 @@ const UserManage = () => {
         });
 
         return () => unsubscribe();
-    }, [auth]);
+    }, []);
 
     const fetchUsers = useCallback(async () => {
         setLoading(true);

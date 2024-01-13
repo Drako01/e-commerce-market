@@ -4,17 +4,17 @@ import { useState, useEffect } from 'react';
 import logo from '../../logo.svg';
 import Swal from 'sweetalert2';
 import './Navbar.css';
-import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
+import { auth } from '../../Firebase/firebaseConfig';
 
 const Navbar = () => {
-    const auth = getAuth();
+    
     const [authenticated, setAuthenticated] = useState(false);
     const [currentUser, setCurrentUser] = useState(null);
     const navigate = useNavigate();
 
     // Escucha los cambios en la autenticación y actualiza el estado del usuario
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
             if (user) {
                 // El usuario está autenticado
                 setCurrentUser(user);
@@ -32,7 +32,7 @@ const Navbar = () => {
 
         // Asegúrate de desuscribirte cuando el componente se desmonte
         return () => unsubscribe();
-    }, [auth]);
+    }, []);
 
     const handleLogout = () => {
         Swal.fire({
@@ -46,7 +46,7 @@ const Navbar = () => {
             cancelButtonText: "Cancelar",
         }).then((result) => {
             if (result.isConfirmed) {
-                signOut(auth)
+                auth.signOut()
                     .then(() => {
                         Swal.fire({
                             title: "Cerrando sesión...",
