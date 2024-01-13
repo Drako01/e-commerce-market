@@ -86,7 +86,7 @@ const CartWidget = () => {
             if (result.isConfirmed) {
                 clearCart();
                 localStorage.removeItem('cart');
-                Swal.fire('Feliciaciones', 'Tu compra ha sido procesada correctamente.', 'success');
+                Swal.fire('Felicitaciones', 'Tu compra ha sido procesada correctamente.', 'success');
             }
         });
     }
