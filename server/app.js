@@ -78,10 +78,20 @@ let dominio = program.opts().mode === 'local' ? config.urls.urlProd : config.url
 const PORT = program.opts().mode === 'dev' ? config.ports.prodPort : config.ports.devPort;
 const upServer = `Server Up! => ${dominio}:${PORT}`;
 
+// Manejar errores no capturados
+process.on('uncaughtException', (err) => {
+    loggers.error('Uncaught Exception:', err);
+    process.exit(1); // Salir de la aplicación con un código de error
+});
+
 // Inicializar el servidor
 function startServer() {
     const httpServer = app.listen(PORT, () => {
         loggers.http(upServer);
+    });
+
+    process.on('unhandledRejection', (reason, promise) => {
+        loggers.error('Unhandled Rejection at:', promise, 'reason:', reason);
     });
 
     // Cerrar conexiones de Firebase u otras tareas de limpieza antes de apagar el servidor
@@ -93,9 +103,7 @@ function startServer() {
         }
     });
 
-    process.on('unhandledRejection', (reason, promise) => {
-        loggers.error('Unhandled Rejection at:', promise, 'reason:', reason);
-    });
+    
 }
 
 startServer();

@@ -8,13 +8,47 @@ import './CartWidget.css'
 import Boton from '../Boton/Boton'
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
-
+import { auth } from '../../Firebase/firebaseConfig';
 
 const CartWidget = () => {
-    const { cart, totalQuantity, getTotalPrice, clearCart, removeItem } = useCart();
+    const { totalQuantity, getTotalPrice, clearCart, removeItem } = useCart();
     const location = useLocation();
     const [lastActivity, setLastActivity] = useState(Date.now());
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [userProfile, setUserProfile] = useState(null);
+    const urlServer = process.env.REACT_APP_URL_SERVER;
+    const [cart, setCart] = useState([]); 
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (user) {
+                setUserProfile(user);
+            } else {
+                setUserProfile(null);
+            }
+        });
+        return unsubscribe;
+    }, []);
+
+    useEffect(() => {
+      const fetchData = async () => {
+          const userId = userProfile ? userProfile.uid : null;
+          try {
+              const response = await fetch(`${urlServer}/api/cart/getCart/${userId}`);
+              if (response.ok) {
+                  const cart = await response.json();
+                  setCart(cart);
+                  localStorage.setItem("cart", JSON.stringify(cart));
+              } else {
+                  console.error(`Error fetching cart data: ${response.statusText}`);
+              }
+          } catch (error) {
+              console.error('Error fetching cart data:', error.message);
+          }
+      };
+  
+      fetchData();
+  }, [urlServer, userProfile]);
+  
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -149,11 +183,11 @@ const CartWidget = () => {
                             <h2>Carrito de Compras</h2>
                             <hr />
                             <div className='ContenedorCompra'>
-                                {cart.map((product) => (
-                                    <div key={product.id} className='ItemsCart'>
+                                {cart.items.map((product) => (
+                                    <div key={product.item.id} className='ItemsCart'>
                                         <div className='ImagenItemCart'>
-                                            <img src={product.foto} alt={product.descripcion} />
-                                            <p><span>{product.marca} {product.subcategoria}</span> - Cantidad: <span>{product.quantity}</span></p>
+                                            <img src={product.item.foto} alt={product.item.descripcion} />
+                                            <p><span>{product.item.marca} {product.item.subcategoria}</span> - Cantidad: <span>{product.item.quantity}</span></p>
                                         </div>
                                         <IconButton onClick={() => handleDeleteItem(product.id)} aria-label="Eliminar">
                                             <DeleteIcon className='EliminarItem' />

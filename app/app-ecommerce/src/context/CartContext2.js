@@ -8,7 +8,7 @@ const getCartFromLocalStorage = () => {
     if (cartString) {
         return JSON.parse(cartString);
     } else {
-        return { items: [] };
+        return [];
     }
 };
 
@@ -23,26 +23,47 @@ const getPurchaseHistoryFromLocalStorage = () => {
 
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState(getCartFromLocalStorage());
-    const [user, setUser] =useState();
     const [purchaseHistory, setPurchaseHistory] = useState(getPurchaseHistoryFromLocalStorage());
+    const [userProfile, setUserProfile] = useState(null);
+    const urlServer = process.env.REACT_APP_URL_SERVER;
+
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
             if (user) {
-                setUser(user);
+                setUserProfile(user);
             } else {
-                setUser(null);
+                setUserProfile(null);
             }
         });
         return unsubscribe;
     }, []);
-    
-    const addItem = (productToAdd, quantity) => {
-        if (!cart || !cart.items) {
-            setCart({ userId: user.id, items: [] });
+
+    useEffect(() => {
+        if (userProfile) {
+            const fetchCart = async () => {
+                try {
+                    const response = await fetch(`${urlServer}/api/cart/getCart/${userProfile.uid}`);
+                    if (response.ok) {
+                        const cartData = await response.json();
+                        setCart(cartData);
+                        localStorage.setItem("cart", JSON.stringify(cartData));
+                    } else {
+                        console.error(`Error fetching cart data: ${response.statusText}`);
+                    }
+                } catch (error) {
+                    console.error('Error fetching cart data:', error.message);
+                }
+            };
+
+            // Llamar a la función para obtener el carrito del servidor
+            fetchCart();
         }
+    }, [urlServer, userProfile]);
+
+    const addItem = (productToAdd, quantity) => {
         if (!isInCart(productToAdd.id)) {
             // Actualiza el estado del carrito agregando el producto con su cantidad
-            setCart(prev => ({ ...prev, items: [...prev.items, { ...productToAdd, quantity }] }));
+            setCart(prev => [...prev, { ...productToAdd, quantity }]);
             Swal.fire({
                 title: 'Producto agregado al carrito',
                 icon: 'success',
@@ -53,13 +74,14 @@ export const CartProvider = ({ children }) => {
                 timerProgressBar: true
             });
         } else {
-            const updatedCart = cart.items.map((item) => {
+            const updatedCart = cart.map((item) => {
                 if (item.id === productToAdd.id) {
                     return { ...item, quantity: item.quantity + quantity };
                 }
                 return item;
             });
-            setCart(prev => ({ ...prev, items: updatedCart }));
+            setCart(updatedCart);
+
             Swal.fire({
                 title: 'Cantidad actualizada en el carrito',
                 icon: 'success',
@@ -75,13 +97,10 @@ export const CartProvider = ({ children }) => {
 
 
 
-    const isInCart = (productId) => {
-        if (cart && cart.items) {
-            return cart.items.some((item) => item.product && item.product.id === productId);
-        }
-        return false;
+    const isInCart = (id) => {
+        return cart.some(prod => prod.id === id);
     };
-    
+
 
 
     const removeItem = (id) => {
@@ -89,36 +108,47 @@ export const CartProvider = ({ children }) => {
         setCart(updatedCart);
     };
 
-    function getTotalQuantity(cart) {
-        if (!cart || !cart.items) {
-            return 0;
-        }
-    
+    const getTotalQuantity = () => {
         let totalQuantity = 0;
-    
-        cart.items.forEach((item) => {
-            totalQuantity += item.quantity;
-        });
-    
-        return totalQuantity;
-    }
 
-
-    function getTotalPrice(cart) {
-        if (!cart || !cart.items) {
-            return 0;
+        if (Array.isArray(cart.items)) {
+            cart.items.forEach(prod => {
+                if (typeof prod.quantity === 'number' && !isNaN(prod.quantity)) {
+                    totalQuantity += prod.quantity;
+                } else {
+                    console.error(`Invalid quantity for product ${prod.id}`);
+                }
+            });
         }
-    
+
+        return totalQuantity;
+    };
+
+
+    const totalQuantity = getTotalQuantity();
+
+    const getTotalPrice = () => {
         let totalPrice = 0;
-    
-        cart.items.forEach((item) => {
-            totalPrice += item.price * item.quantity;
-        });
-    
+
+        if (Array.isArray(cart.items)) {
+            cart.items.forEach(item => {
+                const quantity = parseInt(item.quantity, 10);
+                const priceAsNumber = parseFloat(item.product.precio);
+
+                if (!isNaN(priceAsNumber) && !isNaN(quantity)) {
+                    totalPrice += priceAsNumber * quantity;
+                } else {
+                    console.error(`Error: Invalid quantity or price for item ${item.product.descripcion}`);
+                }
+            });
+        }
+
         return totalPrice;
-    }
+    };
 
 
+
+    const totalPrice = getTotalPrice();
 
     const getItemCount = (productId) => {
         return cart.filter((item) => item.id === productId).reduce((total, item) => total + item.quantity, 0);
@@ -154,15 +184,16 @@ export const CartProvider = ({ children }) => {
         <CartContext.Provider value={{
             cart,
             addItem,
-            totalQuantity: getTotalQuantity(),  // Calcular directamente al ser utilizado
+            totalQuantity,
             purchaseHistory,
             addToPurchaseHistory,
             getItemCount,
-            totalPrice: getTotalPrice(),  // Calcular directamente al ser utilizado
+            totalPrice,
             removeItem,
             isInCart,
             clearCart,
             updateQuantity,
+            getTotalPrice
         }}>
             {children}
         </CartContext.Provider>
